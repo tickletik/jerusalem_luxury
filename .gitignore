@@ -1,0 +1,22 @@
+# Lines starting with '#' are considered comments.
+
+# ignore the setup.py file (use setup_py for the repos instead)
+settings.py
+
+# ignore DS_Store files (mac stuff)
+*.DS_Store
+
+# ignore .swp or .swo files (vim change files)
+*.swp
+*.swo
+
+# ignore .pyc files (python compiled)
+*.pyc
+
+# ignore backup files
+*.*~
+
+# ignore #blah.whatever# or .#blah.whatever files (emacs change files)
+\#*.*#
+\.#*.*
+
