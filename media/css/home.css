@@ -1,0 +1,11 @@
+body { background:url(../images/back.png) top repeat-x; }
+#nav { position:relative; top:0; }
+#navmenu { width:694px; margin:0 auto; position:relative; top:0; right:0; }
+#content { padding:0 0 165px 0; }
+#image { width:778px; height:404px; margin:34px auto 22px auto; padding:6px 0 0 0; background:url(../images/frame.png); position:relative; top:0; }
+p { text-align:center; }
+#address { width:778px; margin:0 auto; text-align:center; }
+#book { margin:22px auto 0 auto; position:relative }
+#subscribe { right:15%; }
+#footer div { width:725px; margin:85px auto 0 auto; }
+.links { position:absolute; top:-2000px; }
