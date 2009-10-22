@@ -13,8 +13,8 @@ urlpatterns = patterns('main.views',
 
 )
 
-urlpatterns += patterns('rotating_gallery.views',
-    (r'^rotating/image_list/(?P<section>\w+)/$', 'image_list'),
+urlpatterns += patterns('slideshow.views',
+    (r'^slideshow/image_list/(?P<section>\w+)/$', 'image_list'),
 )
 
 urlpatterns += patterns('',

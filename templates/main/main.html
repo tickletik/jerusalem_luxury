@@ -7,7 +7,10 @@
 <link href="{{MEDIA_URL}}/css/nav.css" rel="stylesheet" />
 <link href="{{MEDIA_URL}}/css/home.css" rel="stylesheet" />
 
+{# set up the flash javascript #}
 <script type="text/javascript" src="{{MEDIA_URL}}/js/swfobject.js"></script>
+<script type="text/javascript">swfobject.registerObject("slideshowContent", "9.0.0");</script>
+
 <script type="text/javascript">var jslang='EN';</script>
 
 
@@ -41,6 +44,27 @@
         </div>
         
         <div id="content">
+            {# the flash stuff #}
+            <div>
+			    <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="768" height="398" id="slideshowContent">
+                    <param name="movie" value="{{MEDIA_URL}}/swf/slideshow.swf" />
+			    	<param name="scale" value="noscale" />
+			    	<param name="flashvars" value="url_imagelist=http://jerusalem-luxury.dev/slideshow/image_list/home/" />
+			    	<!--[if !IE]>-->
+                    <object type="application/x-shockwave-flash" data="{{MEDIA_URL}}/swf/slideshow.swf" width="768" height="398">
+			    		<param name="scale" value="noscale" />
+			    		<param name="flashvars" value="url_imagelist=http://jerusalem-luxury.dev/slideshow/image_list/home/" />
+			    	<!--<![endif]-->
+			    		<a href="http://www.adobe.com/go/getflashplayer">
+			    			<img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" />
+			    		</a>
+			    	<!--[if !IE]>-->
+			    	</object>
+			    	<!--<![endif]-->
+			    </object>
+		    </div>
+
+            {#
             <div id="image">
                 <a href="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" target="_blank">
                     <img alt="Get Flash Player" src="images/getflash.jpg" />
@@ -54,7 +78,7 @@
 			    so.addParam("allowScriptAccess", "always");
 			    so.write("image");
 		    </script>
-            
+            #}
         <p><img alt="a new level of exclusive luxury holiday apartments" src="images/slogan.gif" /></p>
         <p style="margin: 0px auto; width: 640px;">Two or three sentences of marketing blurb from Samia. Two or three sentences of marketing blurb from Samia. Two or three sentences of marketing blurb from Samia. Two or three sentences of marketing blurb from Samia.  Two or three sentences...</p>
 <p>&nbsp;</p>

@@ -66,7 +66,7 @@ def image_list(request, section):
 
     gallery_dir = "img/gallery"
     
-    return render_to_response('rotating_gallery/image_list.xml', 
+    return render_to_response('slideshow/image_list.xml', 
         {'MEDIA_URL':MEDIA_URL, 'gallery_dir':gallery_dir, 'imagelist':imagelist,})
 
 

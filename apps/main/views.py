@@ -1,8 +1,10 @@
 from jerusalem_luxury.settings import BASE_URL, MEDIA_URL, MEDIA_ROOT
 from django.http import HttpResponse
-from django.shortcuts import render_to_response
+#from django.shortcuts import render_to_response
 
 from PIL import Image
+
+from jinja_utils.shortcuts import render_to_response 
 
 def index(request):
     return render_to_response('main/index.html', {'MEDIA_URL':MEDIA_URL})
@@ -19,8 +21,3 @@ def testimage(request, image_name):
     image.save(response, "JPEG")
     return response
 
-
-def rotating_gallery(request, image_dir):
-    gallery_dir = "img/gallery"
-    gallery_path = "%s/%s/%s" % (MEDIA_ROOT, gallery_dir, image_dir)
-    return render_to_response('main/rotating_gallery.xml', {'gallery_path':gallery_path}
