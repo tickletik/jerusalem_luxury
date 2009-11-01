@@ -1,23 +1,23 @@
 
-#nav { width:100%; height:70px; background:url(../images/nav-back.png) repeat-x; position:absolute; top:45px; }
+#nav { width:100%; height:70px; background:url(../img/elements/nav-back.png) repeat-x; position:absolute; top:45px; }
 #navmenu { height:70px; position:absolute; top:0px; right:-14px; }
 #navmenu ul { margin:0;	padding:0; list-style-type:none; }
 #navmenu li { margin:0; padding:0; float:left; }
 #navmenu a { height:70px; display:block; }
 #navmenu span { position:absolute; top:-1000px; }
 
-.sales a { width:108px; background:url(../images/nav-sales-up.jpg) no-repeat; }
-.sales, .sales a:hover, .sales a.current { background:url(../images/nav-sales-over.jpg) no-repeat; }
-.rentals a { width:108px; background:url(../images/nav-rentals-up.jpg); }
-.rentals, .rentals a:hover, .rentals a.current { background:url(../images/nav-rentals-over.jpg) no-repeat; }
-.clients a { width:108px; background:url(../images/nav-clients-up.jpg); }
-.clients, .clients a:hover, .clients a.current { background:url(../images/nav-clients-over.jpg) no-repeat; }
-.services a { width:108px; background:url(../images/nav-services-up.jpg); }
-.services, .services a:hover, .services a.current { background:url(../images/nav-services-over.jpg) no-repeat; }
-.imp a { width:108px; background:url(../images/nav-imp-up.jpg); }
-.imp, .imp a:hover, .imp a.current { background:url(../images/nav-imp-over.jpg) no-repeat; }
-.lin a { width:108px; background:url(../images/nav-links-up.jpg); }
-.lin, .lin a:hover, .lin a.current { background:url(../images/nav-links-over.jpg) no-repeat; }
+.sales a { width:108px; background:url(../img/elements/nav-sales-up.jpg) no-repeat; }
+.sales, .sales a:hover, .sales a.current { background:url(../img/elements/nav-sales-over.jpg) no-repeat; }
+.rentals a { width:108px; background:url(../img/elements/nav-rentals-up.jpg); }
+.rentals, .rentals a:hover, .rentals a.current { background:url(../img/elements/nav-rentals-over.jpg) no-repeat; }
+.clients a { width:108px; background:url(../img/elements/nav-clients-up.jpg); }
+.clients, .clients a:hover, .clients a.current { background:url(../img/elements/nav-clients-over.jpg) no-repeat; }
+.services a { width:108px; background:url(../img/elements/nav-services-up.jpg); }
+.services, .services a:hover, .services a.current { background:url(../img/elements/nav-services-over.jpg) no-repeat; }
+.imp a { width:108px; background:url(../img/elements/nav-imp-up.jpg); }
+.imp, .imp a:hover, .imp a.current { background:url(../img/elements/nav-imp-over.jpg) no-repeat; }
+.lin a { width:108px; background:url(../img/elements/nav-links-up.jpg); }
+.lin, .lin a:hover, .lin a.current { background:url(../img/elements/nav-links-over.jpg) no-repeat; }
 
 #sub { width:100%; font:11px verdana; position:absolute; top:70px; }
 #sub ul { margin:0;	padding:0; list-style-type:none; }
