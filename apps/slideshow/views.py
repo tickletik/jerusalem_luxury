@@ -1,4 +1,4 @@
-from jerusalem_luxury.settings import BASE_URL, MEDIA_URL, MEDIA_ROOT
+from jerusalem_luxury.settings import MEDIA_URL, MEDIA_ROOT
 from django.http import HttpResponse
 
 # imports to use jinja
@@ -12,6 +12,9 @@ default_mimetype = getattr(settings, 'DEFAULT_CONTENT_TYPE')
 template_dirs = getattr(settings, 'TEMPLATE_DIRS')
 env = Environment(loader=FileSystemLoader(template_dirs))
 
+# get the base URL from the Site model
+from django.contrib.sites.models import Site
+current_site = Site.objects.get_current()
 
 
 from PIL import Image

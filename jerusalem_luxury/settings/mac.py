@@ -42,7 +42,6 @@ MEDIA_ROOT = '/Users/ronny/Sites/media/jerusalem_luxury'
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
 MEDIA_URL = 'http://jerusalem-luxury.dev/jerusalem-media'
 
-BASE_URL = 'http://jerusalem-luxury.dev'
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
@@ -69,11 +68,16 @@ ROOT_URLCONF = 'jerusalem_luxury.urls'
 
 TEMPLATE_DIRS = (
     "/opt/projects/django/jerusalem_luxury.git/templates",
+    "/opt/projects/django/jerusalem_luxury.git/apps/realty",
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
 )
 
+
+# *****HOWTO CUSTOM APPS****
+# make sure the PYTHONPATH on the COMMAND LINE (not apache!) is set to where the apps are located!!!!
+# *****end note*****
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -81,4 +85,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.admindocs',
+    'django.contrib.admindocs',
+    'realty',
+    'realty_data',
 )

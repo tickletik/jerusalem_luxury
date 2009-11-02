@@ -1,36 +1,11 @@
 from django.db import models
 
-class Neighborhood(models.Model):
-    name = models.CharField(max_length=200)
-
-class City(models.Model):
-    name = models.CharField(max_length=200)
-
-class Region(models.Model):
-    name = models.CharField(max_length=200)
-
-
-class Location(models.Model):
-    street = models.CharField(max_length=200)
-    zip = models.CharField(max_length=10)
-    floor = models.IntegerField()
-    apartment_number = models.CharField(max_length=6)
-
-    neighborhood = models.ForeignKey('Neighborhood')
-    city = models.ForeignKey('City')
-    region = models.ForeignKey('Region')
-
-
-class RentalType(models.Model):
-    name = models.CharField(max_length=200)
-
-
-class SaleType(models.Model):
-    name = models.CharField(max_length=200)
-
+from realty_locations.models import PropertyType
+from realty_locations.models import RentalType, SaleType 
+from realty_locations.models import City, Neighborhood, Region 
 
 class Rent(models.Model):
-    asking_price = models.DecimalField(decimal_places=2)
+    asking_price = models.DecimalField(max_digits=10, decimal_places=2)
     type = models.ForeignKey('RentalType')
 
     available_from = models.DateField()
@@ -40,13 +15,25 @@ class Rent(models.Model):
 
 
 class Sale(models.Model):
-    asking_price = models.DecimalField(decimal_places=2)
+    asking_price = models.DecimalField(max_digits=10, decimal_places=2)
     type = models.ForeignKey('SaleType')
 
     available_from = models.DateField()
     available_to = models.DateField()
 
     property = models.ForeignKey('Property')
+
+
+class Location(models.Model):
+    street = models.CharField(max_length=200)
+    zip = models.CharField(max_length=10)
+    floor = models.IntegerField()
+    apartment_number = models.CharField(max_length=6)
+
+    neighborhood = models.ForeignKey('realty_data.Neighborhood')
+    city = models.ForeignKey('realty_data.City')
+    region = models.ForeignKey('realty_data.Region')
+
 
 
 class Amenities(models.Model):
@@ -68,14 +55,14 @@ class Amenities(models.Model):
     parking_garage = models.BooleanField()
     parking_private = models.IntegerField()
 
-    garden_width = models.DecimalField(decimal_places=2)
-    garden_length = models.DecimalField(decimal_places=2)
+    garden_width = models.DecimalField(max_digits=10, decimal_places=2)
+    garden_length = models.DecimalField(max_digits=10, decimal_places=2)
 
     elevators = models.IntegerField()
     has_elevator_shabbat = models.BooleanField()
 
-    balcony_width = models.DecimalField(decimal_places=2)
-    balcony_length = models.DecimalField(decimal_places=2)
+    balcony_width = models.DecimalField(max_digits=10, decimal_places=2)
+    balcony_length = models.DecimalField(max_digits=10, decimal_places=2)
 
     heating = models.CharField(max_length=1, choices=HEATING_CHOICES)
     conditioning = models.CharField(max_length=1, choices=CONDITIONING_CHOICES)
@@ -86,6 +73,8 @@ class Property(models.Model):
     name = models.CharField(max_length=200)
     title = models.CharField(max_length=200)
 
+    type = models.ForeignKey('realty_data.PropertyType')
+
     map = models.URLField()
     floorplan = models.FileField(upload_to="pdf/floorplans", blank=True)
 
@@ -94,8 +83,8 @@ class Property(models.Model):
 
     number_of_floors = models.IntegerField()
 
-    floor_width = models.DecimalField(decimal_places=2)
-    floor_length = models.DecimalField(decimal_places=2)
+    floor_width = models.DecimalField(max_digits=10, decimal_places=2)
+    floor_length = models.DecimalField(max_digits=10, decimal_places=2)
 
     is_available = models.BooleanField()
     is_featured = models.BooleanField()
