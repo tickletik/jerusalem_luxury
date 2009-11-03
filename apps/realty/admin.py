@@ -14,10 +14,7 @@ class AmenitiesInline(admin.StackedInline):
     verbose_name_plural="House/Apartment Details"
 
     fieldsets = [
-            (None,          {'fields':['bedrooms', 'bathrooms', 'elevators', 'has_elevator_shabbat']}),
-            ('Parking',     {'fields':['parking_garage', 'parking_private']}),
-            ('Garden Area (if not avail, leave blank)',     {'fields':[('garden_width', 'garden_length')]}),
-            ('Balcony Area (if not avail, leave blank)',     {'fields':[('balcony_width', 'balcony_length')]}),
+            (None,          {'fields':['bedrooms', 'bathrooms', 'elevators', 'has_elevator_shabbat', 'parking', 'garden', 'balcony']}),
             ('Heating/Air Conditioning',    {'fields':['heating', 'conditioning']}),
 
             ]

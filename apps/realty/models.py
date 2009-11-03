@@ -59,7 +59,14 @@ class Amenities(models.Model):
     PARKING_CHOICES = (
             ('N', 'None'),
             ('G', 'Garage'),
-            ('P', 'Private'),
+            ('P', 'Reserved Space'),
+    )
+
+    BALCONY_CHOICES = (
+            ('N', 'None'),
+            ('L', 'Large'),
+            ('M', 'Medium'),
+            ('S', 'Small'),
     )
 
     property = models.ForeignKey("Property")
@@ -72,12 +79,10 @@ class Amenities(models.Model):
 
     parking = models.CharField(max_length=1, default='N', choices=PARKING_CHOICES)
     garden = models.CharField(max_length=1, default='N', choices=GARDEN_CHOICES)
+    balcony = models.CharField(max_length=1, default='N', choices=BALCONY_CHOICES)
 
     elevators = models.IntegerField(default=0, help_text="Enter the number of elevators in Property")
     has_elevator_shabbat = models.BooleanField(verbose_name="Has Shabbat Elevator?")
-
-    balcony_width = models.DecimalField(max_digits=10, decimal_places=2, default=0, verbose_name="width")
-    balcony_length = models.DecimalField(max_digits=10, decimal_places=2, default=0, verbose_name="length")
 
     heating = models.CharField(max_length=1, default='N', choices=HEATING_CHOICES)
     conditioning = models.CharField(max_length=1, default='N', choices=CONDITIONING_CHOICES)
@@ -114,6 +119,8 @@ class Property(models.Model):
 class Images(models.Model):
     property = models.ForeignKey("Property")
 
+
+    name = models.CharField(max_length=200)
     title = models.CharField(max_length=200)
     caption = models.TextField()
     position = models.IntegerField()

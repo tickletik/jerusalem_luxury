@@ -88,4 +88,5 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'realty',
     'realty_data',
+    'languages',
 )

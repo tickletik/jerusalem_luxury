@@ -1,0 +1,166 @@
+- model: languages.languagechoice
+  pk: 1
+  fields:
+    name: English
+    code: en
+    is_activated: 1
+    menu_order: 1
+
+- model: languages.languagechoice
+  pk: 2
+  fields:
+    name: French 
+    code: fre 
+    is_activated: 0
+    menu_order: 2
+
+
+- model: languages.languagechoice
+  pk: 3
+  fields:
+    name: Hebrew 
+    code: heb 
+    is_activated: 1
+    menu_order: 3
+
+- model: realty_data.title_c
+  pk: 1
+  fields:
+    text: Jerusalem
+    language_choice: 1
+    primary: 1
+    
+- model: realty_data.title_c
+  pk: 2
+  fields:
+    text: "\u05d9\u05e8\u05d5\u05e9\u05dc\u05d9\u05dd"
+    language_choice: 3
+    primary: 1
+
+- model: realty_data.city
+  pk: 1
+  fields:
+    name: jerusalem
+    region: 1
+
+- model: realty_data.title_r
+  pk: 1
+  fields:
+    text: jerusalem 
+    language_choice: 1 
+    primary: 1
+
+- model: realty_data.title_r
+  pk: 2 
+  fields:
+    text: "\u05d9\u05e8\u05d5\u05e9\u05dc\u05d9\u05dd"
+    language_choice: 3 
+    primary: 1
+
+- model: realty_data.region
+  pk: 1 
+  fields:
+    name: jerusalem
+
+- model: realty_data.title_n 
+  pk: 1 
+  fields: 
+    text: Rehavia 
+    language_choice: 1 
+    primary: 1
+    
+   
+  
+- model: realty_data.title_n 
+  pk: 2 
+  fields: 
+    text: "\u05e8\u05d7\u05d1\u05d9\u05d4" 
+    language_choice: 3 
+    primary: 1
+    
+   
+  
+- model: realty_data.title_n 
+  pk: 3 
+  fields: 
+    text: Nachlaot 
+    language_choice: 1 
+    primary: 2
+    
+   
+  
+- model: realty_data.title_n 
+  pk: 4 
+  fields: 
+    text: "\u05e0\u05d7\u05dc\u05d0\u05d5\u05ea" 
+    language_choice: 3 
+    primary: 2
+    
+   
+  
+- model: realty_data.title_n 
+  pk: 5 
+  fields: 
+    text: The German Colony 
+    language_choice: 1 
+    primary: 3
+    
+   
+  
+- model: realty_data.title_n 
+  pk: 6 
+  fields: 
+    text: "\u05d4\u05de\u05d5\u05e9\u05d1\u05d4 \u05d4\u05d2\u05e8\u05de\u05e0\u05d9\u05ea" 
+    language_choice: 3 
+    primary: 3
+    
+   
+  
+- model: realty_data.title_n 
+  pk: 7 
+  fields: 
+    text: Givat Shaul 
+    language_choice: 1 
+    primary: 4
+    
+   
+  
+- model: realty_data.title_n 
+  pk: 8 
+  fields: 
+    text: "\u05d2\u05d1\u05e2\u05ea \u05e9\u05d0\u05d5\u05dc" 
+    language_choice: 3 
+    primary: 4
+    
+   
+  
+- model: realty_data.neighborhood 
+  pk: 1 
+  fields: 
+    city: 1 
+    name: rehavia
+    
+   
+  
+- model: realty_data.neighborhood 
+  pk: 2 
+  fields: 
+    city: 1 
+    name: nachlaot
+    
+   
+  
+- model: realty_data.neighborhood 
+  pk: 3 
+  fields: 
+    city: 1 
+    name: german colony
+    
+   
+  
+- model: realty_data.neighborhood 
+  pk: 4 
+  fields: 
+    city: 1 
+    name: givat shaul
+
