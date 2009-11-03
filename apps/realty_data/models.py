@@ -8,7 +8,8 @@ class PropertyType(models.Model):
 
 
 class Neighborhood(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, help_text="you can leave this blank, but if you put anything in it, please keep it as english lowercase with underscores connected words")
+
 
 class City(models.Model):
     class Meta:
