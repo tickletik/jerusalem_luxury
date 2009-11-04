@@ -40,13 +40,13 @@ MEDIA_ROOT = '/Users/ronny/Sites/media/jerusalem_luxury'
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = 'http://jerusalem-luxury.dev/jerusalem-media'
+MEDIA_URL = 'http://jerusalem-luxury.dev/media'
 
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/media/'
+ADMIN_MEDIA_PREFIX = '/admin/media/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '%b0qipyb_&0bu4428=zubk3mp8c_ghfr6o#e#xiy7s8^q5=#8a'

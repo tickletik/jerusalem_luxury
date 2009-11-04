@@ -11,8 +11,8 @@ class LanguageChoice(models.Model):
         return "[%s] %s" % (self.code, self.name)
 
 class ATextField(models.Model):
-    text = models.TextField()
     language_choice = models.ForeignKey(LanguageChoice)
+    text = models.TextField()
 
     class Meta:
         abstract = True
@@ -21,8 +21,8 @@ class ATextField(models.Model):
         return "%s" % self.text
 
 class ACharField(models.Model):
-    text = models.CharField(max_length=200)
     language_choice = models.ForeignKey(LanguageChoice)
+    text = models.CharField(max_length=200)
 
     class Meta:
         abstract = True
