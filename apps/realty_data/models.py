@@ -26,7 +26,7 @@ class Neighborhood(models.Model):
 
     Title = Title_N
 
-    name = models.CharField(max_length=200, help_text="you can leave this blank, but if you put anything in it, please keep it as english lowercase with underscores connected words")
+    name = models.CharField(max_length=200)
     city = models.ForeignKey('City', help_text="which city does this neighborhood belong to?")
 
     def __unicode__(self):
