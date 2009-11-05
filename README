@@ -1,0 +1,19 @@
+make sure to install yaml on whatever system you are using so that you can sync
+
+directory structure should be something like:
+
+~/repository
+~/apps
+~/templates
+~/media
+~/path/to/python/django/libs
+~/path/to/jerusalem_luxury
+
+
+figure out a way to transfer one of the hash keys to whatever server you are using so you can update the git repository
+
+the format is always:
+push github master
+pull github master
+
+(NOTE:FIND THE ACTUCAL COMMANDS FROM GITHUB AND PUT THEM ALL HERE SO YOU DON'T HAVE TO KEEP GOING BACK AND FORTH)
