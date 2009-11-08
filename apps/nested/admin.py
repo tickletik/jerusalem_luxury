@@ -7,10 +7,6 @@ from languages.models import LanguageChoice
 
 num_langs = LanguageChoice.objects.filter(is_activated=True).count()
 
-class LowerInline(admin.StackedInline):
-    model = Lower
-    max_num=1
-    
 class LowerAdmin(admin.ModelAdmin):
     class DescInline(admin.TabularInline):
         model = Lower.Desc
@@ -36,6 +32,11 @@ class LowerAdminMod(admin.ModelAdmin):
     #list_display = ['name', 'title', 'description']
     inlines = [DescInline, TitleInline]
 
+
+class LowerInline(admin.StackedInline):
+    model = Lower
+    max_num=1
+    
 
 class TopAdmin(admin.ModelAdmin):
     list_display = ['name']
