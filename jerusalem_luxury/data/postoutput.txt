@@ -1,0 +1,97 @@
+Content-Type: multipart/form-data; boundary=---------------------------99266353420430460421358796011
+Content-Length: 3128
+
+-----------------------------99266353420430460421358796011
+Content-Disposition: form-data; name="csrfmiddlewaretoken"
+
+7cd39a7474a2c2015390ea2742785a1b
+-----------------------------99266353420430460421358796011
+Content-Disposition: form-data; name="name"
+
+test1it
+-----------------------------99266353420430460421358796011
+Content-Disposition: form-data; name="desc_lower_set-TOTAL_FORMS"
+
+2
+-----------------------------99266353420430460421358796011
+Content-Disposition: form-data; name="desc_lower_set-INITIAL_FORMS"
+
+0
+-----------------------------99266353420430460421358796011
+Content-Disposition: form-data; name="desc_lower_set-0-id"
+
+
+-----------------------------99266353420430460421358796011
+Content-Disposition: form-data; name="desc_lower_set-0-primary"
+
+1
+-----------------------------99266353420430460421358796011
+Content-Disposition: form-data; name="desc_lower_set-0-language_choice"
+
+
+-----------------------------99266353420430460421358796011
+Content-Disposition: form-data; name="desc_lower_set-0-text"
+
+
+-----------------------------99266353420430460421358796011
+Content-Disposition: form-data; name="desc_lower_set-1-id"
+
+
+-----------------------------99266353420430460421358796011
+Content-Disposition: form-data; name="desc_lower_set-1-primary"
+
+1
+-----------------------------99266353420430460421358796011
+Content-Disposition: form-data; name="desc_lower_set-1-language_choice"
+
+
+-----------------------------99266353420430460421358796011
+Content-Disposition: form-data; name="desc_lower_set-1-text"
+
+
+-----------------------------99266353420430460421358796011
+Content-Disposition: form-data; name="title_lower_set-TOTAL_FORMS"
+
+2
+-----------------------------99266353420430460421358796011
+Content-Disposition: form-data; name="title_lower_set-INITIAL_FORMS"
+
+2
+-----------------------------99266353420430460421358796011
+Content-Disposition: form-data; name="title_lower_set-0-id"
+
+1
+-----------------------------99266353420430460421358796011
+Content-Disposition: form-data; name="title_lower_set-0-primary"
+
+1
+-----------------------------99266353420430460421358796011
+Content-Disposition: form-data; name="title_lower_set-0-language_choice"
+
+2
+-----------------------------99266353420430460421358796011
+Content-Disposition: form-data; name="title_lower_set-0-text"
+
+this might be in English
+-----------------------------99266353420430460421358796011
+Content-Disposition: form-data; name="title_lower_set-1-id"
+
+2
+-----------------------------99266353420430460421358796011
+Content-Disposition: form-data; name="title_lower_set-1-primary"
+
+1
+-----------------------------99266353420430460421358796011
+Content-Disposition: form-data; name="title_lower_set-1-language_choice"
+
+3
+-----------------------------99266353420430460421358796011
+Content-Disposition: form-data; name="title_lower_set-1-text"
+
+this is in hebrew
+-----------------------------99266353420430460421358796011
+Content-Disposition: form-data; name="_continue"
+
+Save and continue editing
+-----------------------------99266353420430460421358796011-
+http://jerusalem-luxury.dev/admin/nested/lower/1/
