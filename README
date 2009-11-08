@@ -1,4 +1,15 @@
-make sure to install yaml on whatever system you are using so that you can sync
+python libraries to install:
+
+    PyYaml - for installing yaml files in loaddata:
+        easy_install-2.5 pyyaml
+    
+    jinja2 - for the template engine:
+        easy_install-2.5 Jinja2==dev 
+
+    lxml - bindings for libxml and libxslt:
+        easy_install-2.5 lxml
+
+
 
 directory structure should be something like:
 

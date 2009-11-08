@@ -89,4 +89,5 @@ INSTALLED_APPS = (
     'realty',
     'realty_data',
     'languages',
+    'nested',
 )
