@@ -30,7 +30,7 @@ class LowerAdminMod(admin.ModelAdmin):
         max_num = num_langs
 
     #list_display = ['name', 'title', 'description']
-    inlines = [DescInline, TitleInline]
+    #inlines = [DescInline, TitleInline]
 
 
 class LowerInline(admin.StackedInline):
@@ -39,9 +39,17 @@ class LowerInline(admin.StackedInline):
     
 
 class TopAdmin(admin.ModelAdmin):
-    list_display = ['name']
+    fieldsets = (
+            (None, {
+                'fields': ['name'],
+                'classes': ['whatever'],
+                'description': 'testing purposes',
+                }),
+            )
     inlines = [LowerInline]
 
-admin.site.register(Lower, LowerAdmin)
+
+#admin.site.register(Lower, LowerAdmin)
+admin.site.register(Lower, LowerAdminMod)
 admin.site.register(Top, TopAdmin)
 

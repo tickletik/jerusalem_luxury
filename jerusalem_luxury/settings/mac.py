@@ -68,7 +68,6 @@ ROOT_URLCONF = 'jerusalem_luxury.urls'
 
 TEMPLATE_DIRS = (
     "/opt/projects/django/jerusalem_luxury.git/templates",
-    "/opt/projects/django/jerusalem_luxury.git/apps/realty",
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
