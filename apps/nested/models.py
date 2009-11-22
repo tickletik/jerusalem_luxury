@@ -40,6 +40,36 @@ class Lower(models.Model):
     title = models.CharField(max_length="200")
     description = models.TextField()
 
+class TitleForm(forms.ModelForm):
+    class Meta:
+        model = Lower.Title
+        fields = ['primary', 'language_choice', 'text']
+
+    def clean(self):
+        cleaned_data = self.cleaned_data
+        return cleaned_data
+
+from django.forms.models import BaseModelFormSet 
+class BaseTitleFormSet(BaseModelFormSet):
+    #def __init__(self, *args, **kwargs):
+    #    self.queryset = Lower.Title.objects.filter(primary=lower)
+    #    super(BaseTitleFormSet, self).__init__(*args, **kwargs)
+
+    def clean(self):
+        if any(self.errors):
+            return
+        langs = []
+        x = self.total_form_count()
+        for i in range(0, self.total_form_count()):
+            form = self.forms[i]
+
+            if form.cleaned_data.has_key('language_choice'):
+                lang_choice = form.cleaned_data['language_choice']
+                if lang_choice in langs:
+                    raise forms.ValidationError, "Titles muse have distinct language choices"
+                langs.append(lang_choice)
+            elif form.cleaned_data.has_key('text'):
+                raise forms.ValidationError, "Text must be accompanied by a language"
 
 class LowerForm(forms.ModelForm):
     #name = forms.CharField(max_length=100)

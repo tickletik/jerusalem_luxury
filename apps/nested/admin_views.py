@@ -14,7 +14,9 @@ def report(request, lower_id=None):
 
     from django.forms.models import modelformset_factory
 
-    TitleFSet = modelformset_factory(Lower.Title, max_num=3)
+    #TitleFSet = modelformset_factory(Lower.Title, max_num=3)
+    TitleFSet = modelformset_factory(Lower.Title, can_delete=True, formset=BaseTitleFormSet, max_num=3)
+    #TitleFSet = formset_factory(TitleForm, max_num=3) 
     formset_title = TitleFSet(queryset=Lower.Title.objects.filter(primary=lower))
 
     DescFSet = modelformset_factory(Lower.Desc, max_num=3)
@@ -27,16 +29,20 @@ def report(request, lower_id=None):
         lowerform.save()
 
         formset_title = TitleFSet(request.POST)
-        formset_title.is_valid()
+
+        # if it's all good then save it and reload
+        if formset_title.is_valid():
+            formset_title.save()
+            formset_title = TitleFSet(queryset=Lower.Title.objects.filter(primary=lower))
 
         
-        title_instances = formset_title.save(commit=False)
+        #title_instances = formset_title.save(commit=False)
 
         # check to make sure we aren't saving multiple objects for the same language_choice
-        for title_instance in title_instances:
-            title_qs = Lower.Title.objects.filter(primary=title_instance.primary).filter(language_choice=title_instance.language_choice)
-            if title_qs.count() == 0:
-                title_instance.save()
+        #for title_instance in title_instances:
+        #    title_qs = Lower.Title.objects.filter(primary=title_instance.primary).filter(language_choice=title_instance.language_choice)
+        #    if title_qs.count() == 0:
+        #        title_instance.save()
 
         #formset_desc = DescFSet(request.POST)
         #formset_desc.is_valid()
