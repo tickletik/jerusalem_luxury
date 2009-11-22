@@ -18,6 +18,11 @@ urlpatterns += patterns('slideshow.views',
 )
 
 urlpatterns += patterns('',
+        (r'^admin/nested/report/$', 'nested.admin_views.report'),
+        (r'^admin/nested/report/(?P<lower_id>\d+)/$', 'nested.admin_views.report'),
+        )
+
+urlpatterns += patterns('',
     # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
     # to INSTALLED_APPS to enable admin documentation:
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),

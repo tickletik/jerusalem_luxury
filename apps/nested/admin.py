@@ -49,7 +49,7 @@ class TopAdmin(admin.ModelAdmin):
     inlines = [LowerInline]
 
 
-#admin.site.register(Lower, LowerAdmin)
-admin.site.register(Lower, LowerAdminMod)
+admin.site.register(Lower, LowerAdmin)
+#admin.site.register(Lower, LowerAdminMod)
 admin.site.register(Top, TopAdmin)
 

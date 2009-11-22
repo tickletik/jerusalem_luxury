@@ -41,48 +41,25 @@ class Lower(models.Model):
     description = models.TextField()
 
 
-from django import forms
-class TLForm(forms.Form):
-    from languages.models import LanguageChoice
-    language = forms.ModelChoiceField(queryset=LanguageChoice.objects.filter(is_activated=True), empty_label="Choose Lang")
-    title = forms.CharField(max_length="200")
-
-    class Meta:
-        model = Lower.Title
-
-    def clean(self):
-        return self.cleaned_data
-
-    def get_formset(self):
-        from django.forms.formsets import formset_factory
-        FS = formset_factory(TLForm, extra=2)
-        return FS()
-
-
-from django.forms import BaseModelForm
-
 class LowerForm(forms.ModelForm):
-    tlform = TLForm()
-
-    top = forms.ModelChoiceField(queryset=Top.objects.all(), empty_label="Top objects")
     #name = forms.CharField(max_length=100)
-
-    def __init__(self, *args, **kwargs):
-        super(LowerForm, self).__init__(*args, **kwargs)
-        self.fields['name'] = forms.CharField(max_length=100)
-
-        for k in self.tlform.fields.iterkeys():
-            self.fields[k] = self.tlform.fields[k]
-
+    #title = forms.CharField(max_length=100)
+    
+    # make sure that values for top fall within acceptable range
+    # is_valid will check to see if the value is outside bounds
     class Meta:
         model = Lower
-        fields = ['name', 'top']#, 'language', 'title']
+        fields = ['name', 'title', 'description', 'top']
 
     def clean(self):
-        return self.cleaned_data
+        cleaned_data = self.cleaned_data
+        return cleaned_data
 
-    def save(self, commit):
-        super(LowerForm, self).save(commit)
-
-
+    #def save(self, commit=True):
+        # create new model
+    #    lower = ModelForm.save(self, False)
+    #    lower.description = self.cleaned_data['description']
+    #    lower.save()
+    #    return ModelForm.save(self,commit)
+        
         
