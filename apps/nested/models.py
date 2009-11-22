@@ -59,7 +59,6 @@ class BaseTitleFormSet(BaseModelFormSet):
         if any(self.errors):
             return
         langs = []
-        x = self.total_form_count()
         for i in range(0, self.total_form_count()):
             form = self.forms[i]
 
