@@ -5,11 +5,14 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.contrib.admin.views.decorators import staff_member_required
 
-def report(request, lower_id=None):
+def report(request, lower_id):
+    return lower(request, lower_id)
 
-    lower = None
+def lower(request, lower_id=None):
+
+    lower_obj = None
     if lower_id != None:
-        lower = Lower.objects.get(id=lower_id)
+        lower_obj = Lower.objects.get(id=lower_id)
     lowerform = None
 
     from django.forms.models import modelformset_factory
@@ -17,15 +20,15 @@ def report(request, lower_id=None):
     #TitleFSet = modelformset_factory(Lower.Title, max_num=3)
     TitleFSet = modelformset_factory(Lower.Title, can_delete=True, formset=BaseTitleFormSet, max_num=3)
     #TitleFSet = formset_factory(TitleForm, max_num=3) 
-    formset_title = TitleFSet(queryset=Lower.Title.objects.filter(primary=lower))
+    formset_title = TitleFSet(queryset=Lower.Title.objects.filter(primary=lower_obj))
 
     DescFSet = modelformset_factory(Lower.Desc, max_num=3)
-    formset_desc = DescFSet(queryset=Lower.Desc.objects.filter(primary=lower))
+    formset_desc = DescFSet(queryset=Lower.Desc.objects.filter(primary=lower_obj))
 
     title_instances = None
 
     if request.method == 'POST':
-        lowerform = LowerForm(request.POST, instance=lower)
+        lowerform = LowerForm(request.POST, instance=lower_obj)
         lowerform.save()
 
         formset_title = TitleFSet(request.POST)
@@ -33,7 +36,7 @@ def report(request, lower_id=None):
         # if it's all good then save it and reload
         if formset_title.is_valid():
             formset_title.save()
-            formset_title = TitleFSet(queryset=Lower.Title.objects.filter(primary=lower))
+            formset_title = TitleFSet(queryset=Lower.Title.objects.filter(primary=lower_obj))
 
         
         #title_instances = formset_title.save(commit=False)
@@ -48,7 +51,7 @@ def report(request, lower_id=None):
         #formset_desc.is_valid()
         #formset_desc.save()
     else:
-        lowerform = LowerForm(instance=lower)
+        lowerform = LowerForm(instance=lower_obj)
         
     return render_to_response(
             "admin/nested/report.html",
@@ -63,3 +66,4 @@ def report(request, lower_id=None):
             )
 
 report = staff_member_required(report)
+lower = staff_member_required(lower)
