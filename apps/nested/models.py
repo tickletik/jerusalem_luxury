@@ -45,6 +45,10 @@ class TitleForm(forms.ModelForm):
         model = Lower.Title
         fields = ['primary', 'language_choice', 'text']
 
+class DescForm(forms.ModelForm):
+    class Meta:
+        model = Lower.Desc
+        fields = ['primary', 'language_choice', 'text']
 
 from django.forms.models import BaseModelFormSet 
 class BaseTitleFormSet(BaseModelFormSet):
@@ -97,13 +101,48 @@ class InfoForm(forms.Form):
     description = forms.CharField(max_length=500, widget=forms.Textarea())
 
 
-    id_lower = forms.IntegerField(widget=forms.HiddenInput)
-    id_title = forms.IntegerField(widget=forms.HiddenInput, required=False)
-    id_desc = forms.IntegerField(widget=forms.HiddenInput, required=False)
+    lower = forms.ModelChoiceField(queryset=Lower.objects.all(), widget=forms.HiddenInput, required=False)
+    lower_desc = forms.ModelChoiceField(queryset=Lower.Desc.objects.all(), widget=forms.HiddenInput, required=False)
+    lower_title = forms.ModelChoiceField(queryset=Lower.Title.objects.all(), widget=forms.HiddenInput, required=False)
 
-    def changed_forms(self, formset):
-        if formset.form != InfoForm:
-            raise Exception("You are using a formset.form = " + str(formset.form) + ", where you should be using one of InfoForm")
+
+
+
+
+from django.forms.formsets import BaseFormSet
+class BaseInfoFormSet(BaseFormSet):
+    def testit(self):
+        print 'hi'
+
+
+
+def initial_list(m_lower):
+    # initialize the list, if it's nothing don't use it
+    l_initial = list()
+
+    if m_lower != None:
+
+        for lang in LanguageChoice.objects.all():
+            l_titles = Lower.Title.objects.filter(language_choice=lang).filter(primary=m_lower)
+            l_descs = Lower.Desc.objects.filter(language_choice=lang).filter(primary=m_lower)
+
+            d_initial = dict()
+
+            if len(l_titles):
+                d_initial['lower_title'] = l_titles[0].id
+                d_initial['title'] = l_titles[0].text
+
+            if len(l_descs):
+                d_initial['lower_desc'] = l_descs[0].id
+                d_initial['description'] = l_descs[0].text
+
+            # if anything got retrieved then add the rest and append it to the main list
+            if len(d_initial):
+                d_initial['lower'] = m_lower.id
+                d_initial['language'] = lang.id
+                l_initial.append(d_initial)
+
+        return l_initial
 
 
 
@@ -121,31 +160,6 @@ def initialize_formset(FSET, l_initial):
         return formset
 
 
-def initial_list(lower, num=1):
-
-    # make sure lower has an id attribute
-    id_lower = u''
-    if hasattr(lower, "id"):
-        id_lower = lower.id
-    elif isinstance(lower, (int, long)):
-        id_lower = lower
-    elif isinstance(lower, (str, unicode)):
-        id_lower = int(lower)
-    
-    d_initial = {'id_lower': id_lower}
-
-    # return a list of duplicated values for dict_initial
-    return [d_initial.copy() for i in range(0, num)]
-
-
-
-def clean_request(dict_from):
-    dict_to = dict()
-
-    for k in dict_from:
-        dict_to[k] = dict_from[k][0]
-
-    return dict_to
 
 def transfer_dict(dict_from, prefix):
     dict_to = dict()
@@ -157,26 +171,14 @@ def transfer_dict(dict_from, prefix):
 
 def extract_dict(dict_from, type):
     dict_to = dict()
-    dict_to['language_choice'] = dict_from['language']
-    dict_to['primary'] = dict_from['id_lower']
+    dict_to['language_choice'] = dict_from['language'].id
+    dict_to['primary'] = dict_from['lower'].id
 
     if type == 't':
-        if len(dict_from['id_title']) > 0:
-            dict_to['id'] = dict_from['id_title']
-
         dict_to['text'] = dict_from['title']
     elif type == 'd':
-        if len(dict_from['id_desc']) > 0:
-            dict_to['id'] = dict_from['id_desc']
-
-        dict_to['text'] = dict_from['desc']
+        dict_to['text'] = dict_from['description']
 
     return dict_to
-
-from django.forms.formsets import formset_factory
-FSET_Info_0 = formset_factory(InfoForm, extra=0)
-FSET_Info_1 = formset_factory(InfoForm, extra=1)
-FSET_Info_2 = formset_factory(InfoForm, extra=2)
-FSET_Info_3 = formset_factory(InfoForm, extra=3)
 
 

@@ -5,55 +5,49 @@
 {% block content %}
 <div id="content-main">
     <form action="." method="POST">
-        {% comment %}
-        <table>
-            {{form_lower.as_table}}
-        </table>
-        {% endcomment %}
+
+        <div class="fieldWrapper">
+            {{ form_lower.id }}
+        </div>
+
         <div class="fieldWrapper">
             {{ form_lower.top.errors }}
             {{ form_lower.top.label_tag}}
             {{ form_lower.top }}
         </div>
-        <br/>
         <div class="fieldWrapper">
             {{ form_lower.name.errors }}
             {{ form_lower.name.label_tag}}
             {{ form_lower.name }}
         </div>
-        <br/>
 
 
-        {% comment %}
-        <table>
-        {{ formset_info.as_table }}
-        </table>
-        {% endcomment %}
-
-        {% comment %}
-        {% endcomment %}
-        <div id='DEBUG-MANAGE'>
+        <div class='fieldWrapper'>
         {{ formset_info.management_form }}
         </div>
 
         {% for form in formset_info.forms %}
-        {{ form }}
-        <br/>
+            <div class="formWrapper">
+            {% for field in form %}
+                <div class="fieldWrapper">
+                    {{ field.errors }}
+                    {% if field.is_hidden %}
+                        {{ field }}
+                    {% else %}
+                        {{ field.label_tag }}: {{ field }}
+                    {% endif %}
+                </div>
+            {% endfor %}
+            </div>
         {% endfor %}
 
-        initial = {{initial}}<br/>
-
-
         request.POST = {{request.POST}}<br/>
-        instances = {{instances}}<br/>
         is_valid = {{form_lower.is_valid}}<br/>
 
         <div class="submit-row" >
-        <input type="submit" value="Save" class="default" name="_save" />
-        
-        
-        <input type="submit" value="Save and add another" name="_addanother"  />
-        <input type="submit" value="Save and continue editing" name="_continue" />
+            <input type="submit" value="Save" class="default" name="_save" />
+            <input type="submit" value="Save and add another" name="_addanother"  />
+            <input type="submit" value="Save and continue editing" name="_continue" />
         </div>
 
     </form>

@@ -25,93 +25,56 @@ def lower2(request, lower_id=None):
     if id_lower != None:
         m_lower = Lower.objects.get(id=id_lower)
 
-    form_lower = None
 
-    """
-    TODO: Use the model formsets from below! for Title and Desc to populate the info formset!
-    NOTE: make sure to keep the initial value of 'id_lower' set to the lower object id
-    """
-    FormSet_Info = formset_factory(InfoForm, extra=2) 
-    formset_info = FormSet_Info()
-    #formset_info = initialize_formset(FormSet_Info, initial_list(m_lower, 2)) 
+    FormSet_Info = formset_factory(InfoForm, extra=1) 
+    formset_info = FormSet_Info(initial=initial_list(m_lower))
     
+    form_lower = LowerForm(instance=m_lower)
 
     if request.method == 'POST':
         form_lower = LowerForm(request.POST, instance=m_lower)
 
         if form_lower.is_valid():
-            form_lower.save()
+            m_lower = form_lower.save(commit=False)
+            m_lower.save()
 
+
+            # note that if form_lower is not valid, then we can't 
+            # check out the formset_info
+            formset_info = FormSet_Info(request.POST)
+
+            if formset_info.is_valid():
+
+                # set the lower id for both saving, AND for display
+                for form in formset_info.forms:
+                    if form.cleaned_data.has_key('lower'):
+                        form.cleaned_data['lower'] = m_lower
+
+                    if form.cleaned_data.has_key('lower_title') or form.cleaned_data.has_key('title'):
+                        f_title = TitleForm(data=extract_dict(form.cleaned_data, 't'))
+
+                        m_title = f_title.save(commit=False)
+                        if form.cleaned_data['lower_title']:
+                            m_title.id = form.cleaned_data['lower_title'].id
+                        m_title.save()
+
+                    if form.cleaned_data.has_key('lower_desc') or form.cleaned_data.has_key('title'):
+                        f_desc = DescForm(data=extract_dict(form.cleaned_data, 'd'))
+
+                        m_desc = f_desc.save(commit=False)
+                        if form.cleaned_data['lower_desc'] != None:
+                            m_desc.id = form.cleaned_data['lower_desc'].id
+                        m_desc.save()
+
+                # reload the data
+                formset_info = FormSet_Info(initial=initial_list(m_lower))
             
-        """
-        # for each form in the formsets filled out:
-        # something like the following:
-        initial_forms = int(request.POST['form-INITIAL_FORMS'][0])
-        total_forms = int(request.POST['form-TOTAL_FORMS'][0])
-        
-
-        formset_info = FormSet_Info(request.POST)
-        if formset_info.is_valid():
-            for f in formset_info.forms:
-                f.cleaned_data  # do something with this
-
-        # NOTE: ALTHERNATIVELY YOU CAN USE THE FOLLOWING---
-        [form.cleaned_data for form in formset_info.forms]
-
-        # might have to change based on initial vs. total, eg. 
-        # range(0, total_forms - initial_forms) ?????  probably not.
-
-        for form_num in range(0, total_forms):
-            form_prefix = 'form-' + str(form_num)
-
-            # get the general data from the request object
-            dict_request = transfer_dict(request.POST, form_prefix)
-
-
-            # extract data for title and process
-            data_t = extract_dict(dict_request, 't')
-
-            # create a generic form_t.  But if there is an id value, check to make
-            # sure there's an actual title associated with it, and if so, create a 
-            # new form_t using that title as an instance
-
-            # this part should probably be done in the validate data section of the formset or the InfoForm?
-            form_t = TitleForm(data=data_t)
-            if data_t.has_key('id') and len(data_t['id']) > 0:
-                if len(Lower.Title.objects.filter(id=data_t['id'])) > 0:
-                    model_t = Lower.Title.objects.get(pk=data_t['id'])
-                    form_t = TitleForm(data=data_t, instance=model_t)
-
-            if form_t.is_valid():
-                form_t.save()
-
-            # extract data for desc and process
-            data_d = extract_dict(dict_request, 'd')
-
-            # create a generic form_d.  But if there is an id value, check to make
-            # sure there's an actual title associated with it, and if so, create a 
-            # new form_d using that title as an instance
-
-            # this part should probably be done in the validate data section of the formset or the InfoForm?
-            form_d = DescForm(data=data_d)
-            if data_d.has_key('id') and len(data_d['id']) > 0:
-                if len(Lower.Desc.objects.filter(id=data_d['id'])) > 0:
-                    model_d = Lower.Desc.objects.get(pk=data_d['id'])
-                    form_d = DescForm(data=data_d, instance=model_d)
-
-            if form_d.is_valid():
-                form_d.save()
-        """
-    else:
-        form_lower = LowerForm(instance=m_lower)
 
     return render_to_response(
                 "admin/nested/lower.html",
                 {
                     'form_lower':form_lower,
                     'formset_info':formset_info,
-                    'type':str(type(id_lower)),
-                    'initial': initial_list(id_lower, 1),
                     'request':request,
                     },
                 RequestContext(request, {}),
