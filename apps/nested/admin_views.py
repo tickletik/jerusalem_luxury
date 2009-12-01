@@ -32,10 +32,7 @@ def lower2(request, lower_id=None):
     NOTE: make sure to keep the initial value of 'id_lower' set to the lower object id
     """
     FormSet_Info = formset_factory(InfoForm, extra=0) 
-    formset_info = FormSet_Info(initial=create_initial(FormSet_Info, id_lower))
-
-    #formset_info = FormSet_Info(initial=[{'id_lower':str(id_lower)}])
-
+    formset_info = FormSet_Info(initial=create_initial(FormSet_Info, id_lower, 3))
 
     if request.method == 'POST':
         form_lower = LowerForm(request.POST, instance=m_lower)
@@ -111,6 +108,7 @@ def lower2(request, lower_id=None):
                 {
                     'form_lower':form_lower,
                     'formset_info':formset_info,
+                    'type':str(type(id_lower)),
                     'request':request,
                     },
                 RequestContext(request, {}),

@@ -105,9 +105,13 @@ def create_initial(fset, lower, num=None):
     # make sure lower has an id attribute
     id_lower = u''
     if hasattr(lower, "id"):
-        id_lower = str(lower.id)
+        id_lower = lower.id
     elif isinstance(lower, (int, long)):
-        id_lower = str(lower)
+        id_lower = lower
+    elif isinstance(lower, (str, unicode)):
+        id_lower = int(lower)
+    else:
+        id_lower = lower
     
     return create_initial_list(fset, {'id_lower': id_lower}, num)
 
