@@ -18,11 +18,11 @@ urlpatterns += patterns('slideshow.views',
 )
 
 urlpatterns += patterns('',
-        (r'^admin/nested/lower/$', 'nested.admin_views.report'),
-        (r'^admin/nested/lower/(?P<lower_id>\d+)/$', 'nested.admin_views.lower'),
+        (r'^admin/nested/lower/(?P<lower_id>\d+)/$', 'nested.admin_views.lower2'),
 
-        (r'^admin/nested/report/$', 'nested.admin_views.report'),
-        (r'^admin/nested/report/(?P<lower_id>\d+)/$', 'nested.admin_views.report'),
+
+        #(r'^admin/nested/report/$', 'nested.admin_views.report'),
+        #(r'^admin/nested/report/(?P<lower_id>\d+)/$', 'nested.admin_views.report'),
         )
 
 urlpatterns += patterns('',

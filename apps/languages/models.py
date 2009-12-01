@@ -30,3 +30,14 @@ class ACharField(models.Model):
     def __unicode__(self):
 
         return "%s" % self.text
+
+class ADualField(models.Model):
+    language_choice = models.ForeignKey(LanguageChoice)
+    charfield = models.CharField(max_length=200)
+    textfield = models.TextField()
+
+    class Meta:
+        abstract = True
+
+    def __unicode__(self):
+        return "%s" % self.text

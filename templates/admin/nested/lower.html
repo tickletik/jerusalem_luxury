@@ -1,0 +1,52 @@
+{% extends "admin/base_site.html" %}
+
+{% block title %}Lower Form{% endblock %}
+
+{% block content %}
+<div id="content-main">
+    <form action="." method="POST">
+        {% comment %}
+        <table>
+            {{form_lower.as_table}}
+        </table>
+        {% endcomment %}
+        <div class="fieldWrapper">
+            {{ form_lower.top.errors }}
+            {{ form_lower.top.label_tag}}
+            {{ form_lower.top }}
+        </div>
+        <br/>
+        <div class="fieldWrapper">
+            {{ form_lower.name.errors }}
+            {{ form_lower.name.label_tag}}
+            {{ form_lower.name }}
+        </div>
+        <br/>
+
+
+        {% comment %}
+        <table>
+        {{ formset_info.as_table }}
+        </table>
+        {% endcomment %}
+
+        {% comment %}
+        {% endcomment %}
+        <div id='DEBUG-MANAGE'>
+        {{ formset_info.management_form }}
+        </div>
+
+        {% for form in formset_info.forms %}
+        {{ form }}
+        <br/>
+        {% endfor %}
+
+        request.POST = {{request.POST}}<br/>
+        instances = {{instances}}<br/>
+        is_valid = {{form_lower.is_valid}}<br/>
+
+        <input type="submit" value="Submit">
+    </form>
+</div>
+{% endblock %}
+

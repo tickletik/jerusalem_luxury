@@ -6,14 +6,34 @@
 <div id="content-main">
     <p>DEBUG ADMIN TEMPLATE</p>
     <form action="." method="POST">
+        {% comment %}
         <table>
             {{lowerform.as_table}}
         </table>
+        {% endcomment %}
+        <div class="fieldWrapper">
+            {{ lowerform.top.errors }}
+            {{ lowerform.top.label_tag}}
+            {{ lowerform.top }}
+        </div>
+        <br/>
+        <div class="fieldWrapper">
+            {{ lowerform.name.errors }}
+            {{ lowerform.name.label_tag}}
+            {{ lowerform.name }}
+        </div>
         <br/>
         FORMSET_ERRORS:<br/>
+        <br/>TITLE_ERRORS:<br/>
         f_title.is_valid: {{formset_title.is_valid}}<br/>
         f_title.errors: {{formset_title.errors}}<br/>
         f_title.data: {{formset_title.data}}<br/>
+        <br/><br/>
+        <br/>DESC_ERRORS:<br/>
+        f_desc.is_valid: {{formset_desc.is_valid}}<br/>
+        f_desc.errors: {{formset_desc.errors}}<br/>
+        f_desc.data: {{formset_desc.data}}<br/>
+        <br/><br/>
         {% comment %}
         -------------<br/>
         {% for form in formset_desc.forms %}
@@ -40,8 +60,24 @@
 
 
         <br/>
+        FORMSET TITLE:<br/>
+        {{ formset_title.management_form }}
+        <table>
+        {% for form in formset_title.forms %}
+            {{form}}
+        {% endfor %}
+        </table>
+        {% comment %}
         <table>
             {{formset_title}}
+        </table>
+        <br/>
+        {% endcomment %}
+
+        <br/>
+        FORMSET DESC:<br/>
+        <table>
+            {{formset_desc}}
         </table>
         <br/>
 
