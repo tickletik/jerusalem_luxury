@@ -1,4 +1,5 @@
 from nested.models import *
+from nested.forms import *
 from languages.models import *
 
 from django.template import RequestContext
@@ -17,9 +18,7 @@ def top(request, top_id):
         top_obj = Top.objects.get(id=top_id)
     topform = None
 
-def lower2(request, lower_id=None):
-
-    id_lower = lower_id
+def lower(request, id_lower=None):
 
     m_lower = None
     if id_lower != None:
@@ -47,8 +46,11 @@ def lower2(request, lower_id=None):
 
                 # set the lower id for both saving, AND for display
                 for form in formset_info.forms:
+                    
                     if form.cleaned_data.has_key('lower'):
                         form.cleaned_data['lower'] = m_lower
+
+
  
                     if form.cleaned_data.has_key('DELETE') and form.cleaned_data['DELETE']:
                         # get ids for title and desc if any, and delete them
@@ -102,54 +104,4 @@ def lower2(request, lower_id=None):
                 RequestContext(request, {}),
             )
 
-def lower(request, lower_id=None):
-
-    lower_obj = None
-    if lower_id != None:
-        lower_obj = Lower.objects.get(id=lower_id)
-    lowerform = None
-
-
-    TitleFSet = modelformset_factory(Lower.Title, can_delete=True, formset=BaseTitleFormSet, max_num=3)
-    formset_title = TitleFSet(queryset=Lower.Title.objects.filter(primary=lower_obj), auto_id='id_title_%s', prefix='title')
-
-    DescFSet = modelformset_factory(Lower.Desc, can_delete=True, formset=BaseTitleFormSet, max_num=3)
-    formset_desc = DescFSet(queryset=Lower.Desc.objects.filter(primary=lower_obj), auto_id='id_desc_%s', prefix='desc')
-
-    title_instances = None
-
-    if request.method == 'POST':
-        lowerform = LowerForm(request.POST, instance=lower_obj)
-
-        if lowerform.is_valid():
-            lowerform.save()
-
-        formset_title = TitleFSet(request.POST, auto_id='id_title_%s', prefix='title')
-
-        # if it's all good then save it and reload
-        if formset_title.is_valid():
-            formset_title.save()
-            formset_title = TitleFSet(queryset=Lower.Title.objects.filter(primary=lower_obj), auto_id='id_title_%s', prefix='title')
-
-        formset_desc = DescFSet(request.POST, auto_id='id_desc_%s', prefix='desc')
-        if formset_desc.is_valid():
-            formset_desc.save()
-            formset_desc = DescFSet(queryset=Lower.Desc.objects.filter(primary=lower_obj), auto_id='id_desc_%s', prefix='desc')
-        
-    else:
-        lowerform = LowerForm(instance=lower_obj)
-        
-    return render_to_response(
-            "admin/nested/report.html",
-            {
-                'lowerform':lowerform,
-                'formset_title':formset_title,
-                'formset_desc':formset_desc,
-                'request':request,
-                'instances':title_instances,
-                },
-            RequestContext(request, {}),
-            )
-
-lower2 = staff_member_required(lower2)
 lower = staff_member_required(lower)

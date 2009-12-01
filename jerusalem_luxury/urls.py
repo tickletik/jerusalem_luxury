@@ -18,13 +18,9 @@ urlpatterns += patterns('slideshow.views',
 )
 
 urlpatterns += patterns('',
-        (r'^admin/nested/lower/(?P<lower_id>\d+)/$', 'nested.admin_views.lower2'),
-        (r'^admin/nested/lower/add/$', 'nested.admin_views.lower2'),
-
-
-        #(r'^admin/nested/report/$', 'nested.admin_views.report'),
-        #(r'^admin/nested/report/(?P<lower_id>\d+)/$', 'nested.admin_views.report'),
-        )
+        (r'^admin/nested/lower/(?P<id_lower>\d+)/$', 'nested.admin_views.lower'),
+        (r'^admin/nested/lower/add/$', 'nested.admin_views.lower'),
+)
 
 urlpatterns += patterns('',
     # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
