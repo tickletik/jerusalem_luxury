@@ -26,7 +26,7 @@ def lower2(request, lower_id=None):
         m_lower = Lower.objects.get(id=id_lower)
 
 
-    FormSet_Info = formset_factory(InfoForm, extra=1) 
+    FormSet_Info = formset_factory(InfoForm, extra=1, can_delete=True) 
     formset_info = FormSet_Info(initial=initial_list(m_lower))
     
     form_lower = LowerForm(instance=m_lower)
@@ -49,22 +49,44 @@ def lower2(request, lower_id=None):
                 for form in formset_info.forms:
                     if form.cleaned_data.has_key('lower'):
                         form.cleaned_data['lower'] = m_lower
+ 
+                    if form.cleaned_data.has_key('DELETE') and form.cleaned_data['DELETE']:
+                        # get ids for title and desc if any, and delete them
+                        if form.cleaned_data.has_key('lower_title') and form.cleaned_data['lower_title']:
+                            form.cleaned_data['lower_title'].delete()
 
-                    if form.cleaned_data.has_key('lower_title') or form.cleaned_data.has_key('title'):
-                        f_title = TitleForm(data=extract_dict(form.cleaned_data, 't'))
+                        if form.cleaned_data.has_key('lower_desc') and form.cleaned_data['lower_desc']:
+                            form.cleaned_data['lower_desc'].delete()
 
-                        m_title = f_title.save(commit=False)
-                        if form.cleaned_data['lower_title']:
-                            m_title.id = form.cleaned_data['lower_title'].id
-                        m_title.save()
+                    else:
 
-                    if form.cleaned_data.has_key('lower_desc') or form.cleaned_data.has_key('title'):
-                        f_desc = DescForm(data=extract_dict(form.cleaned_data, 'd'))
+                        # we have to put this in an else statement, otherwise after deleting 
+                        #   this section will just replace the old values
 
-                        m_desc = f_desc.save(commit=False)
-                        if form.cleaned_data['lower_desc'] != None:
-                            m_desc.id = form.cleaned_data['lower_desc'].id
-                        m_desc.save()
+
+                        # make sure the object doesn't have blank values in title or lower_title 
+    
+                        if (form.cleaned_data.has_key('lower_title') and form.cleaned_data['lower_title']) \
+                                or (form.cleaned_data.has_key('title') and form.cleaned_data['title']):
+                            f_title = TitleForm(data=extract_dict(form.cleaned_data, 't'))
+    
+                            m_title = f_title.save(commit=False)
+                            if form.cleaned_data['lower_title']:
+                                m_title.id = form.cleaned_data['lower_title'].id
+                            m_title.save()
+    
+    
+    
+                        # make sure the object doesn't have blank values in desc or lower_desc 
+    
+                        if (form.cleaned_data.has_key('lower_desc') and form.cleaned_data['lower_desc']) \
+                                or (form.cleaned_data.has_key('desc') and form.cleaned_data['desc']):
+                            f_desc = DescForm(data=extract_dict(form.cleaned_data, 'd'))
+    
+                            m_desc = f_desc.save(commit=False)
+                            if form.cleaned_data['lower_desc'] != None:
+                                m_desc.id = form.cleaned_data['lower_desc'].id
+                            m_desc.save()
 
                 # reload the data
                 formset_info = FormSet_Info(initial=initial_list(m_lower))

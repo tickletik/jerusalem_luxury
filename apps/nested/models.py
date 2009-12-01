@@ -98,7 +98,7 @@ class LowerForm(forms.ModelForm):
 class InfoForm(forms.Form):
     language = forms.ModelChoiceField(queryset=LanguageChoice.objects.all())
     title = forms.CharField(max_length=100)
-    description = forms.CharField(max_length=500, widget=forms.Textarea())
+    desc = forms.CharField(max_length=500, widget=forms.Textarea())
 
 
     lower = forms.ModelChoiceField(queryset=Lower.objects.all(), widget=forms.HiddenInput, required=False)
@@ -134,7 +134,7 @@ def initial_list(m_lower):
 
             if len(l_descs):
                 d_initial['lower_desc'] = l_descs[0].id
-                d_initial['description'] = l_descs[0].text
+                d_initial['desc'] = l_descs[0].text
 
             # if anything got retrieved then add the rest and append it to the main list
             if len(d_initial):
@@ -177,7 +177,7 @@ def extract_dict(dict_from, type):
     if type == 't':
         dict_to['text'] = dict_from['title']
     elif type == 'd':
-        dict_to['text'] = dict_from['description']
+        dict_to['text'] = dict_from['desc']
 
     return dict_to
 
