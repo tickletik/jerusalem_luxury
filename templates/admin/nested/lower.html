@@ -41,12 +41,21 @@
         <br/>
         {% endfor %}
 
+        initial = {{initial}}<br/>
+
 
         request.POST = {{request.POST}}<br/>
         instances = {{instances}}<br/>
         is_valid = {{form_lower.is_valid}}<br/>
 
-        <input type="submit" value="Submit">
+        <div class="submit-row" >
+        <input type="submit" value="Save" class="default" name="_save" />
+        
+        
+        <input type="submit" value="Save and add another" name="_addanother"  />
+        <input type="submit" value="Save and continue editing" name="_continue" />
+        </div>
+
     </form>
 </div>
 {% endblock %}

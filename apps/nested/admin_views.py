@@ -31,8 +31,10 @@ def lower2(request, lower_id=None):
     TODO: Use the model formsets from below! for Title and Desc to populate the info formset!
     NOTE: make sure to keep the initial value of 'id_lower' set to the lower object id
     """
-    FormSet_Info = formset_factory(InfoForm, extra=0) 
-    formset_info = FormSet_Info(initial=create_initial(FormSet_Info, id_lower, 3))
+    FormSet_Info = formset_factory(InfoForm, extra=2) 
+    formset_info = FormSet_Info()
+    #formset_info = initialize_formset(FormSet_Info, initial_list(m_lower, 2)) 
+    
 
     if request.method == 'POST':
         form_lower = LowerForm(request.POST, instance=m_lower)
@@ -109,6 +111,7 @@ def lower2(request, lower_id=None):
                     'form_lower':form_lower,
                     'formset_info':formset_info,
                     'type':str(type(id_lower)),
+                    'initial': initial_list(id_lower, 1),
                     'request':request,
                     },
                 RequestContext(request, {}),

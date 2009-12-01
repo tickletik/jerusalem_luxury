@@ -95,12 +95,33 @@ class InfoForm(forms.Form):
     language = forms.ModelChoiceField(queryset=LanguageChoice.objects.all())
     title = forms.CharField(max_length=100)
     description = forms.CharField(max_length=500, widget=forms.Textarea())
+
+
     id_lower = forms.IntegerField(widget=forms.HiddenInput)
     id_title = forms.IntegerField(widget=forms.HiddenInput, required=False)
     id_desc = forms.IntegerField(widget=forms.HiddenInput, required=False)
 
+    def changed_forms(self, formset):
+        if formset.form != InfoForm:
+            raise Exception("You are using a formset.form = " + str(formset.form) + ", where you should be using one of InfoForm")
 
-def create_initial(fset, lower, num=None):
+
+
+
+# NOTE: make sure to use the correct type for FSET!
+def initialize_formset(FSET, l_initial):
+
+        formset = FSET(initial=l_initial)
+
+        # set the id_lower attribute to the correct value for all extra fields
+        for i in range(formset.initial_form_count(), formset.total_form_count()):
+            for k in l_initial[0].keys(): 
+                formset.forms[i].fields[k].initial = l_initial[0][k]
+
+        return formset
+
+
+def initial_list(lower, num=1):
 
     # make sure lower has an id attribute
     id_lower = u''
@@ -110,25 +131,12 @@ def create_initial(fset, lower, num=None):
         id_lower = lower
     elif isinstance(lower, (str, unicode)):
         id_lower = int(lower)
-    else:
-        id_lower = lower
     
-    return create_initial_list(fset, {'id_lower': id_lower}, num)
-
-def create_initial_list(fset, dict_initial, num=None):
-
-    if num == None:
-        extra = fset.extra
-        max_num = fset.max_num
-
-        if max_num != 0 and (extra+1) > max_num:
-            num = max_num
-        else:
-            num = extra + 1
+    d_initial = {'id_lower': id_lower}
 
     # return a list of duplicated values for dict_initial
-    return [dict_initial.copy() for i in range(0, num)]
-            
+    return [d_initial.copy() for i in range(0, num)]
+
 
 
 def clean_request(dict_from):
@@ -168,19 +176,7 @@ def extract_dict(dict_from, type):
 from django.forms.formsets import formset_factory
 FSET_Info_0 = formset_factory(InfoForm, extra=0)
 FSET_Info_1 = formset_factory(InfoForm, extra=1)
+FSET_Info_2 = formset_factory(InfoForm, extra=2)
 FSET_Info_3 = formset_factory(InfoForm, extra=3)
-
-
-data_list = list()
-data_list.append({u'form-2-title': [u'DEBUG_LOWER_TITLE_HE'], u'form-1-id_lower': [u''], u'form-0-description': [u'DEBUG_LOWER_DESC_EN'], u'form-2-id_title': [u''], u'form-3-title': [u''], u'form-0-language': [u'1'], u'form-1-title': [u'DEBUG_LOWER_TITLE_FR'], u'form-2-description': [u'DEBUG_LOWER_DESC_HE'], u'form-3-id_title': [u''], u'form-3-language': [u''], u'form-3-description': [u''], u'top': [u'1'], u'form-0-id_desc': [u''], u'form-0-id_lower': [u'21'], u'form-2-id_lower': [u''], u'form-3-id_lower': [u''], u'form-0-title': [u'DEBUG_LOWER_TITLE_EN'], u'form-3-id_desc': [u''], u'form-1-id_title': [u''], u'form-1-description': [u'DEBUG_LOWER_DESC_FR'], u'form-TOTAL_FORMS': [u'4'], u'form-1-id_desc': [u''], u'form-INITIAL_FORMS': [u'1'], u'name': [u'debug lower_form 1'], u'form-2-language': [u'3'], u'form-2-id_desc': [u''], u'form-0-id_title': [u''], u'form-1-language': [u'2']})
-
-data_list.append({u'form-2-title': [u'DEBUG_LOWER_TITLE_HE'], u'form-1-id_lower': [u''], u'form-0-description': [u'DEBUG_LOWER_DESC_EN_1'], u'form-2-id_title': [u''], u'form-3-title': [u''], u'form-0-language': [u'1'], u'form-1-title': [u'DEBUG_LOWER_TITLE_EN_2'], u'form-2-description': [u'DEBUG_LOWER_DESC_HE'], u'form-3-id_title': [u''], u'form-3-language': [u''], u'form-3-description': [u''], u'top': [u'1'], u'form-0-id_desc': [u''], u'form-0-id_lower': [u'21'], u'form-2-id_lower': [u''], u'form-3-id_lower': [u''], u'form-0-title': [u'DEBUG_LOWER_TITLE_EN_1'], u'form-3-id_desc': [u''], u'form-1-id_title': [u''], u'form-1-description': [u'DEBUG_LOWER_DESC_EN_2'], u'form-TOTAL_FORMS': [u'4'], u'form-1-id_desc': [u''], u'form-INITIAL_FORMS': [u'1'], u'name': [u'debug lower_form 1'], u'form-2-language': [u'3'], u'form-2-id_desc': [u''], u'form-0-id_title': [u''], u'form-1-language': [u'1']})
-
-
-data_list.append({u'form-1-id_desc': [u''], u'form-1-id_title': [u''], u'form-1-description': [u''], u'name': [u'debug lower_form 1'], u'form-0-description': [u'DEBUG_LOWER_TITLE_ID_1'], u'top': [u'1'], u'form-INITIAL_FORMS': [u'1'], u'form-0-id_desc': [u'1'], u'form-TOTAL_FORMS': [u'2'], u'form-0-id_lower': [u'21'], u'form-1-id_lower': [u''], u'form-0-id_title': [u'4'], u'form-0-language': [u'1'], u'form-0-title': [u'DEBUG_LOWER_TITLE_EN_ID_4'], u'form-1-title': [u''], u'form-1-language': [u'']})
-
-data_list.append({u'form-1-id_desc': [u''], u'form-1-id_title': [u''], u'form-1-description': [u'DEBUG_LOWER_DESC_NEW_HE'], u'name': [u'debug lower_form 1'], u'form-0-description': [u'DEBUG_LOWER_TITLE_ID_1'], u'top': [u'1'], u'form-INITIAL_FORMS': [u'1'], u'form-0-id_desc': [u'1'], u'form-TOTAL_FORMS': [u'2'], u'form-0-id_lower': [u'21'], u'form-1-id_lower': [u''], u'form-0-id_title': [u'4'], u'form-0-language': [u'1'], u'form-0-title': [u'DEBUG_LOWER_TITLE_EN_ID_4'], u'form-1-title': [u'DEBUG_LOWER_TITLE_NEW_HE'], u'form-1-language': [u'3']})
-
-
 
 
