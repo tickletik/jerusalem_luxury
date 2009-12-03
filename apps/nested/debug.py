@@ -1,4 +1,5 @@
-from nested.models import clean_request, Lower, InfoForm, BaseInfoFormSet
+from nested.models import Lower
+from nested.forms import InfoForm, BaseInfoFormSet
 from languages.models import LanguageChoice
 
 langs = LanguageChoice.objects.all()
