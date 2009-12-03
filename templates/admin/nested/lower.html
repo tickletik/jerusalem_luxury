@@ -1,45 +1,117 @@
 {% extends "admin/base_site.html" %}
 
+
+{% comment %}The following is here to allow translations strings (like in the breadcrumbs section) {% endcomment %}
+{% load i18n %}
+
 {% block title %}Lower Form{% endblock %}
+{% block extrastyle %}
+<link rel="stylesheet" type="text/css" href="/admin/media/css/forms.css" />
+<link rel="stylesheet" type="text/css" href="http://jerusalem-luxury.dev/media/css/test.css" />
+{% endblock %}
+
+{% block extrahead %}
+<script type="text/javascript" src="../../../jsi18n/"></script>
+<script type="text/javascript" src="/admin/media/js/core.js"></script>
+<script type="text/javascript" src="/admin/media/js/admin/RelatedObjectLookups.js"></script>
+<script type="text/javascript" src="/admin/media/js/getElementsBySelector.js"></script>
+
+<script type="text/javascript" src="/admin/media/js/actions.js"></script>
+{% endblock %}
+
+
+{% load nested_extras %}
+
+{% block breadcrumbs %}{% if not is_popup %}
+<div class="breadcrumbs">
+     <a href="../../../">{% trans "Home" %}</a> &rsaquo;
+     <a href="../../">{{ app_label|capfirst|escape }}</a> &rsaquo; 
+     {% if has_change_permission %}<a href="../">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %} &rsaquo; 
+     {% if add %}{% trans "Add" %} {{ opts.verbose_name }}{% else %}{{ original|truncatewords:"18" }}{% endif %}
+</div>
+{% endif %}{% endblock %}
+
+
 
 {% block content %}
 <div id="content-main">
     <form action="." method="POST">
 
-        <div class="fieldWrapper">
-            {{ form_lower.id }}
-        </div>
 
-        <div class="fieldWrapper">
-            {{ form_lower.top.errors }}
-            {{ form_lower.top.label_tag}}
-            {{ form_lower.top }}
-        </div>
-        <div class="fieldWrapper">
-            {{ form_lower.name.errors }}
-            {{ form_lower.name.label_tag}}
-            {{ form_lower.name }}
-        </div>
+        <fieldset class="module aligned">
 
-
-        <div class='fieldWrapper'>
-        {{ formset_info.management_form }}
-        </div>
-
-        {% for form in formset_info.forms %}
-            <div class="formWrapper">
-            {% for field in form %}
-                <div class="fieldWrapper">
-                    {{ field.errors }}
-                    {% if field.is_hidden %}
-                        {{ field }}
-                    {% else %}
-                        {{ field.label_tag }}: {{ field }}
-                    {% endif %}
+            <div class="form-row blackit">
+                <div>
+                {{ form_lower.top.errors }}
+                {{ form_lower.top.label|label_class:"required" }} {{ form_lower.top }}
                 </div>
-            {% endfor %}
+
+
+
+                <div>
+                {{ form_lower.name.errors }}
+                {{ form_lower.name.label|label_class:"required" }} {{ form_lower.name }}
+                </div>
             </div>
+        </fieldset>
+    
+        <div class="inline-group">
+            <h2>Titles / Descriptions</h2>
+
+            {{ formset_info.management_form }}
+
+            {% for form in formset_info.forms %}
+            <div class="inline-related">
+
+                {% if forloop.last %}
+                <h6>title / description</h6>
+                {% else %}
+                <h3><strong>title / description:</strong>&nbsp; {{form|form_initial:"title"}}
+                    <span class="delete">{{ form.DELETE }} {{ form.DELETE.label|label_class:"vCheckboxLabel inline" }}</span>
+                </h3>
+                {% endif %}
+
+
+                <div class="form-row">
+                    <div>
+                    {{ form.language.errors }}
+                    {% if form.language.is_hidden %}
+                    {{ form.language }}
+                    {% else %}
+                    {{ form.language.label|label_class:"required" }}: {{ form.language }}
+<a href="/admin/    languages/languagechoice/add/" class="add-another" id="add_id_title_p_set-2-language_choice" onclick="return showAddAnotherPopup(this);"> <img src="/admin/media/img/admin/icon_addlink.gif" width="10" height="10" alt="Add Another"/></a>
+                    {% endif %}
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div>
+                    {{ form.title.errors }}
+                    {% if form.title.is_hidden %}
+                    {{ form.title }}
+                    {% else %}
+                    {{ form.title.label|label_class:"required" }}: {{ form.title }}
+                    {% endif %}
+                    </div>
+
+                    <div>
+                    {{ form.desc.errors }}
+                    {% if form.desc.is_hidden %}
+                    {{ form.desc }}
+                    {% else %}
+                    {{ form.desc.label|label_class:"required" }}: {{ form.desc }}
+                    {% endif %}
+                    </div>
+                </div>
+
+                <div>
+                {{ form.lower }}
+                {{ form.lower_desc }}
+                {{ form.lower_title }}
+                </div>
+
         {% endfor %}
+        </div>
 
         request.POST = {{request.POST}}<br/>
         is_valid = {{form_lower.is_valid}}<br/>

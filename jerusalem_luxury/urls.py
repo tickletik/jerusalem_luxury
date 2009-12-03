@@ -18,8 +18,8 @@ urlpatterns += patterns('slideshow.views',
 )
 
 urlpatterns += patterns('',
-        (r'^admin/nested/lower/(?P<id_lower>\d+)/$', 'nested.admin_views.lower'),
-        (r'^admin/nested/lower/add/$', 'nested.admin_views.lower'),
+        (r'^admin/nested/lower2/(?P<id_lower>\d+)/$', 'nested.admin_views.lower'),
+        (r'^admin/nested/lower2/add/$', 'nested.admin_views.lower'),
 )
 
 urlpatterns += patterns('',

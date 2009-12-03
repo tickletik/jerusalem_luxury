@@ -18,7 +18,7 @@ def top(request, top_id):
         top_obj = Top.objects.get(id=top_id)
     topform = None
 
-def lower(request, id_lower=None):
+def lower(request, id_lower=None, add=False):
 
     m_lower = None
     if id_lower != None:
@@ -97,6 +97,11 @@ def lower(request, id_lower=None):
     return render_to_response(
                 "admin/nested/lower.html",
                 {
+                    # this is for the breadcrumbs
+                    'app_label': "nested",
+                    'opts': {'verbose_name_plural':'Lowers'},
+                    'has_change_permission':True,
+                    
                     'form_lower':form_lower,
                     'formset_info':formset_info,
                     'request':request,
