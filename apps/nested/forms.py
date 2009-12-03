@@ -51,7 +51,7 @@ class LowerForm(forms.ModelForm):
     # is_valid will check to see if the value is outside bounds
     class Meta:
         model = Lower
-        fields = ['name', 'top']
+        fields = ['name', 'top', 'image_large', 'image_thumb']
 
     def clean(self):
         cleaned_data = self.cleaned_data

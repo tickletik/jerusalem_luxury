@@ -28,101 +28,105 @@
      <a href="../../">{{ app_label|capfirst|escape }}</a> &rsaquo; 
      {% if has_change_permission %}<a href="../">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %} &rsaquo; 
      {% if add %}{% trans "Add" %} {{ opts.verbose_name }}{% else %}{{ original|truncatewords:"18" }}{% endif %}
+     {{ item_name }}
 </div>
 {% endif %}{% endblock %}
 
 
 
 {% block content %}
-<div id="content-main">
-    <form action="." method="POST">
+    <h1>Change lower</h1>
 
-
-        <fieldset class="module aligned">
-
-            <div class="form-row blackit">
-                <div>
-                {{ form_lower.top.errors }}
-                {{ form_lower.top.label|label_class:"required" }} {{ form_lower.top }}
-                </div>
-
-
-
-                <div>
-                {{ form_lower.name.errors }}
-                {{ form_lower.name.label|label_class:"required" }} {{ form_lower.name }}
-                </div>
-            </div>
-        </fieldset>
+    <div id="content-main">
+        <form action="." method="POST">
     
-        <div class="inline-group">
-            <h2>Titles / Descriptions</h2>
-
-            {{ formset_info.management_form }}
-
-            {% for form in formset_info.forms %}
-            <div class="inline-related">
-
-                {% if forloop.last %}
-                <h6>title / description</h6>
-                {% else %}
-                <h3><strong>title / description:</strong>&nbsp; {{form|form_initial:"title"}}
-                    <span class="delete">{{ form.DELETE }} {{ form.DELETE.label|label_class:"vCheckboxLabel inline" }}</span>
-                </h3>
-                {% endif %}
-
-
+    
+            <fieldset class="module aligned">
+    
                 <div class="form-row">
                     <div>
-                    {{ form.language.errors }}
-                    {% if form.language.is_hidden %}
-                    {{ form.language }}
-                    {% else %}
-                    {{ form.language.label|label_class:"required" }}: {{ form.language }}
-<a href="/admin/    languages/languagechoice/add/" class="add-another" id="add_id_title_p_set-2-language_choice" onclick="return showAddAnotherPopup(this);"> <img src="/admin/media/img/admin/icon_addlink.gif" width="10" height="10" alt="Add Another"/></a>
-                    {% endif %}
+                    {{ form_lower.top.errors }}
+                    {{ form_lower.top.label|label_class:"required" }} {{ form_lower.top }}
                     </div>
                 </div>
-
+    
                 <div class="form-row">
                     <div>
-                    {{ form.title.errors }}
-                    {% if form.title.is_hidden %}
-                    {{ form.title }}
-                    {% else %}
-                    {{ form.title.label|label_class:"required" }}: {{ form.title }}
-                    {% endif %}
+                    {{ form_lower.name.errors }}
+                    {{ form_lower.name.label|label_class:"required" }} {{ form_lower.name }}
                     </div>
+                </div>
 
+            </fieldset>
+        
+            <div class="inline-group">
+                <h2>Titles / Descriptions</h2>
+    
+                {{ formset_info.management_form }}
+    
+                {% for form in formset_info.forms %}
+                <div class="inline-related">
+    
+                    {% if forloop.last %}
+                    <h6>title / description</h6>
+                    {% else %}
+                    <h3><strong>title / description:</strong>&nbsp; {{form|form_initial:"title"}}
+                        <span class="delete">{{ form.DELETE }} {{ form.DELETE.label|label_class:"vCheckboxLabel inline" }}</span>
+                    </h3>
+                    {% endif %}
+    
+    
+                    <div class="form-row">
+                        <div>
+                        {{ form.language.errors }}
+                        {% if form.language.is_hidden %}
+                        {{ form.language }}
+                        {% else %}
+                        {{ form.language.label|label_class:"required" }}: {{ form.language }}
+    <a href="/admin/    languages/languagechoice/add/" class="add-another" id="add_id_title_p_set-2-language_choice" onclick="return showAddAnotherPopup(this);"> <img src="/admin/media/img/admin/icon_addlink.gif" width="10" height="10" alt="Add Another"/></a>
+                        {% endif %}
+                        </div>
+                    </div>
+    
+                    <div class="form-row">
+                        <div>
+                        {{ form.title.errors }}
+                        {% if form.title.is_hidden %}
+                        {{ form.title }}
+                        {% else %}
+                        {{ form.title.label|label_class:"required" }}: {{ form.title }}
+                        {% endif %}
+                        </div>
+    
+                        <div>
+                        {{ form.desc.errors }}
+                        {% if form.desc.is_hidden %}
+                        {{ form.desc }}
+                        {% else %}
+                        {{ form.desc.label|label_class:"required" }}: {{ form.desc }}
+                        {% endif %}
+                        </div>
+                    </div>
+    
                     <div>
-                    {{ form.desc.errors }}
-                    {% if form.desc.is_hidden %}
-                    {{ form.desc }}
-                    {% else %}
-                    {{ form.desc.label|label_class:"required" }}: {{ form.desc }}
-                    {% endif %}
+                    {{ form.lower }}
+                    {{ form.lower_desc }}
+                    {{ form.lower_title }}
                     </div>
-                </div>
-
-                <div>
-                {{ form.lower }}
-                {{ form.lower_desc }}
-                {{ form.lower_title }}
-                </div>
-
-        {% endfor %}
-        </div>
-
-        request.POST = {{request.POST}}<br/>
-        is_valid = {{form_lower.is_valid}}<br/>
-
-        <div class="submit-row" >
-            <input type="submit" value="Save" class="default" name="_save" />
-            <input type="submit" value="Save and add another" name="_addanother"  />
-            <input type="submit" value="Save and continue editing" name="_continue" />
-        </div>
-
-    </form>
-</div>
+    
+            {% endfor %}
+            </div>
+    
+            request.POST = {{request.POST}}<br/>
+            is_valid = {{form_lower.is_valid}}<br/>
+    
+            <div class="submit-row" >
+                <input type="submit" value="Save" class="default" name="_save" />
+                <input type="submit" value="Save and add another" name="_addanother"  />
+                <input type="submit" value="Save and continue editing" name="_continue" />
+            </div>
+    
+        </form>
+    </div>
 {% endblock %}
 

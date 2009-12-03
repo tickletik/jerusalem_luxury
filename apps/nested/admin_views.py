@@ -101,6 +101,8 @@ def lower(request, id_lower=None, add=False):
                     'app_label': "nested",
                     'opts': {'verbose_name_plural':'Lowers'},
                     'has_change_permission':True,
+                    'item_name':m_lower.name,
+                    'messages':['The lower "LOWER_1" was changed successfully. You may edit it again below.', 'hi there ronny!'],
                     
                     'form_lower':form_lower,
                     'formset_info':formset_info,
