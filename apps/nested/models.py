@@ -34,6 +34,4 @@ class Lower(models.Model):
 
     top = models.ForeignKey("Top")
     name = models.CharField(max_length="200")
-    image_large = models.ImageField(upload_to="img/nested/large")
-    image_thumb = models.ImageField(upload_to="img/nested/thumb")
 

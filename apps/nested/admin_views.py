@@ -1,11 +1,13 @@
 from nested.models import *
 from nested.forms import *
 from languages.models import *
+from jerusalem_luxury.settings import MEDIA_URL, DEBUG
 
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.contrib.admin.views.decorators import staff_member_required
 
+from django.core.files.uploadedfile import SimpleUploadedFile
 
 #formset imports
 from django.forms.models import modelformset_factory
@@ -20,6 +22,14 @@ def top(request, top_id):
 
 def lower(request, id_lower=None, add=False):
 
+    t_list = ['a', 'a', 'c', 'd', 'e', 'f'] 
+    count = 0
+    h_dict = dict()
+
+    for t in t_list:
+        count += 1
+        h_dict[t] = [str(x) for x in range(0, count)]
+
     m_lower = None
     if id_lower != None:
         m_lower = Lower.objects.get(id=id_lower)
@@ -31,7 +41,7 @@ def lower(request, id_lower=None, add=False):
     form_lower = LowerForm(instance=m_lower)
 
     if request.method == 'POST':
-        form_lower = LowerForm(request.POST, instance=m_lower)
+        form_lower = LowerForm(request.POST, request.FILES, instance=m_lower)
 
         if form_lower.is_valid():
             m_lower = form_lower.save(commit=False)
@@ -102,11 +112,22 @@ def lower(request, id_lower=None, add=False):
                     'opts': {'verbose_name_plural':'Lowers'},
                     'has_change_permission':True,
                     'item_name':m_lower.name,
+
+                    # admin form stuff
                     'messages':['The lower "LOWER_1" was changed successfully. You may edit it again below.', 'hi there ronny!'],
+                    'title': "Change lower",
+                    'MEDIA_URL': MEDIA_URL,
+                    'DEBUG': DEBUG,
+
                     
                     'form_lower':form_lower,
                     'formset_info':formset_info,
                     'request':request,
+
+                    't_list':t_list,
+                    'h_dict':h_dict,
+                    'key':'some content',
+                    'key2':'b',
                     },
                 RequestContext(request, {}),
             )

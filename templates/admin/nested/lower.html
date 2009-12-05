@@ -1,10 +1,12 @@
 {% extends "admin/base_site.html" %}
 
 
+
 {% comment %}The following is here to allow translations strings (like in the breadcrumbs section) {% endcomment %}
 {% load i18n %}
+{% load webdesign %}
 
-{% block title %}Lower Form{% endblock %}
+{% block title %}Change lower | Django site admin{% endblock %}
 {% block extrastyle %}
 <link rel="stylesheet" type="text/css" href="/admin/media/css/forms.css" />
 <link rel="stylesheet" type="text/css" href="http://jerusalem-luxury.dev/media/css/test.css" />
@@ -35,11 +37,10 @@
 
 
 {% block content %}
-    <h1>Change lower</h1>
 
     <div id="content-main">
-        <form action="." method="POST">
-    
+
+        <form enctype="multipart/form-data" action="." method="POST">
     
             <fieldset class="module aligned">
     
@@ -57,13 +58,81 @@
                     </div>
                 </div>
 
+                <div class="form-row image_large">
+                    <div>
+                    {{ form_lower.image_large.errors }}
+                    {{ form_lower.image_large.label|label_class:"required" }} Currently: <a target="_blank" href="{{MEDIA_URL}}/{{form_lower.instance.image_large.name}}">{{form_lower.instance.image_large.name}}</a>
+                    <br />Change: {{ form_lower.image_large }}
+                    </div>
+                </div>
+
+                <div class="form-row image_thumb">
+                    <div>
+                    {{ form_lower.image_thumb.errors }}
+                    {{ form_lower.image_thumb.label|label_class:"required" }} Currently: <a target="_blank" href="{{MEDIA_URL}}/{{form_lower.instance.image_thumb.name}}">{{form_lower.instance.image_thumb.name}}</a>
+                    <br />Change: {{ form_lower.image_thumb }}
+                    </div>
+                </div>
             </fieldset>
         
             <div class="inline-group">
+
+
+                <div class="tabular inline-related">
+                    {{ formset_info.management_form }}
+                    <fieldset class="module">
+                        <h2>Title / Description</h2>
+
+                        <table>
+                            {% for form in formset_info.forms %}
+                            {% if forloop.first %}
+                            <thead><tr>
+                                    <th colspan="2">{{ form.language.label}}</th>
+                                    <th>{{ form.title.label }}</th>
+                                    <th>{{ form.desc.label }}</th>
+                                    <th>{{ form.DELETE.label }}?</th>
+                            </tr></thead>
+                            <tbody>
+                            {% endif %}
+                                <tr class="{% cycle 'row1' 'row2' %} has_original">
+                                    <td class="original">
+                                        {% if not forloop.last %}<p>{{ form|form_initial:"title" }}</p>{% endif %}
+                                        {{ form.lower }}
+                                        {{ form.lower_desc }}
+                                        {{ form.lower_title }}
+                                    </td>
+
+                                    <td>
+                                        {{ form.language.errors }}
+                                        {{ form.language }}
+                                        <a href="/admin/languages/languagechoice/add/" class="add-another" id="{{ form.prefix|string_form:form.auto_id|string_form:"add_%s-language" }}" onclick="return showAddAnotherPopup(this);"> <img src="/admin/media/img/admin/icon_addlink.gif" width="10" height="10" alt="Add Another"/></a>
+                                        <br/>
+                                        
+                                    </td>
+                                    <td>
+                                        {{ form.title.errors }}
+                                        {{ form.title }}
+                                    </td>
+                                    <td>
+                                        {{ form.desc.errors }}
+                                        {{ form.desc }}
+                                    </td>
+                                    <td>{% if not forloop.last %}{{ form.DELETE }}{% endif %}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </fieldset>
+                </div>
+            </div>
+
+    
+                {% comment %}
+                {# This is some interesting code that I just don't have the heart to get rid of #}
                 <h2>Titles / Descriptions</h2>
     
                 {{ formset_info.management_form }}
-    
+
                 {% for form in formset_info.forms %}
                 <div class="inline-related">
     
@@ -113,12 +182,42 @@
                     {{ form.lower_desc }}
                     {{ form.lower_title }}
                     </div>
+                </div>
+                {% endfor %}
+                {% endcomment %}
     
-            {% endfor %}
-            </div>
     
-            request.POST = {{request.POST}}<br/>
-            is_valid = {{form_lower.is_valid}}<br/>
+            {% if DEBUG %}
+                request.POST = {{request.POST}}<br/>
+                request.FILES = {{request.FILES}}<br/>
+                is_valid = {{form_lower.is_valid}}<br/>
+
+                [{% for t in t_list %}
+                    {{ t }}&nbsp;
+                {% endfor %}]
+
+
+                {% for t in t_list %}
+                {% dict_key h_dict t %}
+                {% endfor %}
+
+                {% content_box key %}
+                <p>{% lorem %}</p>
+                <p>{% lorem random %}</p>
+                {% endcontent_box %}
+
+                {% content_readmore key %}
+                    <p>{% lorem %}</p>
+                    {% readmore %}
+                    <p>{% lorem random %}</p>
+                {% endcontent_readmore %}
+
+                -----<br/>
+                {% for t in t_list %}
+                    {% dict_extract h_dict t as temp_dict %}
+                {% endfor %}
+            {% endif %}
+
     
             <div class="submit-row" >
                 <input type="submit" value="Save" class="default" name="_save" />

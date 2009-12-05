@@ -91,6 +91,8 @@ FSET_Info_3 = formset_factory(InfoForm, extra=3, can_delete=True)
 
 data_list = list()
 
+data_list.append(clean_request({u'image_large': [u''], u'form-0-lower': [u'1'], u'form-0-lower_desc': [u'57'], u'form-1-title': [u''], u'name': [u'LOWER_1'], u'form-1-lower': [u''], u'top': [u'1'], u'form-0-language': [u'1'], u'form-0-desc': [u'fghg'], u'form-TOTAL_FORMS': [u'2'], u'form-0-title': [u'hgfh'], u'form-1-desc': [u''], u'form-1-lower_desc': [u''], u'form-INITIAL_FORMS': [u'1'], u'form-0-lower_title': [u'65'], u'image_thumb': [u''], u'form-1-language': [u''], u'form-0-DELETE': [u'on'], u'_continue': [u'Save and continue editing'], u'form-1-lower_title': [u'']}))
+
 data_list.append(clean_request({u'form-0-lower': [u''], u'form-0-lower_desc': [u''], u'form-1-description': [u''], u'name': [u'debug lower_form 1'], u'form-0-description': [u''], u'form-1-lower': [u''], u'top': [u'1'], u'form-INITIAL_FORMS': [u'0'], u'form-1-lower_desc': [u''], u'form-TOTAL_FORMS': [u'2'], u'form-0-lower_title': [u''], u'form-0-language': [u''], u'form-0-title': [u''], u'form-1-title': [u''], u'form-1-language': [u''], u'_continue': [u'Save and continue editing'], u'form-1-lower_title': [u'']}))
 
 data_list.append(clean_request({u'form-0-lower': [u''], u'form-0-lower_desc': [u''], u'form-1-description': [u''], u'name': [u'debug lower_form 1'], u'form-0-description': [u'DEBUG_LOWER_DESC_EN_NEW'], u'form-1-lower': [u''], u'top': [u'1'], u'form-INITIAL_FORMS': [u'0'], u'form-1-lower_desc': [u''], u'form-TOTAL_FORMS': [u'2'], u'form-0-lower_title': [u''], u'form-0-language': [u'1'], u'form-0-title': [u'DEBUG_LOWER_TITLE_EN_NEW'], u'form-1-title': [u''], u'form-1-language': [u''], u'_continue': [u'Save and continue editing'], u'form-1-lower_title': [u'']}))

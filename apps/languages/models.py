@@ -31,13 +31,13 @@ class ACharField(models.Model):
 
         return "%s" % self.text
 
-class ADualField(models.Model):
+class ATitleDesc(models.Model):
     language_choice = models.ForeignKey(LanguageChoice)
-    charfield = models.CharField(max_length=200)
-    textfield = models.TextField()
+    title = models.CharField(max_length=200)
+    desc = models.TextField()
 
     class Meta:
         abstract = True
 
     def __unicode__(self):
-        return "%s" % self.text
+        return "title = %s, desc = %s" % (self.title, self.desc)
