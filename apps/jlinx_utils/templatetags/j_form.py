@@ -61,11 +61,11 @@ def do_form_value(form, arg):
 
 #----------------------- TAGS --------------------------
 
-@register.tag(name="form_row")
-def do_form_row(parser, token):
-    #{% form_row "form-row" building.block "required" %}
-    #{% form_row "form-row" building.block "required" MEDIA_URL%}
-    #{% form_row "form-row css-class2 css-class3" building.block "required" "http://jerusalem_luxury.dev/media/" %}
+@register.tag(name="form_field")
+def do_form_field(parser, token):
+    #{% form_field "form-row" building.block "required" %}
+    #{% form_field "form-row" building.block "required" MEDIA_URL%}
+    #{% form_field "form-row css-class2 css-class3" building.block "required" "http://jerusalem_luxury.dev/media/" %}
     try:
         # Splitting by None == splitting by spaces
         #tag_name, d_class, f_instance, l_class = token.split_contents()
@@ -82,10 +82,10 @@ def do_form_row(parser, token):
     d_class, f_instance, l_class = m.groups()[:3]
     m_url, a_name = m.groups()[4:]
 
-    return FormRowNode(d_class, f_instance, l_class, m_url, a_name)
+    return FormFieldNode(d_class, f_instance, l_class, m_url, a_name)
 
 
-class FormRowNode(template.Node):
+class FormFieldNode(template.Node):
     def __init__(self, d_class, f_instance, l_class, m_url, a_name):
         self.d_class = d_class
         self.f_instance = f_instance

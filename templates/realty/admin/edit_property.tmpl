@@ -1,0 +1,138 @@
+{% extends "admin/base_site.html" %}
+
+
+
+{% comment %}The following is here to allow translations strings (like in the breadcrumbs section) {% endcomment %}
+{% load i18n %}
+{% load webdesign %}
+
+{% load j_form %}
+
+{% block title %}{% if add %}{% trans "Add" %} {% else %}{% trans "Change" %} {% endif %} {{opts.verbose_name|capfirst }} | Django site admin{% endblock %}
+
+{% block extrastyle %}
+<link rel="stylesheet" type="text/css" href="/admin/media/css/forms.css" />
+<link rel="stylesheet" type="text/css" href="http://jerusalem-luxury.dev/media/css/test.css" />
+{% endblock %}
+
+{% block extrahead %}
+<script type="text/javascript" src="../../../jsi18n/"></script>
+<script type="text/javascript" src="/admin/media/js/core.js"></script>
+<script type="text/javascript" src="/admin/media/js/admin/RelatedObjectLookups.js"></script>
+<script type="text/javascript" src="/admin/media/js/getElementsBySelector.js"></script>
+
+<script type="text/javascript" src="/admin/media/js/actions.js"></script>
+{% endblock %}
+
+{% block breadcrumbs %}{% if not is_popup %}
+<div class="breadcrumbs">
+     <a href="../../../">{% trans "Home" %}</a> &rsaquo;
+     <a href="../../">{{ app_label|capfirst|escape }}</a> &rsaquo; 
+     {% if has_change_permission %}<a href="../">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %} &rsaquo; 
+     {% if add %}{% trans "Add" %} {{ opts.verbose_name }}{% else %}{{ original|truncatewords:"18" }}{% endif %}
+</div>
+{% endif %}{% endblock %}
+
+
+{% block content %}
+
+    <div id="content-main">
+
+        <form enctype="multipart/form-data" action="." method="POST">
+
+            {{ form_main.id }}
+            {{ form_main }}
+
+            {{ formset_main.management_form }}
+        
+            <div class="inline-group">
+                <h2>{{labels.formset}}</h2>
+                {% for fm_form in formset_main.forms %}
+
+                    {{ fm_form.id }}
+            
+                    <div class="tabular inline-related">
+                        <h3><b>{{labels.formset}}:</b>&nbsp; {% if fm_form|form_value:"name" %}{{ fm_form|form_value:"name" }}{% endif %}
+                            <span class="delete">{{ fm_form.DELETE }}{{ fm_form.DELETE.label|label_class:"vCheckboxLabel inline" }}</span> </h3>
+
+                        <fieldset class="module aligned">
+
+                            {% form_field "form-row" fm_form.name "required" %}<br/>
+    
+                            {% form_field "form-row image_large" fm_form.image_large "required" MEDIA_URL fm_form.instance.image_large.name %}<br/>
+                            {% form_field "form-row image_thumb" fm_form.image_thumb "required" MEDIA_URL fm_form.instance.image_thumb.name %}<br/>
+
+                        </fieldset>
+                    </div>
+
+
+
+            
+                    {% if fm_form.nested %}
+                    {% for n_formset in fm_form.nested %}
+                    <div class="tabular inline-related">
+                        {{ n_formset.management_form }}
+                        <fieldset class="module">
+                            <h4>{{ labels.nested }}</h4>
+
+                            <table>
+                                {% for n_form in n_formset.forms %}
+                                {% if forloop.first %}
+                                <thead><tr>
+                                        <th colspan="2">{{ n_form.language_choice.label }}</th>
+                                        <th>{{ n_form.title.label }}</th>
+                                        <th>{{ n_form.desc.label }} </th>
+                                        <th>{{ n_form.DELETE.label }} </th>
+                                </tr></thead>
+                                {% endif %}
+
+                                <tr class="{% cycle "row1" "row2" %} has_original">
+                                    <td class="original">
+                                        {% if n_form|form_value:"title" %}<p>{{ n_form|form_value:"title" }}</p>{% endif %}
+                                        {{ n_form.id }}
+                                    </td>
+                                    <td>
+                                        {{ n_form.language_choice.errors }}
+                                        {{ n_form.language_choice }}
+                                        <a href="/admin/languages/languagechoice/add/" class="add-another" id="{{ n_form.prefix|string_form:n_form.auto_id|string_form:"add_%s-language" }}" onclick="return showAddAnotherPopup(this);"> <img src="/admin/media/img/admin/icon_addlink.gif" width="10" height="10" alt="Add Another"/></a>
+                                        <br/>
+                                    </td>
+                                    <td>
+                                        {{ n_form.title.errors }}
+                                        {{ n_form.title }}
+                                    </td>
+                                    <td>
+                                        {{ n_form.desc.errors }}
+                                        {{ n_form.desc }}
+                                    </td>
+                                    <td>{% if n_form.DELETE %}{{ n_form.DELETE }}{% endif %}</td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+                        </fieldset>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+        
+            {% endfor %}
+        </div>
+
+        <div class="submit-row" >
+            <input type="submit" value="Save" class="default" name="_save" />
+            <p class="deletelink-box"><a href="delete/" class="deletelink">Delete</a></p>
+            <input type="submit" value="Save and add another" name="_addanother"  />
+            <input type="submit" value="Save and continue editing" name="_continue" />
+        </div>
+        </form>
+
+        
+        {% if DEBUG %}
+        request.POST = {{request.POST}}<br/>
+        request.FILES = {{request.FILES}}<br/>
+        is_valid_f = {{form_main.is_valid}}<br/>
+        is_valid_fset = {{formset_main.is_valid}}<br/>
+        {% endif %}
+
+
+    </div>
+{% endblock %}

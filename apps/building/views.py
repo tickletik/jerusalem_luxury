@@ -10,47 +10,61 @@ import building.models as models
 import building.forms as forms
 
 
+MainForm = forms.BlockForm
+NestedFormset = forms.BuildingFormset
+MainModel = models.Block 
+nested_labels = {'main':'Block', 'formset':'Building', 'nested':'Title / Description'}
+app_label = 'Buildings'
+template_object_edit =  'rentals/edit_buildings.html'
+template_object_add =  'rentals/edit_buildings.html'
+
+s_continue='/admin/building/block/%s/'
+s_save='/admin/building/block'
+s_add='/admin/building/block/add/'
+
+
 @staff_member_required
-def add_block(request):
+def add_nestedinline(request):
     """Add buildings and their tenants on a brand new block."""
 
 
     if request.method == 'POST':
-        f_block = forms.BlockForm(request.POST)
+        form_main = MainForm(request.POST)
 
-        if f_block.is_valid():
-            # don't save the block until the formsets are valid and saved
-            block = f_block.save(commit=False)
-            block.save()
+        if form_main.is_valid():
+            # don't save the m_object until the formsets are valid and saved
+            m_object = form_main.save(commit=False)
+            m_object.save()
         
-            formset = forms.BuildingFormset(request.POST, request.FILES, instance=block)
+            formset = NestedFormset(request.POST, request.FILES, instance=m_object)
 
             if formset.is_valid():
                 rooms = formset.save_all()
 
 
                 if request.POST.has_key('_continue'): 
-                    return redirect('/admin/building/block/%s/' % block.id, block_id=block.id) 
+                    return redirect(s_continue % m_object.id)
                 elif request.POST.has_key('_save'):
-                    return redirect('/admin/building/block')
+                    return redirect(s_save)
                 else:
-                    return redirect('/admin/building/block/add/')
+                    return redirect()
             else:
-                # didn't work, get rid of this block
-                block.delete()
+                # didn't work, get rid of this m_object 
+                m_object.delete()
     else:
-        f_block = forms.BlockForm()
-        formset = forms.BuildingFormset()
+        form_main = MainForm()
+        formset = NestedFormset()
 
-    return render_to_response('rentals/edit_buildings.html',
+    return render_to_response(template_object_add,
         {
-            'opts':models.Block._meta,
+            'opts':MainModel._meta,
             'add':True,
-            'app_label':'Buildings',
+            'app_label': app_label,
             'has_change_permission':request.user.is_authenticated,
             
-            'f_block':f_block,
-            'buildings':formset,
+            'form_main':form_main,
+            'formset_main':formset,
+            'labels':nested_labels,
 
             'MEDIA_URL':MEDIA_URL,
             'DEBUG':DEBUG,
@@ -59,47 +73,51 @@ def add_block(request):
             
 
 @staff_member_required
-def edit_block(request, block_id):
+def edit_nestedinline(request, object_id):
 
     """Edit buildings and their tenants on a given block."""
-
-    block = get_object_or_404(models.Block, id=block_id)
+    
+    m_object = get_object_or_404(MainModel, id=object_id)
 
     if request.method == 'POST':
-        f_block = forms.BlockForm(request.POST, instance=block)
-        formset = forms.BuildingFormset(request.POST, request.FILES, instance=block)
-        is_valid = f_block.is_valid(), formset.is_valid()
+        form_main = MainForm(request.POST, instance=m_object)
+        formset = NestedFormset(request.POST, request.FILES, instance=m_object)
+        is_valid = form_main.is_valid(), formset.is_valid()
 
-        if f_block.is_valid():
-            f_block.save()
+        if form_main.is_valid():
+            form_main.save()
 
             if formset.is_valid():
                 rooms = formset.save_all()
 
                 if request.POST.has_key('_continue'): 
-                    return redirect('/admin/building/block/%s/' % block.id, block_id=block.id) 
+                    return redirect(s_continue % m_object.id)
                 elif request.POST.has_key('_save'):
-                    return redirect('/admin/building/block')
+                    return redirect(s_save)
                 else:
-                    return redirect('/admin/building/block/add/')
+                    return redirect(s_add)
     else:
-        f_block = forms.BlockForm(instance=block)
-        formset = forms.BuildingFormset(instance=block)
+        form_main = MainForm(instance=m_object)
+        formset = NestedFormset(instance=m_object)
 
-
-    return render_to_response('rentals/edit_buildings.html',
+    return render_to_response(template_object_edit,
             {
-                'opts':models.Block._meta,
-                'app_label':'Buildings',
+                'opts':MainModel._meta,
+                'app_label': app_label,
                 'add':False,
-                'original':block,
+                'original':m_object,
                 'has_change_permission':request.user.is_authenticated,
 
-                'f_block':f_block,
-                'buildings':formset,
+                'form_main':form_main,
+                'formset_main':formset,
+                'labels':nested_labels,
+
 
                 'MEDIA_URL':MEDIA_URL,
                 'DEBUG':DEBUG,
                 'request':request,
             }, context_instance = RequestContext(request))
             
+
+add_block=add_nestedinline
+edit_block=edit_nestedinline

@@ -51,6 +51,7 @@ def clean_request(dict_from):
         dict_to[k] = dict_from[k][0]
 
     return dict_to
+
 def test_retrieve(m_lower):
 
     # initialize the list, if it's nothing don't use it
