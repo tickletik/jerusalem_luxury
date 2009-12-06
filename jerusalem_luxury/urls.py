@@ -18,6 +18,14 @@ urlpatterns += patterns('slideshow.views',
 )
 
 urlpatterns += patterns('',
+        (r'^block_view/(?P<block_id>\d+)/$', 'building.views.edit_block'),
+
+        (r'^test/block/(?P<block_id>\d+)/$', 'building.views.edit_block'),
+        (r'^test/block/add/$', 'building.views.add_block'),
+
+        (r'^admin/building/block/(?P<block_id>\d+)/$', 'building.views.edit_block'),
+        (r'^admin/building/block/add/$', 'building.views.add_block'),
+
         (r'^admin/nested/lower2/(?P<id_lower>\d+)/$', 'nested.admin_views.lower'),
         (r'^admin/nested/lower2/add/$', 'nested.admin_views.lower'),
 )

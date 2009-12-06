@@ -5,17 +5,18 @@ from languages.models import *
 class Block(models.Model):
     name = models.CharField(max_length=200)
 
+
     def __unicode__(self):
         return "%s" % self.name
 
 class Building(models.Model):
     block = models.ForeignKey(Block)
     name = models.CharField(max_length=200)
-    image_large = models.ImageField(upload_to="img/nested/large")
-    image_thumb = models.ImageField(upload_to="img/nested/thumb")
+    image_large = models.ImageField(upload_to="img/debug/building/large")
+    image_thumb = models.ImageField(upload_to="img/debug/building/thumb")
     
     def __unicode__(self):
-        return "Building %s, Block %s" % (name, block.name)
+        return "[%s, %s]" % (self.name, self.block.name)
 
 class Tenant(models.Model):
     building = models.ForeignKey(Building)
