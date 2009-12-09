@@ -17,12 +17,15 @@
 {% endblock %}
 
 {% block extrahead %}
-<script type="text/javascript" src="../../../jsi18n/"></script>
+<script type="text/javascript" src="/admin/jsi18n/"></script>
 <script type="text/javascript" src="/admin/media/js/core.js"></script>
 <script type="text/javascript" src="/admin/media/js/admin/RelatedObjectLookups.js"></script>
 <script type="text/javascript" src="/admin/media/js/getElementsBySelector.js"></script>
 
 <script type="text/javascript" src="/admin/media/js/actions.js"></script>
+
+<script type="text/javascript" src="/admin/media/js/calendar.js"></script>
+<script type="text/javascript" src="/admin/media/js/admin/DateTimeShortcuts.js"></script>
 {% endblock %}
 
 {% block breadcrumbs %}{% if not is_popup %}
@@ -67,6 +70,7 @@
                 <h2>Location / Address</h2>
                 {{ formset_location.management_form }}
                 {% for form_loc in formset_location.forms %}
+                {{ form_loc.id }}
                 {% form_field form_loc.street_en "form-row" %}
                 {% form_field form_loc.street_he "form-row" %}
                 {% form_field form_loc.zip "form-row" %}
@@ -82,6 +86,7 @@
                 <h2>House / Apartment Details</h2>
                 {{ formset_amenities.management_form }}
                 {% for form_amen in formset_amenities.forms %}
+                {{ form_amen.id }}
                 {% form_field form_amen.bedrooms "form-row" %}
                 {% form_field form_amen.bathrooms "form-row" %}
                 {% form_field form_amen.number_of_floors "form-row" %}
@@ -96,7 +101,32 @@
                 {% form_field form_amen.conditioning "form-row" %}
                 {% endfor %}
             </fieldset>
+
+
+            <fieldset class="module aligned">
+                <h2>Rental Information</h2>
+                {{ formset_rent.management_form }}
+                {% for form_rent in formset_rent.forms %}
+                {{ form_rent.id }}
+                {% form_field form_rent.asking_price "form-row" %}
+                {% form_field form_rent.type "form-row" %}
+                {% form_field form_rent.available_from "form-row" %}
+                {% form_field form_rent.available_to "form-row" %}
+                {% endfor %}
+            </fieldset>
         
+            <fieldset class="module aligned">
+                <h2>Sales Information</h2>
+                {{ formset_sale.management_form }}
+                {% for form_sale in formset_sale.forms %}
+                {{ form_sale.id }}
+                {% form_field form_sale.asking_price "form-row" %}
+                {% form_field form_sale.type "form-row" %}
+                {% form_field form_sale.available_from "form-row" %}
+                {% form_field form_sale.available_to "form-row" %}
+                {% endfor %}
+            </fieldset>
+
             <div class="inline-group">
                 <h2>{{ labels.formset_images }}</h2>
 

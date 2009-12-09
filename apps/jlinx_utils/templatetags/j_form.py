@@ -30,7 +30,7 @@ def resolve_if_quotes(var, context):
 
 
 @register.filter(name="label_class")
-def do_label_class(value, arg, suffix=":", autoescape=None):
+def do_label_class(value, arg, forarg=None, suffix=":", autoescape=None):
 
     if autoescape:
         esc = conditional_escape
@@ -41,6 +41,9 @@ def do_label_class(value, arg, suffix=":", autoescape=None):
         result = "<label class=\"%s\">%s%s</label>" % (esc(arg), esc(value), esc(suffix))
     else:
         result = "<label>%s%s</label>" % (esc(value), esc(suffix))
+
+    if forarg != None:
+        result = "<label class=\"%s\" for=\"%s\">%s%s</label>" % (esc(arg), esc(forarg), esc(value), esc(suffix))
 
     return mark_safe(result)
 
@@ -147,7 +150,24 @@ class FormFieldNode(template.Node):
                 """
             #f_label = "<label class=\"%s\">%s</label>" % ("vCheckboxLabel required" if f_instance.field.required else "vCheckboxLabel", f_instance.label)
             context_dict['f_label'] = do_label_class(f_instance.label, "vCheckboxLabel required" if f_instance.field.required else "vCheckboxLabel", suffix="" ) 
+
+        elif isinstance(f_instance.field, dforms.fields.DateField):
             
+            result_str = """
+                        <div class="%(d_class)s">
+                            <div>
+                                %(f_errors)s
+                                %(f_label)s %(f_inst)s
+                                %(help_text)s
+                            </div>
+                        </div>
+                """
+            f_text = f_instance.as_text()
+        
+            f_label = do_label_class(f_instance.label, "required" if f_instance.field.required else None, forarg=f_instance.auto_id)
+
+            context_dict['f_label'] = f_label
+            context_dict['f_inst'] = f_text[:len(f_text)-2] + " class=\"vDateField\" size=\"10\" />" 
 
 
         elif isinstance(f_instance.field, dforms.models.ModelChoiceField):
@@ -173,7 +193,6 @@ class FormFieldNode(template.Node):
                                 %(help_text)s
                             </div>
                         </div>""" 
-
 
 
         else:

@@ -27,22 +27,26 @@ defaultcontext =  {
     'title': content_title_property,
     'labels':nested_labels,
     'MEDIA_URL':MEDIA_URL,
-    'DEBUG':DEBUG, }
-
-s_continue='/t/admin/realty/property/%s/'
-s_add='/t/admin/realty/property/add/'
-s_save='/admin/realty/property'
+    'DEBUG':DEBUG, 
+}
 
 
-def is_validity(formsetdict):
+# redirect urls
+r_urls= {
+    '_continue': '/t/admin/realty/property/%s/',
+    '_add': '/t/admin/realty/property/add/',
+    '_save': '/admin/realty/property',
+    }
+
+
+def valid_save(formsetdict):
+    """Check for validity and save if valid"""
 
     validation = reduce(lambda a,b: a and b, [ elem[1].is_valid() for elem in formsetdict.iteritems()])
 
     if validation:
         formsetdict['formset_images'].save_all()
-        formsetdict['formset_descs'].save()
-        formsetdict['formset_location'].save()
-        formsetdict['formset_amenities'].save()
+        [elem[1].save() for elem in formsetdict.iteritems()]
 
     return validation
 
@@ -52,50 +56,39 @@ def is_validity(formsetdict):
 def add_property(request):
     """Add images and their title/descs on a brand new property."""
 
+    form_property = forms.PropertyForm()
+
+    # use formsetclasses dict to create a dictionary of formset objects
+    f_dict = dict( (elem[0], elem[1]()) for elem in forms.formsetclasses.iteritems())
 
     if request.method == 'POST':
         form_property = forms.PropertyForm(request.POST)
 
-        # it's necessary to use validation = False
-        # because all the formsets require an instance of models.Property and as we are in an "add" method
-        # that hasn't yet been created yet.  So first  
-        validation = False
-        f_dict = dict()
 
         if form_property.is_valid():
             # don't save the m_property until the formsets are valid and saved
             m_property = form_property.save(commit=False)
             m_property.save()
         
-            f_dict['formset_images'] = forms.ImagesFormset(request.POST, request.FILES, instance=m_property)
-            f_dict['formset_descs'] = forms.PropertyTitleDescFormset(request.POST, instance=m_property)
-            f_dict['formset_location'] = forms.LocationFormset(request.POST, instance=m_property)
-            f_dict['formset_amenities'] = forms.AmenitiesFormset(request.POST, instance=m_property)
+            # use formsetclasses dict to create a dictionary of formset objects
+            f_dict = dict( (elem[0], elem[1](request.POST, request.FILES, instance=m_property)) for elem in forms.formsetclasses.iteritems())
 
-            validation = is_validity(f_dict)
-
-        if validation:
+        if valid_save(f_dict):
             if request.POST.has_key('_continue'): 
-                return redirect(s_continue % m_property.id)
+                return redirect(r_urls['_continue'] % m_property.id)
             elif request.POST.has_key('_save'):
-                return redirect(s_save)
+                return redirect(r_urls['_save'])
             else:
-                return redirect()
+                return redirect(r_urls['_add'])
         else:
             # didn't work, get rid of this m_property 
             m_property.delete()
-    else:
-        form_property = forms.PropertyForm()
-        f_dict['formset_images'] = forms.ImagesFormset()
-        f_dict['formset_descs'] = forms.PropertyTitleDescFormset()
-        f_dict['formset_location'] = forms.LocationFormset()
-        f_dict['formset_amenities'] = forms.AmenitiesFormset()
 
     rendercontext = dict()
     rendercontext.update(defaultcontext)
     rendercontext.update(f_dict)
-    rendercontext.update({ 'add':False,
-                'original':m_property,
+    rendercontext.update(
+            {   'add': True,
                 'has_change_permission':request.user.is_authenticated,
                 'request':request,
                 'form_property':form_property, })
@@ -111,45 +104,30 @@ def edit_property(request, property_id):
     """Edit images and their title/descs on a given property."""
     
     m_property = get_object_or_404(models.Property, id=property_id)
-    f_dict = dict()
 
+    # create non request.POST forms
+    form_property = forms.PropertyForm(instance=m_property)
+
+    # use formsetclasses dict to create a dictionary of formset objects
+    f_dict = dict( (elem[0], elem[1](instance=m_property)) for elem in forms.formsetclasses.iteritems())
+
+    # now run through it if we actually have post data
     if request.method == 'POST':
         form_property = forms.PropertyForm(request.POST, instance=m_property)
-        f_dict['formset_images'] = forms.ImagesFormset(request.POST, request.FILES, instance=m_property)
-        f_dict['formset_descs'] = forms.PropertyTitleDescFormset(request.POST, instance=m_property)
-        f_dict['formset_location'] = forms.LocationFormset(request.POST, instance=m_property)
-        f_dict['formset_amenities'] = forms.AmenitiesFormset(request.POST, instance=m_property)
 
+        # use formsetclasses dict to create a dictionary of formset objects
+        f_dict = dict( (elem[0], elem[1](request.POST, request.FILES, instance=m_property)) for elem in forms.formsetclasses.iteritems())
 
-        is_valid = form_property.is_valid(), f_dict['formset_images'].is_valid()
-
-
-        validation = False
         if form_property.is_valid():
             form_property.save()
 
-            validation = is_validity(f_dict)
-
-            #if is_validity(f_dict):
-            #    f_dict['formset_images'].save_all()
-            #    f_dict['formset_descs'].save()
-            #    f_dict['formset_location'].save()
-            #    f_dict['formset_amenities'].save()
-            #    validation = True
-
-        if validation:
+        if valid_save(f_dict):
             if request.POST.has_key('_continue'): 
-               return redirect(s_continue % m_property.id)
+               return redirect(r_urls['_continue'] % m_property.id)
             elif request.POST.has_key('_save'):
-               return redirect(s_save)
+               return redirect(r_urls['_save'])
             else:
-               return redirect(s_add)
-    else:
-        form_property = forms.PropertyForm(instance=m_property)
-        f_dict['formset_images'] = forms.ImagesFormset(instance=m_property)
-        f_dict['formset_descs'] = forms.PropertyTitleDescFormset(instance=m_property)
-        f_dict['formset_location'] = forms.LocationFormset(instance=m_property)
-        f_dict['formset_amenities'] = forms.AmenitiesFormset(instance=m_property)
+               return redirect(r_urls['_add'])
 
     rendercontext = dict()
     rendercontext.update(defaultcontext)

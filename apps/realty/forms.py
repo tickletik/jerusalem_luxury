@@ -7,11 +7,7 @@ from django.forms.formsets import DELETION_FIELD_NAME
 
 num_langs = l_models.LanguageChoice.objects.filter(is_activated=True) 
 
-PropertyTitleDescFormset = inlineformset_factory(models.Property, models.Property.TitleDesc, fk_name="primary", max_num=3)
 ImagesTitleDescFormset = inlineformset_factory(models.Images, models.Images.TitleDesc, fk_name="primary", max_num=3)
-
-LocationFormset = inlineformset_factory(models.Property, models.Location, fk_name="property", max_num=1)
-AmenitiesFormset = inlineformset_factory(models.Property, models.Amenities, fk_name="property", max_num=1)
 
 NestedFormset = ImagesTitleDescFormset 
 prefix_nested = 'IMAGES_TITLE_DESC'
@@ -100,8 +96,6 @@ class BaseImagesFormset(BaseInlineFormSet):
             for nested in form.nested:
                 nested.save(commit=commit)
 
-ImagesFormset  = inlineformset_factory(models.Property, models.Images, formset=BaseImagesFormset, extra=1)
-
 class ImageForm(ModelForm):
     class Meta:
         model = models.Images
@@ -110,3 +104,18 @@ class PropertyForm(ModelForm):
     class Meta:
         model = models.Property
 
+PropertyTitleDescFormset = inlineformset_factory(models.Property, models.Property.TitleDesc, fk_name="primary", max_num=3)
+ImagesFormset  = inlineformset_factory(models.Property, models.Images, formset=BaseImagesFormset, extra=1)
+LocationFormset = inlineformset_factory(models.Property, models.Location, fk_name="property", max_num=1)
+AmenitiesFormset = inlineformset_factory(models.Property, models.Amenities, fk_name="property", max_num=1)
+RentFormset = inlineformset_factory(models.Property, models.Rent, fk_name="property", max_num=1)
+SaleFormset = inlineformset_factory(models.Property, models.Sale, fk_name="property", max_num=1)
+
+formsetclasses = {
+        'formset_descs':    PropertyTitleDescFormset,
+        'formset_images':   ImagesFormset, 
+        'formset_location': LocationFormset,
+        'formset_amenities':AmenitiesFormset,
+        'formset_rent':     RentFormset,
+        'formset_sale':     SaleFormset,
+        }
