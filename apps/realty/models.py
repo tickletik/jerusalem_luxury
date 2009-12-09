@@ -1,15 +1,13 @@
 from django.db import models
 
-from realty_data.models import PropertyType
-from realty_data.models import RentalType, SaleType 
-from realty_data.models import City, Neighborhood, Region 
+import realty_data.models as rd_models
+import languages.models as l_models
 
-from languages.models import ACharField, ATextField
 
 
 class Rent(models.Model):
     asking_price = models.DecimalField(max_digits=10, decimal_places=2)
-    type = models.ForeignKey('realty_data.RentalType')
+    type = models.ForeignKey(rd_models.RentalType)
 
     available_from = models.DateField()
     available_to = models.DateField(blank=True)
@@ -19,7 +17,7 @@ class Rent(models.Model):
 
 class Sale(models.Model):
     asking_price = models.DecimalField(max_digits=10, decimal_places=2)
-    type = models.ForeignKey('realty_data.SaleType')
+    type = models.ForeignKey(rd_models.SaleType)
 
     available_from = models.DateField()
     available_to = models.DateField(blank=True)
@@ -47,9 +45,9 @@ class Location(models.Model):
     
     apartment_number = models.CharField(max_length=6, blank=True, help_text="If we're dealing with a house or a building without apartment numbers, just leave this blank.")
 
-    neighborhood = models.ForeignKey('realty_data.Neighborhood')
-    city = models.ForeignKey('realty_data.City')
-    region = models.ForeignKey('realty_data.Region')
+    neighborhood = models.ForeignKey(rd_models.Neighborhood)
+    city = models.ForeignKey(rd_models.City)
+    region = models.ForeignKey(rd_models.Region)
 
 
 
@@ -119,23 +117,16 @@ class Property(models.Model):
     class Meta:
         verbose_name_plural="Properties"
 
-
-    class Desc(ATextField):
+    class TitleDesc_Property(l_models.ATitleDesc):
         primary = models.ForeignKey('Property')
         class Meta:
-           verbose_name="Description"
-           verbose_name_plural="Description"
+           verbose_name="Title / Description"
 
-    class Title_Prop(ACharField):
-        primary = models.ForeignKey('Property')
-        class Meta:
-           verbose_name="Title"
-           verbose_name_plural="Title"
-    Title=Title_Prop
+    TitleDesc = TitleDesc_Property
 
     name = models.CharField(max_length=200, help_text="this can be the same as title, but for sanity purposes, please stick to lower case letters connected by underscores. e.g. &ldquo; some_house_in_rechavia_5 &rdquo;")
 
-    type = models.ForeignKey('realty_data.PropertyType', verbose_name="Property Type")
+    type = models.ForeignKey(rd_models.PropertyType, verbose_name="Property Type")
 
     map = models.URLField(blank=True)
     floorplan = models.FileField(upload_to="pdf/floorplans", blank=True)
@@ -155,19 +146,15 @@ class Images(models.Model):
     class Meta:
         verbose_name_plural = "Images"
 
-    #class Title_Image(ATextField):
-    #    primary = models.ForeignKey('Images')
-    #    class Meta:
-    #       verbose_name="Title"
-    #       verbose_name_plural="Title"
-    #Title=Title_Image
+    class TitleDesc_Images(l_models.ATitleDesc):
+        primary = models.ForeignKey('Images')
+        class Meta:
+           verbose_name="Title / Caption"
+
+    TitleDesc = TitleDesc_Images
 
     property = models.ForeignKey("Property")
-
     name = models.CharField(max_length=200)
-    title = models.CharField(max_length=200)
-    caption = models.TextField(blank=True)
     position = models.IntegerField()
-
-    image_large = models.ImageField(upload_to="img/apartments/large")
+    image_large = models.ImageField(upload_to="img/apartments/large", help_text="DEBUG_ADMIN_IMAGE")
     image_thumb = models.ImageField(upload_to="img/apartments/thumb", blank=True)

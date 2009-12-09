@@ -15,23 +15,21 @@ class ImagesInline(admin.StackedInline):
     #    model = Images.Title
     #    max_num = num_langs
     fieldsets = [
-            #(None, {'fields':['name', 'position', 'image_large', 'image_thumb', 'caption']}),
-            (None, {'fields':['name', 'title','position', 'image_large', 'image_thumb', 'caption']}),
+            (None, {'fields':['name', 'position', 'image_large', 'image_thumb',] }),
             ]
-    #inlines = [TitleInline]
 
 class ImagesAdmin(admin.ModelAdmin):
 
-    list_display = ['name', 'property']
+    class TitleDescInline(admin.TabularInline):
+        model = Images.TitleDesc
+        max_num = num_langs
 
+    list_display = ['name', 'property', 'image_large', 'image_thumb', 'position']
+
+    inlines = [TitleDescInline]
 
 class LocationAdmin(admin.ModelAdmin):
     pass
-    #class StreetInline(admin.StackedInline):
-    #    model = Location.Street
-    #    max_num = num_langs
-
-    #inlines= [StreetInline]
 
 class LocationInline(admin.StackedInline):
     model = Location
@@ -65,12 +63,8 @@ class SalesInline(admin.StackedInline):
 
 class PropertyAdmin(admin.ModelAdmin):
 
-    class DescInline(admin.TabularInline):
-        model = Property.Desc
-        max_num = num_langs
-
-    class TitleInline(admin.TabularInline):
-        model = Property.Title
+    class TitleDescInline(admin.TabularInline):
+        model = Property.TitleDesc
         max_num = num_langs
 
     list_display = ['name']
@@ -79,7 +73,7 @@ class PropertyAdmin(admin.ModelAdmin):
             (None,          {'fields':['name', 'type', 'is_featured']}),
             ("Availability",   {'fields':['is_active', 'is_available', 'is_rent', 'is_sale']}),
         ]
-    inlines = [TitleInline, DescInline, LocationInline, AmenitiesInline, RentalInline, SalesInline, ImagesInline]
+    inlines = [TitleDescInline, LocationInline, AmenitiesInline, RentalInline, SalesInline, ImagesInline]
 
 admin.site.register(Images, ImagesAdmin)
 admin.site.register(Location, LocationAdmin)

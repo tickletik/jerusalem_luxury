@@ -17,6 +17,11 @@ urlpatterns += patterns('slideshow.views',
     (r'^slideshow/image_list/(?P<section>\w+)/$', 'image_list'),
 )
 
+urlpatterns += patterns('realty.admin_views',
+    (r'^t/admin/realty/property/(?P<property_id>\d+)/$', 'edit_property'),
+    (r'^t/admin/realty/property/add/$', 'add_property'),
+)
+
 urlpatterns += patterns('',
         (r'^block_view/(?P<object_id>\d+)/$', 'building.views.edit_block'),
 

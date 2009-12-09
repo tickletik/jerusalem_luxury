@@ -57,10 +57,10 @@
 
                         <fieldset class="module aligned">
 
-                            {% form_field "form-row" fm_form.name "required" %}<br/>
+                            {% form_field fm_form.name "form-row" %}<br/>
     
-                            {% form_field "form-row image_large" fm_form.image_large "required" MEDIA_URL fm_form.instance.image_large.name %}<br/>
-                            {% form_field "form-row image_thumb" fm_form.image_thumb "required" MEDIA_URL fm_form.instance.image_thumb.name %}<br/>
+                            {% form_field fm_form.image_large "form-row" MEDIA_URL fm_form.instance.image_large.name %}<br/>
+                            {% form_field fm_form.image_thumb "form-row" MEDIA_URL fm_form.instance.image_thumb.name %}<br/>
 
                         </fieldset>
                     </div>

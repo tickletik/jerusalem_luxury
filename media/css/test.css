@@ -4,7 +4,7 @@
     font-size: 11px;
     text-align: left;
     font-weight: bold;
-    background: #7CA0C7 url(../img/admin/level-2-bg.gif) top left repeat-x;
+    background: #7CA0C7 url(../img/admin/level-4-bg.gif) top left repeat-x;
     color: white;
 }
 
@@ -16,4 +16,9 @@
     font-weight: bold;
     background: #7CA0C7 url(../img/admin/level-3-bg.gif) top left repeat-x;
     color: white;
+}
+
+.inline-related h3 {
+    
+    background: #7CA0C7 url(../img/admin/level-3-bg.gif) top left repeat-x;
 }

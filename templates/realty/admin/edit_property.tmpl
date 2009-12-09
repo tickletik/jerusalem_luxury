@@ -7,6 +7,7 @@
 {% load webdesign %}
 
 {% load j_form %}
+{% load languages_tags %}
 
 {% block title %}{% if add %}{% trans "Add" %} {% else %}{% trans "Change" %} {% endif %} {{opts.verbose_name|capfirst }} | Django site admin{% endblock %}
 
@@ -37,81 +38,96 @@
 {% block content %}
 
     <div id="content-main">
+        <ul class="object-tools"><li><a href="history/" class="historylink">History</a></li></ul>
 
         <form enctype="multipart/form-data" action="." method="POST">
 
-            {{ form_main.id }}
-            {{ form_main }}
+            {{ form_property.id }}
 
-            {{ formset_main.management_form }}
+            <fieldset class="module aligned">
+                {% form_field form_property.name "form-row"  %}
+                {% form_field form_property.type "form-row"  %}
+                {% form_field form_property.is_featured "form-row"  %}
+            </fieldset>
+
+            <fieldset class="module aligned">
+                <h2>Availability</h2>
+                {% form_field form_property.is_active "form-row"  %}
+                {% form_field form_property.is_available "form-row"  %}
+                {% form_field form_property.is_rent "form-row"  %}
+                {% form_field form_property.is_sale "form-row"  %}
+            </fieldset>
+
+
+            <div class="inline-group">
+                {% show_titledesc formset_descs labels.formset_descs "h2" %}
+            </div>
+
+            <fieldset class="module aligned">
+                <h2>Location / Address</h2>
+                {{ formset_location.management_form }}
+                {% for form_loc in formset_location.forms %}
+                {% form_field form_loc.street_en "form-row" %}
+                {% form_field form_loc.street_he "form-row" %}
+                {% form_field form_loc.zip "form-row" %}
+                {% form_field form_loc.floor "form-row" %}
+                {% form_field form_loc.apartment_number "form-row" %}
+                {% form_field form_loc.neighborhood "form-row" %}
+                {% form_field form_loc.city "form-row" %}
+                {% form_field form_loc.region "form-row" %}
+                {% endfor %}
+            </fieldset>
+        
+            <fieldset class="module aligned">
+                <h2>House / Apartment Details</h2>
+                {{ formset_amenities.management_form }}
+                {% for form_amen in formset_amenities.forms %}
+                {% form_field form_amen.bedrooms "form-row" %}
+                {% form_field form_amen.bathrooms "form-row" %}
+                {% form_field form_amen.number_of_floors "form-row" %}
+                {% form_field form_amen.floor_width "form-row" %}
+                {% form_field form_amen.floor_length "form-row" %}
+                {% form_field form_amen.parking "form-row" %}
+                {% form_field form_amen.garden "form-row" %}
+                {% form_field form_amen.balcony "form-row" %}
+                {% form_field form_amen.elevators "form-row" %}
+                {% form_field form_amen.has_elevator_shabbat "form-row" %}
+                {% form_field form_amen.heating "form-row" %}
+                {% form_field form_amen.conditioning "form-row" %}
+                {% endfor %}
+            </fieldset>
         
             <div class="inline-group">
-                <h2>{{labels.formset}}</h2>
-                {% for fm_form in formset_main.forms %}
+                <h2>{{ labels.formset_images }}</h2>
 
-                    {{ fm_form.id }}
+                {{ formset_images.management_form }}
+                {% for form_images in formset_images.forms %}
+
+                    {{ form_images.id }}
             
                     <div class="tabular inline-related">
-                        <h3><b>{{labels.formset}}:</b>&nbsp; {% if fm_form|form_value:"name" %}{{ fm_form|form_value:"name" }}{% endif %}
-                            <span class="delete">{{ fm_form.DELETE }}{{ fm_form.DELETE.label|label_class:"vCheckboxLabel inline" }}</span> </h3>
+                        <h3><b>{{ labels.formset_images }}:</b>&nbsp; {% if form_images|form_value:"name" %}{{ form_images|form_value:"name" }}{% endif %}
+                            <span class="delete">{{ form_images.DELETE }}{{ form_images.DELETE.label|label_class:"vCheckboxLabel inline" }}</span> </h3>
 
                         <fieldset class="module aligned">
 
-                            {% form_field "form-row" fm_form.name "required" %}<br/>
+                            {% form_field form_images.name "form-row"  %}
     
-                            {% form_field "form-row image_large" fm_form.image_large "required" MEDIA_URL fm_form.instance.image_large.name %}<br/>
-                            {% form_field "form-row image_thumb" fm_form.image_thumb "required" MEDIA_URL fm_form.instance.image_thumb.name %}<br/>
+                            {% form_field form_images.position "form-row"  %}
+
+                            {% form_field form_images.image_large "form-row image_large"  MEDIA_URL form_images.instance.image_large.name %}
+                            {% form_field form_images.image_thumb "form-row image_thumb"  MEDIA_URL form_images.instance.image_thumb.name %}
 
                         </fieldset>
                     </div>
-
-
 
             
-                    {% if fm_form.nested %}
-                    {% for n_formset in fm_form.nested %}
-                    <div class="tabular inline-related">
-                        {{ n_formset.management_form }}
-                        <fieldset class="module">
-                            <h4>{{ labels.nested }}</h4>
+                    {% if form_images.nested %}
 
-                            <table>
-                                {% for n_form in n_formset.forms %}
-                                {% if forloop.first %}
-                                <thead><tr>
-                                        <th colspan="2">{{ n_form.language_choice.label }}</th>
-                                        <th>{{ n_form.title.label }}</th>
-                                        <th>{{ n_form.desc.label }} </th>
-                                        <th>{{ n_form.DELETE.label }} </th>
-                                </tr></thead>
-                                {% endif %}
-
-                                <tr class="{% cycle "row1" "row2" %} has_original">
-                                    <td class="original">
-                                        {% if n_form|form_value:"title" %}<p>{{ n_form|form_value:"title" }}</p>{% endif %}
-                                        {{ n_form.id }}
-                                    </td>
-                                    <td>
-                                        {{ n_form.language_choice.errors }}
-                                        {{ n_form.language_choice }}
-                                        <a href="/admin/languages/languagechoice/add/" class="add-another" id="{{ n_form.prefix|string_form:n_form.auto_id|string_form:"add_%s-language" }}" onclick="return showAddAnotherPopup(this);"> <img src="/admin/media/img/admin/icon_addlink.gif" width="10" height="10" alt="Add Another"/></a>
-                                        <br/>
-                                    </td>
-                                    <td>
-                                        {{ n_form.title.errors }}
-                                        {{ n_form.title }}
-                                    </td>
-                                    <td>
-                                        {{ n_form.desc.errors }}
-                                        {{ n_form.desc }}
-                                    </td>
-                                    <td>{% if n_form.DELETE %}{{ n_form.DELETE }}{% endif %}</td>
-                                </tr>
-                                {% endfor %}
-                            </table>
-                        </fieldset>
-                    </div>
-                    {% endfor %}
+                        {% for i_dt_formset in form_images.nested %}
+                        {% show_titledesc i_dt_formset labels.nested %}
+                        {% endfor %}
+        
                     {% endif %}
         
             {% endfor %}
@@ -129,8 +145,8 @@
         {% if DEBUG %}
         request.POST = {{request.POST}}<br/>
         request.FILES = {{request.FILES}}<br/>
-        is_valid_f = {{form_main.is_valid}}<br/>
-        is_valid_fset = {{formset_main.is_valid}}<br/>
+        is_valid_f = {{form_property.is_valid}}<br/>
+        is_valid_fset = {{formset_images.is_valid}}<br/>
         {% endif %}
 
 

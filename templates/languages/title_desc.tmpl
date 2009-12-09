@@ -1,0 +1,48 @@
+
+{% load j_form %}
+
+<div class="tabular inline-related">
+    {{ FORMSET.management_form }}
+    <fieldset class="module aligned">
+        <{{ header_tag }}>{{ LABEL }}</{{ header_tag }}>
+        <table>
+            {% for FORM in FORMSET.forms %}
+            {% if forloop.first %}
+            <thead><tr>
+                <th colspan="2">{{ FORM.language_choice.label }}</th>
+                <th>{{ FORM.title.label }}</th>
+                <th>{{ FORM.desc.label }} </th>
+                <th>{{ FORM.DELETE.label }} </th>
+            </tr></thead>
+            {% endif %}
+
+            <tr class="{% cycle "row1" "row2" %} has_original">
+                <td class="original">
+                    {% if FORM|form_value:"title" %}<p>{{ FORM|form_value:"title" }}</p>{% endif %}
+                    {{ FORM.id }}
+                </td>
+
+                <td>
+                    {{ FORM.language_choice.errors }}
+                    {{ FORM.language_choice }}
+                    <a href="/admin/languages/languagechoice/add/" class="add-another" id="{{ FORM.prefix|string_form:FORM.auto_id|string_form:"add_%s-language" }}" onclick="return showAddAnotherPopup(this);"> <img src="/admin/media/img/admin/icon_addlink.gif" width="10" height="10" alt="Add Another"/></a> <br/>
+                </td>
+
+                <td>
+                    {{ FORM.title.errors }}
+                    {{ FORM.title }}
+                </td>
+
+                <td>
+                    {{ FORM.desc.errors }}
+                    {{ FORM.desc }}
+                </td>
+
+                <td>{% if FORM.DELETE %}{{ FORM.DELETE }}{% endif %}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </fieldset>
+</div>
+
+
