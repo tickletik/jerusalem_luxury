@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>.: Luxury properties for sale and rent in Jerusalem, Israel   |   Jerusalem Luxury :.</title>
+    
+    <link type="text/css" rel="stylesheet" href="{{MEDIA_URL}}/css/styles.css" />
+    <link type="text/css" rel="stylesheet" href="{{MEDIA_URL}}/css/nav.css" />
+    <link type="text/css" rel="stylesheet" href="{{MEDIA_URL}}/css/jquery.lightbox-0.5.css" media="screen" />
+    <link type="text/css" rel="stylesheet" href="{{MEDIA_URL}}/css/home.css" />
+    
+    <script type="text/javascript" src="{{MEDIA_URL}}/js/jquery.js"></script>
+    <script type="text/javascript" src="{{MEDIA_URL}}/js/jquery.lightbox-0.5.js"></script>
+    
+    {# set up the flash javascript #}
+    <script type="text/javascript" src="{{MEDIA_URL}}/js/swfobject.js"></script>
+    
+    <script type="text/javascript">
+			var flashvars = {};
+            flashvars.url_imagelist = "http://{{current_site}}/slideshow/image_list/home/";
+			flashvars.has_border = "true";
+			flashvars.border_width = "768";
+			flashvars.border_height = "400";
+			var params = {};
+			params.scale = "noscale";
+			var attributes = {};
+			swfobject.embedSWF("{{MEDIA_URL}}/swf/slideshow.swf", "alternate_flash", "768", "400", "9.0.0", false, flashvars, params, attributes);
+    </script>
+    
+    {# set up the jquery lightbox plugin #}
+    <script type="text/javascript">$(function() { $('#gallery a').lightBox({fixedNavigation:true}); });</script>
+    
+    <script type="text/javascript">var jslang='EN';</script>
+    
+    
+    <meta name="Keywords" content="Israel apartment rental, Jerusalem apartment rental, apartment jerusalem, apartments for rent, Jerusalem, apartments jerusalem, israel apartments, israel rentals, jerusalem, jerusalem israel, luxury homes, luxury properties for sale, luxury property, luxury real estate, properties for sale, real estate, real estate Israel, real estate Jerusalem, real estate Jerusalem Israel, real estate listings, rent apartment israel, rent jerusalem," /> 
+    
+    <meta name="Description" content="Are you looking to buy a luxury dream home in Jerusalem? looking for a luxury Apartment to rent in Jerusalem? Jerusalemluxury is an online Realty business whose sole purpose is to serve your luxury property desires. We invite you to browse our site and indulge yourself along the way. Feast your eyes upon our lovely luxurious properties for sale and rent. For further information call +972-(0)-54-494-7730, or email sales@jerusalemluxury.com" />
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+
+
+
+<body>
+
+
+
+
+    <div id="container">
+        <div id="top">
+            <a href="/">
+                <img alt="Luxury properties for sale and rent in Jerusalem, Israel" src="{{MEDIA_URL}}/img/elements/logo.gif" />
+            </a>
+        </div>
+
+        <div id="nav">
+            <div id="navmenu">
+                <ul>
+                    <li class="sales"><a href="/sales"><span>sales</span></a</li>
+                    <li class="rentals"><a href="/rentals"><span>Rentals</span></a</li>
+                    <li class="clients"><a href="/clients"><span>Clients</span></a</li>
+                    <li class="services"><a href="/services"><span>Services</span></a</li>
+                    <li class="imp"><a href="/important"><span>Important</span></a</li>
+                    <li class="lin"><a href="/links"><span>Links</span></a</li>
+                </ul>
+            </div>
+        </div>
+        
+
+        <div id="content">
+            <!-- the flash stuff --> 
+            <div id="image">
+                <div id="alternate_flash">
+                    <a href="http://www.adobe.com/go/getflashplayer">
+			            <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" />
+                    </a>
+		        </div>
+            </div>
+            <!-- end flash stuff -->
+
+
+            <p><img alt="a new level of exclusive luxury holiday apartments" src="{{MEDIA_URL}}/img/elements/slogan.gif" /></p>
+
+            <p style="margin: 0px auto; width: 640px;">
+            Samia Manneh owns Jerusalem Luxury real estate. A licensed Real estate agent approved by the Israeli ministry of justice, Samia is a member of the Israeli Brokerage chamber of commerce and of the Jerusalem multiple listing service. If you are considering buying or renting a new home in Jerusalem You are in the right place; we are here to assist, advise, find and plan every step on the way to your dream house or apartment. Everything you need in one package!
+            </p>
+
+            <p>&nbsp;</p>
+
+
+
+            <!-- CONTENT -->
+            <div id="content">
+                <div class="box"> 
+                    <a href="/sales"><img src="{{MEDIA_URL}}/img/elements/gallery/sales/musrara/msrra-01th.jpg" 
+                                        alt="Luxury properties for sale" /></a> 
+
+	                <h2><a href="/sales">Sales</a></h2> 
+                    <p>
+                    We cater for people who are seeking to buy real estate property as an investment, a holiday home or for permanent residence. Our customers are mostly investors that buys for investing or that are moving to Jerusalem or as a holiday apartment. We are here to assist, advise, find and plan every step on the way to your dream house. We are proud to cover the most charming areas in Jerusalem, both East and West. Lovely neighborhoods include Abu Tor, German Colony, Bakaa,Talbieh, Rehavia, Arnona, Malcha, French Hill, Musrara, Sheikh-Jarah, Shufat and Beit Hanina.
+                    </p> 
+
+	                <p><a href="/sales">View Sales</a></p> 
+                </div> 
+
+                <div class="box"> 
+                    <a href="/rentals"><img src="{{MEDIA_URL}}/img/elements/gallery/rentals/abu-tor-01/abu-tor-06th.jpg" 
+                                            alt="Luxury properties for rent" /></a> 
+
+	                <h2><a href="/rentals">Rentals</a></h2> 
+
+	                <p>We cater for people who are seeking to buy real estate property as an investment, a holiday home or for permanent residence. Our customers are mostly investors that buy for investment purposes or that are moving to Jerusalem permanently or as a holiday apartment. We are here to assist, advise, find and plan every step on the way to your dream house. We are proud to cover the most charming areas in Jerusalem, both East and West. Lovely neighborhoods include Abu Tor, German Colony, Bakaa,Talbieh, Rehavia, Arnona, Malcha, French Hill, Musrara, Sheikh-Jarah, Shufat and Beit Hanina.</p> 
+	                
+                    <p><a href="/rentals">View Rentals</a></p> 
+                </div> 
+
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                
+                <!-- / CONTENT -->
+            </div>
+
+
+            <p><img src="{{MEDIA_URL}}/img/elements/break.png" alt="" /></p>
+            <br />
+
+            <div id="address"><strong>Phone</strong> +972-54-494-7730 <strong>Fax</strong> +972-2-645-1102 <strong>Skype</strong> jerusalemluxury <strong>Email</strong><a href="mailto:samia@jerusalemluxury.com">samia@jerusalemluxury.com</a></div>
+        
+            <div id="book"><a href="/book" title="Check Rates &amp; Availability" onclick="javascript:pageTracker._trackPageview('/custom/reservations/book_online');"><img alt="Book Online" src="{{MEDIA_URL}}/img/elements/book-up.png" /></a></div>
+		
+        </div>
+
+        <div id="subscribe"><a title="Send an email to Samia, JerusalemLuxury.com" href="mailto:samia@jerusalemluxury.com"><img bc="2" alt="Send an email to Samia, JerusalemLuxury.com" src="{{MEDIA_URL}}/img/elements/subscribe-up.jpg" /></a></div>
+
+        <div id="footer">
+            <div>
+                <a href="/"><img bc="2" class="juniper" alt="Luxury properties for sale and rent in Jerusalem, Israel" src="{{MEDIA_URL}}/img/elements/old-city-line-art_small.gif" /></a>
+
+                <span class="footer1">
+                    <a href="/">HOME</a>
+                    <a href="/sales">SALES</a>
+                    <a href="/rentals">RENTALS</a>
+                    <a href="/clients">CLIENTS</a>
+                    <a href="/services">SERVICES</a>
+                    <a href="/important">IMPORTANT!</a>
+                    <a href="/links">LINKS</a>
+                </span>
+                
+                <br />
+                
+                <span class="footer2">COPYRIGHT &#169; 2009 <a href="/">JERUSALEMLUXURY.COM</a> <a href="/contact">CONTACT US</a></span>
+
+
+            </div>
+        </div>
+
+	    <div id="trees"></div>
+	    <div id="treecover"></div>
+    </div>
+</body>
+
+</html>
