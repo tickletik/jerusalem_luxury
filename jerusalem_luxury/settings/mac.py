@@ -89,6 +89,5 @@ INSTALLED_APPS = (
     'realty',
     'realty_data',
     'languages',
-    'building',
     'jlinx_utils',
 )

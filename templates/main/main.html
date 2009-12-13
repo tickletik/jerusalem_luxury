@@ -3,9 +3,9 @@
 <head>
 <title>.: Luxury properties for sale and rent in Jerusalem, Israel   |   Jerusalem Luxury :.</title>
 
-<link href="{{MEDIA_URL}}/css/styles.css" rel="stylesheet" />
-<link href="{{MEDIA_URL}}/css/nav.css" rel="stylesheet" />
-<link href="{{MEDIA_URL}}/css/home.css" rel="stylesheet" />
+<link href="{{MEDIA_URL}}/css/old/styles.css" rel="stylesheet" />
+<link href="{{MEDIA_URL}}/css/old/nav.css" rel="stylesheet" />
+<link href="{{MEDIA_URL}}/css/old/home.css" rel="stylesheet" />
 
 {# set up the flash javascript #}
 <script type="text/javascript" src="{{MEDIA_URL}}/js/swfobject.js"></script>
@@ -25,7 +25,7 @@
 
     <div id="container">
         <div id="top">
-            <a href="{{current_site.domain}}">
+            <a href="/">
                 <img alt="Luxury properties for sale and rent in Jerusalem, Israel" src="{{MEDIA_URL}}/img/elements/logo.gif" />
             </a>
         </div>
@@ -33,12 +33,12 @@
         <div id="nav">
             <div id="navmenu">
                 <ul>
-                    <li class="sales"><a href="{{current_site.domain}}/sales"><span>sales</span></a</li>
-                    <li class="rentals"><a href="{{current_site.domain}}/rentals"><span>Rentals</span></a</li>
-                    <li class="clients"><a href="{{current_site.domain}}/clients"><span>Clients</span></a</li>
-                    <li class="services"><a href="{{current_site.domain}}/services"><span>Services</span></a</li>
-                    <li class="imp"><a href="{{current_site.domain}}/important"><span>Important</span></a</li>
-                    <li class="lin"><a href="{{current_site.domain}}/links"><span>Links</span></a</li>
+                    <li class="sales"><a href="/sales"><span>sales</span></a</li>
+                    <li class="rentals"><a href="/rentals"><span>Rentals</span></a</li>
+                    <li class="clients"><a href="/clients"><span>Clients</span></a</li>
+                    <li class="services"><a href="/services"><span>Services</span></a</li>
+                    <li class="imp"><a href="/important"><span>Important</span></a</li>
+                    <li class="lin"><a href="/links"><span>Links</span></a</li>
                 </ul>
             </div>
         </div>
@@ -79,7 +79,7 @@
                     <tr>
                         <td>
                             {% for apartment in apartment_list %}
-                            <a href="apartments-balcony.htm"><img src="{{MEDIA_URL}}/img/{{apartment.image}}" /></a>
+                            <a href="/realty/property/1/" title="nachlaot apt 1000/month"><img src="{{MEDIA_URL}}/img/{{apartment.image}}" /></a>
                             {% endfor %}
                 		</td>
                 	</tr>
@@ -95,35 +95,35 @@
             </div>
         
             <div id="book">
-                <a href="{{current_site.domain}}/book" title="Check Rates &amp; Availability" onclick="javascript:pageTracker._trackPageview('/custom/reservations/book_online');"><img alt="Book Online" src="{{MEDIA_URL}}/img/elements/book-up.png" /></a>
+                <a href="/book" title="Check Rates &amp; Availability" onclick="javascript:pageTracker._trackPageview('/custom/reservations/book_online');"><img alt="Book Online" src="{{MEDIA_URL}}/img/elements/book-up.png" /></a>
 		    </div>
 		
         </div> <!-- end div content -->
 
         <div id="subscribe">
             <a title="Send an email to Samia, JerusalemLuxury.com" href="mailto:samia@jerusalemluxury.com">
-                <img bc="2" alt="Send an email to Samia, JerusalemLuxury.com" src="http://CoconutGrove.pebbleonline.com.au/images/subscribe-up.jpg" />
+                <img bc="2" alt="Send an email to Samia, JerusalemLuxury.com" src="{{MEDIA_URL}}/img/elements/subscribe.gif" />
             </a>
         </div>
 
         <div id="footer">
             <div>
-                <a href="{{current_site.domain}}/"><img bc="2" class="juniper" alt="Luxury properties for sale and rent in Jerusalem, Israel" src="{{MEDIA_URL}}/img/elements/old-city-line-art_small.gif" /></a>
+                <a href="/"><img bc="2" class="juniper" alt="Luxury properties for sale and rent in Jerusalem, Israel" src="{{MEDIA_URL}}/img/elements/old-city-line-art_small.gif" /></a>
 
                 <span class="footer1">
-                    <a href="{{current_site.domain}}">HOME</a>
-                    <a href="{{current_site.domain}}/sales">SALES</a>
-                    <a href="{{current_site.domain}}/rentals">RENTALS</a>
-                    <a href="{{current_site.domain}}/clients">CLIENTS</a>
-                    <a href="{{current_site.domain}}/services">SERVICES</a>
-                    <a href="{{current_site.domain}}/important">IMPORTANT!</a>
-                    <a href="{{current_site.domain}}/links">LINKS</a>
+                    <a href="/">HOME</a>
+                    <a href="/sales">SALES</a>
+                    <a href="/rentals">RENTALS</a>
+                    <a href="/clients">CLIENTS</a>
+                    <a href="/services">SERVICES</a>
+                    <a href="/important">IMPORTANT!</a>
+                    <a href="/links">LINKS</a>
                 </span>
                     
                 <br />
-                <span class="footer2">COPYRIGHT &#169; <script type="text/javascript">var d = new Date() document.write(d.getFullYear())</script>
-                    <a href="{{current_site.domain}}">JERUSALEMLUXURY.COM</a>
-                    <a href="{{current_site.domain}}/contact">CONTACT US</a>
+                <span class="footer2">COPYRIGHT &#169; 1998 
+                    <a href="/">JERUSALEMLUXURY.COM</a>
+                    <a href="/contact">CONTACT US</a>
                 </span>
 
 

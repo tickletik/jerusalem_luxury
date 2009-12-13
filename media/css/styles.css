@@ -1,17 +1,18 @@
 html, body { width:100%; height:100%; margin:0; padding:0; }
 html a:hover { visibility: visible; }
-/*body { background:url(../img/elements/back2.jpg) top left repeat-x; font:10px verdana; }*/
-body { background:url(../img/elements/back3.jpg) top left repeat-x; font:10px verdana; }
+body { background:url(/media/img/elements/back3.jpg) top left repeat-x; font:10px verdana; }
 a { text-decoration:none; }
 a img { border:none; }
 p, h1, h2 { margin:20px 0 0 0; padding:0; }
 #container { width:100%; height:100%; min-height:100%; margin:0; padding:0; position:relative; }
 html>body #container { height:auto; }
+
 /*#top a:hover, #footer img:hover, #logo img:hover, .box a img:hover { opacity:0.7; }*/
+
 #book a, #subscribe a { display:block; }
 #book a:hover img, #subscribe a:hover img { visibility:hidden; }
 
-#top { width:100%; height:98px; padding:27px 0 0 0; text-align:center; background:url(../img/elements/top-back.jpg) left repeat-x; }
+#top { width:100%; height:98px; padding:27px 0 0 0; text-align:center; background:url(/media/img/elements/top-back.jpg) left repeat-x; }
 
 #container2 { width:876px; margin:0 auto; position:relative; z-index:1; }
 #container2.sub #header { top:196px; }
@@ -20,12 +21,19 @@ html>body #container { height:auto; }
 #content a, #address a, .mandatory { color:#5CB4B4; }
 #content a:hover, #address a:hover { color:#ADD9D9; }
 #content ul { margin:20px 0 0 0; padding:0 0 0 15px; list-style-type:none; }
-#content li { margin:0 0 3px 0; padding:0 0 0 18px; line-height:17px; background:url(../img/elements/li2.gif) top left no-repeat; }
+#content li { margin:0 0 3px 0; padding:0 0 0 18px; line-height:17px; background:url(/media/img/elements/li2.gif) top left no-repeat; }
 .indent { margin:0 0 3px 18px !important; }
 #header { width:100%; position:absolute; top:136px; }
 #logo { margin:5px 0 0 0; }
-#image { width:658px; height:374px; text-align:center; background:url(../img/elements/frame2.png); position:absolute; top:0; right:0; }
+
+/*
+#image { width:658px; height:374px; text-align:center; background:url(/media/img/elements/frame2.png); position:absolute; top:0; right:0; }
 #image a img { margin:145px 0 0 0;}
+*/
+
+#image { width:658px; height:374px; text-align:center; position:absolute; top:0; right:0; }
+#image a img { margin:145px 0 0 0;}
+
 #map { width:616px; height:351px; margin:21px 0 0 21px; font:11px/20px verdana; border:1px solid #CCC;  }
 #address { width:170px; margin:38px 0 0 0; font:10px/16px verdana; color:#666; text-align:right; }
 #address strong, #address a { margin-left:12px; }
@@ -36,14 +44,14 @@ hr { margin:0 0 17px 0; border:1px solid #FFF; border-bottom:1px dotted #DDD; }
 #floorplan { margin:25px 0 0 0; float:right; }
 .fine { font:10px verdana; color:#999; }
 
-.box { width:100%; margin:25px 0 0 -5px; padding:25px 0 0 0; display:table; background:url(../img/elements/break.png) top no-repeat; }
-.box img { margin:0 33px 0 0; }
+.box { width:100%; margin:25px 0 0 -5px; padding:25px 0 0 0; display:table; background:url(/media/img/elements/break.png) top no-repeat; }
+.box img { margin:10px /*33px 0 0;*/; border:0; }
 .box a img { float:left; }
 .box h2 { margin:0 0 22px 0; padding:5px 0 0 0; }
 .box a { color:#5CB4B4; }
 .box a:hover { color:#ADD9D9; }
 .box p { margin:14px 0 0 0; }
-.box p a { margin:0 22px 0 0; padding:0 0 0 15px; font-weight:bold; background:url(../img/elements/li.gif) left no-repeat; }
+.box p a { margin:0 22px 0 0; padding:0 0 0 15px; font-weight:bold; background:url(/media/img/elements/li.gif) left no-repeat; }
 .box ul { margin:15px 0 0 0 !important; }
 .box .left { width:150px; font:22px georgia; color:#5CB4B4; float:left; }
 .box .left p { margin:10px 0 0 5px; }
@@ -63,21 +71,21 @@ hr { margin:0 0 17px 0; border:1px solid #FFF; border-bottom:1px dotted #DDD; }
 .text4 { width:211px; margin:2px 0 2px 100px; }
 .text1:hover, .text2:hover, .text4:hover { border:1px solid #ADD9D9; }
 .subscribebutton, .submitbutton, .resetbutton { width:110px; height:37px; border:none; color:#FFFFFF; cursor:pointer; }
-.subscribebutton { margin:0 0 0 204px; background:url(../img/elements/subscribe-up.png); }
-.subscribebutton:hover { background:url(../img/elements/subscribe-over.png); }
-.submitbutton { background:url(../img/elements/submit-up.png); }
-.submitbutton:hover { background:url(../img/elements/submit-over.png); }
-.resetbutton { background:url(../img/elements/reset-up.png); }
-.resetbutton:hover { background:url(../img/elements/reset-over.png); }
+.subscribebutton { margin:0 0 0 204px; background:url(/media/img/elements/subscribe-up.png); }
+.subscribebutton:hover { background:url(/media/img/elements/subscribe-over.png); }
+.submitbutton { background:url(/media/img/elements/submit-up.png); }
+.submitbutton:hover { background:url(/media/img/elements/submit-over.png); }
+.resetbutton { background:url(/media/img/elements/reset-up.png); }
+.resetbutton:hover { background:url(/media/img/elements/reset-over.png); }
 
 .button { width:76px; border:none; background:#68B6B6 !important; color:#FFF; font:10px verdana; padding:4px; }
 .button:hover { background:#4BCFC9 !important; }
 
-#trees { width:216px; height:582px; background:url(../img/elements/trees.gif); position:absolute; bottom:134px; left:0; }
-#treecover { width:85px; height:30px; background:url(../img/elements/tree-cover.jpg); position:absolute; bottom:134px; left:0; z-index:3; }
-#book { width:150px; margin:35px 0 0 25px; background:url(../img/elements/book-over.png); }
-#subscribe { width:58px; background:url(../img/elements/subscribe-over.jpg); position:absolute; bottom:134px; right:12%; z-index:3; }
-#footer { width:100%; height:158px; background:url(../img/elements/footer-back.jpg) left repeat-x; position:absolute; bottom:0; z-index:2; }
+#trees { width:216px; height:582px; background:url(/media/img/elements/trees.gif); position:absolute; bottom:134px; left:0; }
+#treecover { width:85px; height:30px; background:url(/media/img/elements/tree-cover.jpg); position:absolute; bottom:134px; left:0; z-index:3; }
+#book { width:150px; margin:35px 0 0 25px; background:url(/media/img/elements/book-over.png); }
+#subscribe { width:58px; background:url(/media/img/elements/subscribe-over.jpg); position:absolute; bottom:134px; right:12%; z-index:3; }
+#footer { width:100%; height:158px; background:url(/media/img/elements/footer-back.jpg) left repeat-x; position:absolute; bottom:0; z-index:2; }
 #footer div { width:700px; margin:85px auto 0 auto; }
 .juniper { float:left; margin:8px 65px 0 0; }
 .footer1 { font:bold 11px/26px verdana; }
@@ -90,8 +98,4 @@ td.quote {
 	font-family: "Georgia", Palatino, Garamond, Times, Serif;
 	font-style: italic;
 	font-size: 2em;
-}
-
-#thumbs {
-    margin-left: 150px;
 }

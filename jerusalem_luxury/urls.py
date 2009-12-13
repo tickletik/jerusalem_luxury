@@ -4,11 +4,12 @@ from django.conf.urls.defaults import *
 from django.contrib import admin
 admin.autodiscover()
 
-urlpatterns = patterns('main.views',
+urlpatterns = patterns('realty.views',
+    (r'^$', 'index'),
+)
+urlpatterns += patterns('main.views',
     # Example:
     # (r'^jerusalem_luxury/', include('jerusalem_luxury.foo.urls')),
-    (r'^$', 'index'),
-    (r'^test/$', 'test'),
     (r'^testimage/(?P<image_name>\w+)/$', 'testimage'),
 
 )
@@ -18,21 +19,8 @@ urlpatterns += patterns('slideshow.views',
 )
 
 urlpatterns += patterns('realty.admin_views',
-    (r'^t/admin/realty/property/(?P<property_id>\d+)/$', 'edit_property'),
-    (r'^t/admin/realty/property/add/$', 'add_property'),
-)
-
-urlpatterns += patterns('',
-        (r'^block_view/(?P<object_id>\d+)/$', 'building.views.edit_block'),
-
-        (r'^test/block/(?P<object_id>\d+)/$', 'building.views.edit_block'),
-        (r'^test/block/add/$', 'building.views.add_block'),
-
-        (r'^admin/building/block/(?P<object_id>\d+)/$', 'building.views.edit_block'),
-        (r'^admin/building/block/add/$', 'building.views.add_block'),
-
-        (r'^admin/nested/lower2/(?P<id_lower>\d+)/$', 'nested.admin_views.lower'),
-        (r'^admin/nested/lower2/add/$', 'nested.admin_views.lower'),
+    (r'^admin/realty/property/(?P<property_id>\d+)/$', 'edit_property'),
+    (r'^admin/realty/property/add/$', 'add_property'),
 )
 
 urlpatterns += patterns('',

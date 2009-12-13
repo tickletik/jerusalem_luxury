@@ -1,3 +1,8 @@
+To reinstall everything (like in syncdb) use scripts/reset.sh
+
+That's also a good place to find out how things get done
+
+
 python libraries to install:
 
     PyYaml - for installing yaml files in loaddata:

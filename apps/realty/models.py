@@ -154,7 +154,11 @@ class Images(models.Model):
     TitleDesc = TitleDesc_Images
 
     property = models.ForeignKey("Property")
+
     name = models.CharField(max_length=200)
     position = models.IntegerField()
+
+    in_gallery = models.BooleanField(verbose_name="To be used as display?")
+
     image_large = models.ImageField(upload_to="img/apartments/large", help_text="DEBUG_ADMIN_IMAGE")
     image_thumb = models.ImageField(upload_to="img/apartments/thumb", blank=True)

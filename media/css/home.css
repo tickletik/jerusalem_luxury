@@ -1,11 +1,35 @@
-body { background:url(../img/elements/back.png) top repeat-x; }
+body { background:url(/media/img/elements/back.png) top repeat-x; }
 #nav { position:relative; top:0; }
 #navmenu { width:694px; margin:0 auto; position:relative; top:0; right:0; }
 #content { padding:0 0 165px 0; }
-#image { width:778px; height:404px; margin:34px auto 22px auto; padding:6px 0 0 0; background:url(../img/elements/frame.png); position:relative; top:0; }
+/*
+#image { width:778px; height:404px; margin:34px auto 22px auto; padding:6px 0 0 0; background:url(/media/img/elements/frame.png); position:relative; top:0; }
+*/
+#image { width:778px; height:404px; margin:34px auto 22px auto; padding:6px 0 0 0; position:relative; top:0; }
 p { text-align:center; }
 #address { width:778px; margin:0 auto; text-align:center; }
 #book { margin:22px auto 0 auto; position:relative }
 #subscribe { right:15%; }
 #footer div { width:725px; margin:85px auto 0 auto; }
 .links { position:absolute; top:-2000px; }
+
+
+
+#content { padding:0px 100px 0px 130px; font:11px/22px verdana; color:#666; }
+#content a, #address a, .mandatory { color:#5CB4B4; }
+#content a:hover, #address a:hover { color:#ADD9D9; }
+#content ul { margin:20px 0 0 0; padding:0 0 0 15px; list-style-type:none; }
+#content li { margin:0 0 3px 0; padding:0 0 0 18px; line-height:17px; background:url(/media/img/elements/li2.gif) top left no-repeat; }
+.box { width:100%; margin:25px 0 0 -5px; padding:25px 0 0 0; display:table; background:url(/media/img/elements/break.png) top no-repeat; }
+.box img { margin:10px 33px 0 0; }
+.box a img { float:left;  }
+.box h2 { margin:0 0 22px 0; padding:5px 0 0 0; }
+.box a { color:#5CB4B4; }
+.box a:hover { color:#ADD9D9; }
+.box p { margin:/*14px*/0 0 0 0; text-align: left; }
+.box p a { margin:0 /*22px*/0 0 0; padding:0 0 0 0/*15px*/; font-weight:bold; background:url(/media/img/elements/li.gif) left no-repeat; }
+.box ul { margin:15px 0 0 0 !important; }
+.box .left { width:150px; font:22px georgia; color:#5CB4B4; float:left; }
+.box .left p { margin:10px 0 0 5px; }
+.box .left span { font:11px verdana; }
+.box .right { width:435px; float:right; }
