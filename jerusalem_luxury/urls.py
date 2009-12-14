@@ -9,9 +9,7 @@ urlpatterns = patterns('realty.views',
 )
 urlpatterns += patterns('main.views',
     # Example:
-    # (r'^jerusalem_luxury/', include('jerusalem_luxury.foo.urls')),
     (r'^testimage/(?P<image_name>\w+)/$', 'testimage'),
-
 )
 
 urlpatterns += patterns('slideshow.views',

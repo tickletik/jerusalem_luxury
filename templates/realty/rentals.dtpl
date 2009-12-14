@@ -6,7 +6,6 @@
     <link type="text/css" rel="stylesheet" href="{{MEDIA_URL}}/css/styles.css" />
     <link type="text/css" rel="stylesheet" href="{{MEDIA_URL}}/css/nav.css" />
     <link type="text/css" rel="stylesheet" href="{{MEDIA_URL}}/css/jquery.lightbox-0.5.css" media="screen" />
-    <link type="text/css" rel="stylesheet" href="{{MEDIA_URL}}/css/home.css" />
     
     <script type="text/javascript" src="{{MEDIA_URL}}/js/jquery.js"></script>
     <script type="text/javascript" src="{{MEDIA_URL}}/js/jquery.lightbox-0.5.js"></script>
@@ -20,9 +19,7 @@
 			flashvars.has_border = "true";
 			flashvars.border_width = "768";
 			flashvars.border_height = "400";
-            flashvars.border_opacity = "0.4";
-            flashvars.border_color = "0xFFFFFF";
-            flashvars.border_thickness = "15";
+            flashvars.border_thickness = "30";
 			var params = {};
 			params.scale = "noscale";
 			var attributes = {};
