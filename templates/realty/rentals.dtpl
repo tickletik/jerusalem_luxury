@@ -17,13 +17,15 @@
 			var flashvars = {};
             flashvars.url_imagelist = "http://{{current_site}}/slideshow/image_list/home/";
 			flashvars.has_border = "true";
-			flashvars.border_width = "768";
+			flashvars.border_width = "668";
 			flashvars.border_height = "400";
-            flashvars.border_thickness = "30";
+            flashvars.border_thickness = "15";
+            flashvars.border_opacity = "0.4";
+            flashvars.border_color = "0xFFFFFF";
 			var params = {};
 			params.scale = "noscale";
 			var attributes = {};
-			swfobject.embedSWF("{{MEDIA_URL}}/swf/slideshow.swf", "alternate_flash", "768", "400", "9.0.0", false, flashvars, params, attributes);
+			swfobject.embedSWF("{{MEDIA_URL}}/swf/slideshow.swf", "alternate_flash", "668", "400", "9.0.0", false, flashvars, params, attributes);
     </script>
     
     {# set up the jquery lightbox plugin #}
@@ -45,7 +47,6 @@
 
 
 
-
     <div id="container">
         <div id="top">
             <a href="/">
@@ -53,111 +54,243 @@
             </a>
         </div>
 
-        <div id="nav">
+
+
+	    <div id="container2">
+
             <div id="navmenu">
                 <ul>
                     <li class="sales"><a href="/sales"><span>sales</span></a</li>
-                    <li class="rentals"><a href="/rentals"><span>Rentals</span></a</li>
+                    <li class="rentals"><a href="/rentals" class="current"><span>Rentals</span></a</li>
                     <li class="clients"><a href="/clients"><span>Clients</span></a</li>
                     <li class="services"><a href="/services"><span>Services</span></a</li>
                     <li class="imp"><a href="/important"><span>Important</span></a</li>
                     <li class="lin"><a href="/links"><span>Links</span></a</li>
                 </ul>
             </div>
-        </div>
-        
 
-        <div id="content">
+
+            {# side address and contact for header div #}
+	    	<div id="header">
+                <div id="logo">
+                    <a href="/">
+                        <img alt="Luxury properties for rent and rent in Jerusalem, Israel" src="{{MEDIA_URL}}/img/elements/logo2.gif" />
+                    </a>
+                </div>
+                
+                <div id="address">
+        
+                <p style="margin: 0pt;"><!-- Street<br /> City and Postcode<br /> Israel --></p>
+
+                <p><strong>Contact</strong> Samia<br />
+                    <strong>Phone</strong> +972-54-494-7730<br />
+                    <strong>Skype</strong> jerusalemluxury<br />
+                    <strong>Fax</strong> +972-2-645-1102<br />
+                    <a href="mailto:samia@jerusalemluxury.com">Send an Email</a>
+                </p>
+            </div>
+            {# end header div #}
+
             <!-- the flash stuff --> 
             <div id="image">
                 <div id="alternate_flash">
                     <a href="http://www.adobe.com/go/getflashplayer">
-			            <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" />
+                        <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" />
                     </a>
-		        </div>
+                </div>
             </div>
             <!-- end flash stuff -->
 
+        </div> {# end div container2 #}
 
-            <p><img alt="a new level of exclusive luxury holiday apartments" src="{{MEDIA_URL}}/img/elements/slogan.gif" /></p>
+	
+		<div id="content">
+            <h1>Properties<br/>For Rent</h1>
 
-            <p style="margin: 0px auto; width: 640px;">
-            Samia Manneh owns Jerusalem Luxury real estate. A licensed Real estate agent approved by the Israeli ministry of justice, Samia is a member of the Israeli Brokerage chamber of commerce and of the Jerusalem multiple listing service. If you are considering buying or renting a new home in Jerusalem You are in the right place; we are here to assist, advise, find and plan every step on the way to your dream house or apartment. Everything you need in one package!
-            </p>
+            <p>We cater for people who are seeking to buy real estate property as an investment, a holiday home or for permanent residence. Our customers are mostly investors that buy for investment purposes or that are moving to Jerusalem permanently or as a holiday apartment. We are here to assist, advise, find and plan every step on the way to your dream house.</p>
+
+            <p>We are proud to cover the most charming areas in Jerusalem, both East and West. Lovely neighborhoods include Abu Tor, German Colony, Bakaa, Talbieh, Rehavia, Arnona, Malcha, French Hill, Musrara, Sheikh-Jarah, Shufat and Beit Hanina.</p> 
+
+			<h2>Things you should know before renting</h2>
+
+            <p>Since 1996, the Ministry of Justice licenses Israeli real estate brokers. The broker is obliged by law to provide all relevant property information. The broker may represent either buyer or seller or may represent both sides.</p>
+
+            <p>Every agent must have a license approved by ministry of justice; a license cannot be transferred between family members or friends.</p>
+	
+
+            <div class="box"> 
+                <a href="r-abu-tor-01.htm">
+                    <img src="{{MEDIA_URL}}/img/elements/gallery/rentals/abu-tor-01/abu-tor-06th.jpg" alt="Luxury property for rent in Abu Tor"/>
+                </a> 
+
+	            <h2><a href="r-abu-tor-01.htm">For Rent in Abu Tor</a></h2> 
+	            <p>On one of the best streets in Jerusalem. Free standing villa with view to the Old City. On three floors 4 bedrooms one office room and another unit.</p> 
+	            <p><a href="r-abu-tor-01.htm">View This Property</a></p> 
+            </div> 
+
+            <div class="box"> 
+                <a href="r-abu-tor-02.htm">
+                    <img src="{{MEDIA_URL}}/img/elements/gallery/rentals/abu-tor-02/abu-tor-02-01th.jpg" alt="Luxury property for rent in Abu Tor" />
+                </a> 
+            	<h2><a href="r-abu-tor-02.htm">For Rent in Abu Tor</a></h2> 
+            	<p>Luxury Apartment. 3 Bedrooms. Terrace. Unfurnished. Parking.</p> 
+            	<p><a href="r-abu-tor-02.htm">View This Property</a></p> 
+            </div> 
+
+            <div class="box"> 
+            	<a href="r-abu-tor-03.htm"><img src="{{MEDIA_URL}}/img/elements/gallery/rentals/abu-tor-03/abu-tor-03-01th.jpg" alt="Luxury property for rent in Abu Tor" /></a> 
+            	<h2><a href="r-abu-tor-03.htm">For Rent in Abu Tor</a></h2> 
+            	<p>Luxury Apartment. 3 Bedrooms. Terrace. Party furnished. Parking.</p> 
+            	<p><a href="r-abu-tor-03.htm">View This Property</a></p> 
+            </div> 
+            <div class="box"> 
+            	<a href="r-abu-tor-04.htm"><img src="{{MEDIA_URL}}/img/elements/gallery/rentals/abu-tor-04/abu-tor-04-08th.jpg" alt="Luxury property for rent in Abu Tor" /></a> 
+            	<h2><a href="r-abu-tor-04.htm">For Rent in Abu Tor</a></h2> 
+            	<p>Cottage. Great view. 2 Bedrooms. 2 Downstairs. 2 Balconies. Unfurnished. Parking.</p> 
+            	<p><a href="r-abu-tor-04.htm">View This Property</a></p> 
+            </div> 
+            <div class="box"> 
+            	<a href="r-abu-tor-05.htm"><img src="{{MEDIA_URL}}/img/elements/gallery/rentals/abu-tor-05/abu-tor-05-01th.jpg" alt="Luxury property for rent in Abu Tor" /></a> 
+            	<h2><a href="r-abu-tor-05.htm">For Rent in Abu Tor</a></h2> 
+            	<p>Fantastic view of the Old City. 2 fully furnished apartment. Price 2100 USD (including Arnona tax).</p> 
+            	<p><a href="r-abu-tor-05.htm">View This Property</a></p> 
+            </div> 
+            <div class="box"> 
+            	<a href="r-arnona-01.htm"><img src="{{MEDIA_URL}}/img/elements/gallery/rentals/arnona-01/arnona-01-01th.jpg" alt="Luxury property for rent in Arnona" /></a> 
+            	<h2><a href="r-arnona-01.htm">For Rent in Arnona</a></h2> 
+            	<p>Very big apartment. Amazing views. 2 Balconies. Furnished. Parking. Price 2500 USD.</p> 
+            	<p><a href="r-arnona-01.htm">View This Property</a></p> 
+            </div> 
+            <div class="box"> 
+            	<a href="r-arnona-02.htm"><img src="{{MEDIA_URL}}/img/elements/gallery/rentals/arnona-02/arnona-02-01th.jpg" alt="Luxury property for rent in Arnona" /></a> 
+            	<h2><a href="r-arnona-02.htm">For Rent in Arnona</a></h2> 
+            	<p>In the new buildings. A huge garden apartment. 3 bedrooms. Can be furnished. Price 2200 USD.</p> 
+            	<p><a href="r-arnona-02.htm">View This Property</a></p> 
+            </div> 
+            <div class="box"> 
+            	<a href="r-betsffa-01.htm"><img src="{{MEDIA_URL}}/img/elements/gallery/rentals/bet-sffa-01/bet-sffa-01-07th.jpg" alt="Luxury property for rent in Beit Safafa" /></a> 
+            	<h2><a href="r-betsffa-01.htm">For Rent in Beit Safafa</a></h2> 
+            	<p>Sweet 3 bedroom apartment. Balcony. Fully Furnished. Price: 1300 USD (including Arnonah)</p> 
+            	<p><a href="r-betsffa-01.htm">View This Property</a></p> 
+            </div>  
+            <div class="box"> 
+            	<a href="r-grmn-col-01.htm"><img src="{{MEDIA_URL}}/img/elements/gallery/rentals/grmn-col-01/grmn-col-01-01th.jpg" alt="Luxury property for rent in German Colony" /></a> 
+            	<h2><a href="r-grmn-col-01.htm">For Rent in German Colony</a></h2> 
+            	<p>In the middle of German Colony. Cottage on 3 floors. 3 bedrooms. Lovely garden. Another 2 bedroom unit downstairs. Unfurnished. Parking.</p> 
+            	<p><a href="r-grmn-col-01.htm">View This Property</a></p> 
+            </div> 
+            <div class="box"> 
+            	<a href="r-grmn-col-02.htm"><img src="{{MEDIA_URL}}/img/elements/gallery/rentals/grmn-col-02/grmn-col-02-01th.jpg" alt="Luxury property for rent in German Colony" /></a> 
+            	<h2><a href="r-grmn-col-02.htm">For Rent in German Colony</a></h2> 
+            	<p>In the Center of German Colony. Luxury apartment. 3 bedrooms. Balcony. Fully Furnished. Parking. Price: 2300 USD (including Arnonah).</p> 
+            	<p><a href="r-grmn-col-02.htm">View This Property</a></p> 
+            </div> 
+            <div class="box"> 
+            	<a href="r-malcha-01.htm"><img src="{{MEDIA_URL}}/img/elements/gallery/rentals/malcha-01/malcha-01-02th.jpg" alt="Luxury property for rent in Malcha" /></a> 
+            	<h2><a href="r-malcha-01.htm">For Rent in Malcha</a></h2> 
+            	<p>In Malcha close to the Mall. Nice Cottage on 3 floors. 4 bedrooms. Outside area. Kitchen appliances. Parking. Price: 2500 USD (including Arnonah).</p> 
+            	<p><a href="r-malcha-01.htm">View This Property</a></p> 
+            </div> 
+            
+            <!-- 
+            <div class="box"> 
+            	<a href="r-msrra-01.htm"><img src="{{MEDIA_URL}}/img/elements/gallery/rentals/msrra-01/msrra-01-02th.jpg" alt="Luxury property for rent in Musrarah" /></a> 
+            	<h2><a href="r-msrra-01.htm">For Rent in Musrarah</a></h2> 
+            	<p>Close proximity to city center and the Old City. Special Old Arab House. 3 bedrooms. Big garden. Furnished. Parking. Price: 2600 USD (including Arnonah).</p> 
+            	<p><a href="r-msrra-01.htm">View This Property</a></p> 
+            </div> 
+             -->
+             
+             <div class="box"> 
+            	<a href="r-mt-oliv-01.htm"><img src="{{MEDIA_URL}}/img/elements/gallery/rentals/mt-oliv-01/mt-oliv-01th.jpg" alt="Luxury property for rent in the Mount of Olives" /></a> 
+            	<h2><a href="r-mt-oliv-01.htm">For Rent in Mount of Olives</a></h2> 
+            	<p>Luxury apartment. View. 3 bedrooms. Surrounding terrace. Partly furnished (fully equipped kitchen). Parking.</p> 
+            	<p><a href="r-mt-oliv-01.htm">View This Property</a></p> 
+            </div> 
+             <div class="box"> 
+            	<a href="r-old-kat-01.htm"><img src="{{MEDIA_URL}}/img/elements/gallery/rentals/old-kat-01/old-kat-01-04th.jpg" alt="Luxury property for rent in Old Katamon" /></a> 
+            	<h2><a href="r-old-kat-01.htm">For Rent in Old Katamon</a></h2> 
+            	<p>Special cozy apartment. 3 bedrooms on 2 floors. Big Garden and outside area. Kitchen appliances. Price: 1500 USD (including Arnonah).</p> 
+            	<p><a href="r-old-kat-01.htm">View This Property</a></p> 
+            </div> 
+             <div class="box"> 
+            	<a href="r-shft-01.htm"><img src="{{MEDIA_URL}}/img/elements/gallery/rentals/shft-01/shft-01-06th.jpg" alt="Luxury property for rent in Shuafat" /></a> 
+            	<h2><a href="r-shft-01.htm">For Rent in Shuafat</a></h2> 
+            	<p>Great apartment. 3 bedrooms. Balcony. Fully furnished. Parking. Price: 2000 USD (including Arnonah).</p> 
+            	<p><a href="r-shft-01.htm">View This Property</a></p> 
+            </div> 
+             <div class="box"> 
+            	<a href="r-shft-02.htm"><img src="{{MEDIA_URL}}/img/elements/gallery/rentals/shft-02/shft-02-09th.jpg" alt="Luxury property for rent in Shuafat" /></a> 
+            	<h2><a href="r-shft-02.htm">For Rent in Shuafat</a></h2> 
+            	<p>Beautiful studio penthouse. Balcony. Fully furnished. Parking. Price: 1600 USD (including Arnonah).</p> 
+            	<p><a href="r-shft-02.htm">View This Property</a></p> 
+            </div> 
+             <div class="box"> 
+            	<a href="r-shft-alsahel-01.htm"><img src="{{MEDIA_URL}}/img/elements/gallery/rentals/shft-alsahel-01/shft-alsahel-01th.jpg" alt="Luxury property for rent in Shuafat Alsahel" /></a> 
+            	<h2><a href="r-shft-alsahel-01.htm">For Rent in Shuafat Alsahel</a></h2> 
+            	<p>In Shufat Alsahel. Penthouse. 3 bedrooms. Fully furnished. Views.</p> 
+            	<p><a href="r-shft-alsahel-01.htm">View This Property</a></p> 
+            </div> 
+             <div class="box"> 
+            	<a href="r-shk-jrh-01.htm"><img src="{{MEDIA_URL}}/img/elements/gallery/rentals/shk-jrh-01/shk-jrh-03th.jpg" alt="Luxury property for rent in Sheik Jarah" /></a> 
+            	<h2><a href="r-shk-jrh-01.htm">For Rent in Sheik Jarah</a></h2> 
+            	<p> In the very popular area of Sheik Jarah. 2 bedroomed penthouse. Unfurnished. Big surrounding terrace. Parking. Price 2500 USD.</p> 
+            	<p><a href="r-shk-jrh-01.htm">View This Property</a></p> 
+            </div> 
+             <div class="box"> 
+            	<a href="r-shk-jrh-02.htm"><img src="{{MEDIA_URL}}/img/elements/gallery/rentals/shk-jrh-02/shk-jrh-02-01th.jpg" alt="Luxury property for rent in Sheik Jarah" /></a> 
+            	<h2><a href="r-shk-jrh-02.htm">For Rent in Sheik Jarah</a></h2> 
+            	<p>Perfect Location. Nicely renovated luxury apartment. 3 bedrooms. 2 balconies. Big Garden. Private entrance. Unfurnished. Parking. Price: 5000 USD including Arnonah (negotiable).</p> 
+            	<p><a href="r-shk-jrh-02.htm">View This Property</a></p> 
+            </div> 
+             
+
+
+
 
             <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+	
+	
+        </div> {# end div content #}
 
-
-
-            <!-- CONTENT -->
-            <div id="content">
-                <div class="box"> 
-                    <a href="/sales"><img src="{{MEDIA_URL}}/img/elements/gallery/sales/musrara/msrra-01th.jpg" 
-                                        alt="Luxury properties for sale" /></a> 
-
-	                <h2><a href="/sales">Sales</a></h2> 
-                    <p>
-                    We cater for people who are seeking to buy real estate property as an investment, a holiday home or for permanent residence. Our customers are mostly investors that buys for investing or that are moving to Jerusalem or as a holiday apartment. We are here to assist, advise, find and plan every step on the way to your dream house. We are proud to cover the most charming areas in Jerusalem, both East and West. Lovely neighborhoods include Abu Tor, German Colony, Bakaa,Talbieh, Rehavia, Arnona, Malcha, French Hill, Musrara, Sheikh-Jarah, Shufat and Beit Hanina.
-                    </p> 
-
-	                <p><a href="/sales">View Sales</a></p> 
-                </div> 
-
-                <div class="box"> 
-                    <a href="/rentals"><img src="{{MEDIA_URL}}/img/elements/gallery/rentals/abu-tor-01/abu-tor-06th.jpg" 
-                                            alt="Luxury properties for rent" /></a> 
-
-	                <h2><a href="/rentals">Rentals</a></h2> 
-
-	                <p>We cater for people who are seeking to buy real estate property as an investment, a holiday home or for permanent residence. Our customers are mostly investors that buy for investment purposes or that are moving to Jerusalem permanently or as a holiday apartment. We are here to assist, advise, find and plan every step on the way to your dream house. We are proud to cover the most charming areas in Jerusalem, both East and West. Lovely neighborhoods include Abu Tor, German Colony, Bakaa,Talbieh, Rehavia, Arnona, Malcha, French Hill, Musrara, Sheikh-Jarah, Shufat and Beit Hanina.</p> 
-	                
-                    <p><a href="/rentals">View Rentals</a></p> 
-                </div> 
-
-                <p>&nbsp;</p>
-                <p>&nbsp;</p>
-                <p>&nbsp;</p>
-                
-                <!-- / CONTENT -->
-            </div>
-
-
-            <p><img src="{{MEDIA_URL}}/img/elements/break.png" alt="" /></p>
-            <br />
-
-            <div id="address"><strong>Phone</strong> +972-54-494-7730 <strong>Fax</strong> +972-2-645-1102 <strong>Skype</strong> jerusalemluxury <strong>Email</strong><a href="mailto:samia@jerusalemluxury.com">samia@jerusalemluxury.com</a></div>
-        
-            <div id="book"><a href="/book" title="Check Rates &amp; Availability" onclick="javascript:pageTracker._trackPageview('/custom/reservations/book_online');"><img alt="Book Online" src="{{MEDIA_URL}}/img/elements/book-up.png" /></a></div>
 		
-        </div>
+    </div> {# end div container #}
 
-        <div id="subscribe"><a title="Send an email to Samia, JerusalemLuxury.com" href="mailto:samia@jerusalemluxury.com"><img bc="2" alt="Send an email to Samia, JerusalemLuxury.com" src="{{MEDIA_URL}}/img/elements/subscribe-up.jpg" /></a></div>
-
-        <div id="footer">
-            <div>
-                <a href="/"><img bc="2" class="juniper" alt="Luxury properties for sale and rent in Jerusalem, Israel" src="{{MEDIA_URL}}/img/elements/old-city-line-art_small.gif" /></a>
-
-                <span class="footer1">
-                    <a href="/">HOME</a>
-                    <a href="/sales">SALES</a>
-                    <a href="/rentals">RENTALS</a>
-                    <a href="/clients">CLIENTS</a>
-                    <a href="/services">SERVICES</a>
-                    <a href="/important">IMPORTANT!</a>
-                    <a href="/links">LINKS</a>
-                </span>
-                
-                <br />
-                
-                <span class="footer2">COPYRIGHT &#169; 2009 <a href="/">JERUSALEMLUXURY.COM</a> <a href="/contact">CONTACT US</a></span>
-
-
-            </div>
-        </div>
-
-	    <div id="trees"></div>
-	    <div id="treecover"></div>
+    <div id="subscribe">
+        <a title="Send an email to Samia, JerusalemLuxury.com" href="mailto:samia@jerusalemluxury.com">
+            <img bc="2" alt="Send an email to Samia, JerusalemLuxury.com" src="{{MEDIA_URL}}/img/elements/subscribe-up.jpg" />
+        </a>
     </div>
-</body>
 
+
+    <div id="footer">
+        <div>
+            <a href="/"><img bc="2" class="juniper" alt="Luxury properties for sale and rent in Jerusalem, Israel" src="{{MEDIA_URL}}/img/elements/old-city-line-art_small.gif" /></a>
+
+            <span class="footer1">
+                <a href="/">HOME</a>
+                <a href="/sales">SALES</a>
+                <a href="/rentals">RENTALS</a>
+                <a href="/clients">CLIENTS</a>
+                <a href="/services">SERVICES</a>
+                <a href="/important">IMPORTANT!</a>
+                <a href="/links">LINKS</a>
+            </span>
+                
+            <br />
+                
+            <span class="footer2">COPYRIGHT &#169; 2009 <a href="/">JERUSALEMLUXURY.COM</a> <a href="/contact">CONTACT US</a></span>
+
+
+        </div>
+    </div>
+
+	<div id="trees"></div>
+	<div id="treecover"></div>
+
+
+
+</body>
 </html>

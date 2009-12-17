@@ -3,36 +3,38 @@ from django.db import models
 import realty_data.models as rd_models
 import languages.models as l_models
 
+from django.conf import settings
+
+from PIL import Image
 
 
 class Rent(models.Model):
+    property = models.ForeignKey('Property')
+
     asking_price = models.DecimalField(max_digits=10, decimal_places=2)
     type = models.ForeignKey(rd_models.RentalType)
 
     available_from = models.DateField()
-    available_to = models.DateField(blank=True)
+    available_to = models.DateField(blank=True, null=True)
 
-    property = models.ForeignKey('Property')
+    negotiable = models.BooleanField()
+
 
 
 class Sale(models.Model):
+    property = models.ForeignKey('Property')
+
     asking_price = models.DecimalField(max_digits=10, decimal_places=2)
     type = models.ForeignKey(rd_models.SaleType)
 
     available_from = models.DateField()
-    available_to = models.DateField(blank=True)
+    available_to = models.DateField(blank=True, null=True)
 
-    property = models.ForeignKey('Property')
+    negotiable = models.BooleanField()
+
 
 
 class Location(models.Model):
-
-    #class Street(ACharField):
-    #    primary = models.ForeignKey('Location')
-    #    class Meta:
-    #       verbose_name="Street"
-
-    #Street = Street 
 
     property = models.ForeignKey('Property')
 
@@ -83,6 +85,12 @@ class Amenities(models.Model):
             ('S', 'Small'),
     )
 
+    FURNISHING_CHOICES = (
+            ('N', 'None'),
+            ('P', 'Partly'),
+            ('F', 'Fully'),
+    )
+
     property = models.ForeignKey("Property")
 
     bedrooms = models.IntegerField(help_text="Enter # of bedrooms in property")
@@ -99,6 +107,8 @@ class Amenities(models.Model):
 
     parking = models.CharField(max_length=1, default='N', choices=PARKING_CHOICES)
     garden = models.CharField(max_length=1, default='N', choices=GARDEN_CHOICES)
+
+    number_of_balconies = models.IntegerField(default=0, help_text="Enter # of balconies in property")
     balcony = models.CharField(max_length=1, default='N', choices=BALCONY_CHOICES)
 
     elevators = models.IntegerField(default=0, help_text="Enter the number of elevators in Property")
@@ -107,6 +117,7 @@ class Amenities(models.Model):
     heating = models.CharField(max_length=1, default='N', choices=HEATING_CHOICES)
     conditioning = models.CharField(max_length=1, default='N', choices=CONDITIONING_CHOICES)
 
+    furnishing = models.CharField(max_length=1, default='N', choices=FURNISHING_CHOICES)
 
 
 class Property(models.Model):
@@ -128,8 +139,8 @@ class Property(models.Model):
 
     type = models.ForeignKey(rd_models.PropertyType, verbose_name="Property Type")
 
-    map = models.URLField(blank=True)
-    floorplan = models.FileField(upload_to="pdf/floorplans", blank=True)
+    map = models.URLField(blank=True, null=True)
+    floorplan = models.FileField(upload_to="pdf/floorplans", blank=True, null=True)
 
     is_available = models.BooleanField(help_text="Is this property still available?")
     is_active = models.BooleanField(help_text="if this box is not checked off, then the property won't be displayed")
@@ -141,8 +152,54 @@ class Property(models.Model):
     is_sale = models.BooleanField(verbose_name="Is for Sale", 
             help_text="Check this box off if you want this property to be displayed as &ldquo;For Sale&rdquo;")
 
+def image_resize(filename, key):
+    im = Image.open(filename)
+    ratio = settings.IMAGE_SIZE[key][0] / float(im.size[0])
+    size = settings.IMAGE_SIZE[key][0], int(im.size[1] * ratio)
+    
+    im = im.resize(size, Image.ANTIALIAS)
+
+    # if the height is greater than specified, crop it
+    if im.size[1] > settings.IMAGE_SIZE[key][1]:
+        im = im.crop(box=(0,0,settings.IMAGE_SIZE[key][0], settings.IMAGE_SIZE[key][1])) 
+
+    
+    im.save(filename)
+
 
 class Images(models.Model):
+    def __unicode__(self):
+        return "%s - %s" % (self.name, self.property.name)
+
+
+    def save(self):
+        """
+            image_large is a standard image.  It doesn't need to be resized because that's exactly how it's going to be displayed
+
+            or maybe not.
+
+            Anyway, if it's around we can use it as a resized default image for slideshow and thumb
+        """
+        super(Images, self).save()
+
+        if self.image_thumb:
+            image_resize(self.image_thumb.file.name, 'thumb')
+        elif not self.image_thumb and self.image_large:
+            # Note: find a better way to extract the name b/c it's always possible that I'll be doing freaky stuff with '/'
+            self.image_thumb.save(self.image_large.name.rsplit('/')[-1], self.image_large, save=True)
+            image_resize(self.image_thumb.file.name, 'thumb')
+
+        if self.slideshow:
+            image_resize(self.slideshow.file.name, 'slideshow')
+        elif not self.slideshow and self.image_large:
+            # Note: find a better way to extract the name b/c it's always possible that I'll be doing freaky stuff with '/'
+            self.slideshow.save(self.image_large.name.rsplit('/')[-1], self.image_large, save=True)
+            image_resize(self.slideshow.file.name, 'slideshow')
+
+
+        if self.image_large:
+            image_resize(self.image_large.file.name, 'large')
+
     class Meta:
         verbose_name_plural = "Images"
 
@@ -158,7 +215,10 @@ class Images(models.Model):
     name = models.CharField(max_length=200)
     position = models.IntegerField()
 
-    in_gallery = models.BooleanField(verbose_name="To be used as display?")
+    in_display = models.BooleanField(verbose_name="To be used as front page display?")
 
-    image_large = models.ImageField(upload_to="img/apartments/large", help_text="DEBUG_ADMIN_IMAGE")
-    image_thumb = models.ImageField(upload_to="img/apartments/thumb", blank=True)
+    image_large = models.ImageField(upload_to="img/rentals/large") 
+    image_thumb = models.ImageField(upload_to="img/rentals/thumb", blank=True, null=True)
+
+    slideshow = models.ImageField(upload_to="img/slideshow", blank=True, null=True)
+

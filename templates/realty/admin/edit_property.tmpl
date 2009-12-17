@@ -94,11 +94,13 @@
                 {% form_field form_amen.floor_length "form-row" %}
                 {% form_field form_amen.parking "form-row" %}
                 {% form_field form_amen.garden "form-row" %}
+                {% form_field form_amen.number_of_balconies "form-row" %}
                 {% form_field form_amen.balcony "form-row" %}
                 {% form_field form_amen.elevators "form-row" %}
                 {% form_field form_amen.has_elevator_shabbat "form-row" %}
                 {% form_field form_amen.heating "form-row" %}
                 {% form_field form_amen.conditioning "form-row" %}
+                {% form_field form_amen.furnishing "form-row" %}
                 {% endfor %}
             </fieldset>
 
@@ -112,6 +114,7 @@
                 {% form_field form_rent.type "form-row" %}
                 {% form_field form_rent.available_from "form-row" %}
                 {% form_field form_rent.available_to "form-row" %}
+                {% form_field form_rent.negotiable "form-row" %}
                 {% endfor %}
             </fieldset>
         
@@ -124,6 +127,7 @@
                 {% form_field form_sale.type "form-row" %}
                 {% form_field form_sale.available_from "form-row" %}
                 {% form_field form_sale.available_to "form-row" %}
+                {% form_field form_sale.negotiable "form-row" %}
                 {% endfor %}
             </fieldset>
 
@@ -147,6 +151,7 @@
 
                             {% form_field form_images.image_large "form-row image_large"  MEDIA_URL form_images.instance.image_large.name %}
                             {% form_field form_images.image_thumb "form-row image_thumb"  MEDIA_URL form_images.instance.image_thumb.name %}
+                            {% form_field form_images.slideshow "form-row slideshow"  MEDIA_URL form_images.instance.slideshow.name %}
 
                         </fieldset>
                     </div>

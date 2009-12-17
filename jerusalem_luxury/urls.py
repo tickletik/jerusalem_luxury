@@ -6,6 +6,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('realty.views',
     (r'^$', 'index'),
+    (r'^rentals/$', 'rentals'),
 )
 urlpatterns += patterns('main.views',
     # Example:

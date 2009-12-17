@@ -108,6 +108,24 @@
     }
   }, 
   {
+    "pk": 13, 
+    "model": "realty_data.title_p", 
+    "fields": {
+      "text": "Cottage", 
+      "language_choice": 1, 
+      "primary": 7
+    }
+  }, 
+  {
+    "pk": 14, 
+    "model": "realty_data.title_p", 
+    "fields": {
+      "text": "\u05d1\u05d9\u05ea \u05e7\u05ea\u05df", 
+      "language_choice": 3, 
+      "primary": 7
+    }
+  }, 
+  {
     "pk": 1, 
     "model": "realty_data.propertytype", 
     "fields": {
@@ -149,7 +167,135 @@
       "name": "apartment"
     }
   }, 
-  
+  {
+    "pk": 7, 
+    "model": "realty_data.propertytype", 
+    "fields": {
+      "name": "cottage"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "realty_data.title_n", 
+    "fields": {
+      "text": "Rehavia", 
+      "language_choice": 1, 
+      "primary": 1
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "realty_data.title_n", 
+    "fields": {
+      "text": "\u05e8\u05d7\u05d1\u05d9\u05d4", 
+      "language_choice": 3, 
+      "primary": 1
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "realty_data.title_n", 
+    "fields": {
+      "text": "Nachlaot", 
+      "language_choice": 1, 
+      "primary": 2
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "realty_data.title_n", 
+    "fields": {
+      "text": "\u05e0\u05d7\u05dc\u05d0\u05d5\u05ea", 
+      "language_choice": 3, 
+      "primary": 2
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "realty_data.title_n", 
+    "fields": {
+      "text": "The German Colony", 
+      "language_choice": 1, 
+      "primary": 3
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "realty_data.title_n", 
+    "fields": {
+      "text": "\u05d4\u05de\u05d5\u05e9\u05d1\u05d4 \u05d4\u05d2\u05e8\u05de\u05e0\u05d9\u05ea", 
+      "language_choice": 3, 
+      "primary": 3
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "realty_data.title_n", 
+    "fields": {
+      "text": "Givat Shaul", 
+      "language_choice": 1, 
+      "primary": 4
+    }
+  }, 
+  {
+    "pk": 8, 
+    "model": "realty_data.title_n", 
+    "fields": {
+      "text": "\u05d2\u05d1\u05e2\u05ea \u05e9\u05d0\u05d5\u05dc", 
+      "language_choice": 3, 
+      "primary": 4
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "realty_data.neighborhood", 
+    "fields": {
+      "city": 1, 
+      "name": "rehavia"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "realty_data.neighborhood", 
+    "fields": {
+      "city": 1, 
+      "name": "nachlaot"
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "realty_data.neighborhood", 
+    "fields": {
+      "city": 1, 
+      "name": "german colony"
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "realty_data.neighborhood", 
+    "fields": {
+      "city": 1, 
+      "name": "givat shaul"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "realty_data.title_c", 
+    "fields": {
+      "text": "Jerusalem", 
+      "language_choice": 1, 
+      "primary": 1
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "realty_data.title_c", 
+    "fields": {
+      "text": "\u05d9\u05e8\u05d5\u05e9\u05dc\u05d9\u05dd", 
+      "language_choice": 3, 
+      "primary": 1
+    }
+  }, 
   {
     "pk": 3, 
     "model": "realty_data.title_c", 
@@ -187,21 +333,54 @@
     }
   }, 
   {
+    "pk": 1, 
+    "model": "realty_data.city", 
+    "fields": {
+      "region": 1, 
+      "name": "jerusalem"
+    }
+  }, 
+  {
     "pk": 2, 
     "model": "realty_data.city", 
     "fields": {
-      "name": "maale adumim",
-      "region": 1
+      "region": 1, 
+      "name": "maale adumim"
     }
   }, 
   {
     "pk": 3, 
     "model": "realty_data.city", 
     "fields": {
-      "name": "tel aviv",
-      "region": 1
+      "region": 1, 
+      "name": "tel aviv"
     }
-  },
+  }, 
+  {
+    "pk": 1, 
+    "model": "realty_data.title_r", 
+    "fields": {
+      "text": "jerusalem", 
+      "language_choice": 1, 
+      "primary": 1
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "realty_data.title_r", 
+    "fields": {
+      "text": "\u05d9\u05e8\u05d5\u05e9\u05dc\u05d9\u05dd", 
+      "language_choice": 3, 
+      "primary": 1
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "realty_data.region", 
+    "fields": {
+      "name": "jerusalem"
+    }
+  }, 
   {
     "pk": 1, 
     "model": "realty_data.title_rt", 
@@ -402,6 +581,4 @@
       "name": "test 2"
     }
   }
-
-
 ]

@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.conf.urls.defaults import *
 
 from realty.models import * 
 
@@ -27,6 +28,7 @@ class ImagesAdmin(admin.ModelAdmin):
     list_display = ['name', 'property', 'image_large', 'image_thumb', 'position']
 
     inlines = [TitleDescInline]
+
 
 class LocationAdmin(admin.ModelAdmin):
     pass

@@ -3,6 +3,8 @@
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+IMAGE_SIZE={'slideshow':(768,400), 'large':(640,480), 'thumb':(128,96)}
+
 ADMINS = (
     # ('Your Name', 'your_email@domain.com'),
 )
@@ -91,3 +93,5 @@ INSTALLED_APPS = (
     'languages',
     'jlinx_utils',
 )
+
+

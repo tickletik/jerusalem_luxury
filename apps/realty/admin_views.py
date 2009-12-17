@@ -3,7 +3,7 @@ from django.template import RequestContext
 
 from django.contrib.admin.views.decorators import staff_member_required 
 
-from jerusalem_luxury.settings import MEDIA_URL, DEBUG
+from django.conf import settings
 
 # Create your views here.
 import realty.models as models
@@ -26,15 +26,15 @@ defaultcontext =  {
     'app_label': app_label,
     'title': content_title_property,
     'labels':nested_labels,
-    'MEDIA_URL':MEDIA_URL,
-    'DEBUG':DEBUG, 
+    'MEDIA_URL':settings.MEDIA_URL,
+    'DEBUG':settings.DEBUG, 
 }
 
 
 # redirect urls
 r_urls= {
-    '_continue': '/t/admin/realty/property/%s/',
-    '_add': '/t/admin/realty/property/add/',
+    '_continue': '/admin/realty/property/%s/',
+    '_add': '/admin/realty/property/add/',
     '_save': '/admin/realty/property',
     }
 
@@ -65,6 +65,7 @@ def add_property(request):
         form_property = forms.PropertyForm(request.POST)
 
 
+        m_property = None
         if form_property.is_valid():
             # don't save the m_property until the formsets are valid and saved
             m_property = form_property.save(commit=False)
@@ -82,7 +83,8 @@ def add_property(request):
                 return redirect(r_urls['_add'])
         else:
             # didn't work, get rid of this m_property 
-            m_property.delete()
+            if m_property:
+                m_property.delete()
 
     rendercontext = dict()
     rendercontext.update(defaultcontext)

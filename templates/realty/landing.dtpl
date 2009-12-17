@@ -15,8 +15,8 @@
     <script type="text/javascript" src="{{MEDIA_URL}}/js/swfobject.js"></script>
     
     <script type="text/javascript">
-			var flashvars = {};
-            flashvars.url_imagelist = "http://{{current_site}}/slideshow/image_list/home/";
+        var flashvars = {};
+        flashvars.url_imagelist = "http://{{current_site}}/slideshow/image_list/home/";
 			flashvars.has_border = "true";
 			flashvars.border_width = "768";
 			flashvars.border_height = "400";
@@ -134,7 +134,11 @@
 		
         </div>
 
-        <div id="subscribe"><a title="Send an email to Samia, JerusalemLuxury.com" href="mailto:samia@jerusalemluxury.com"><img bc="2" alt="Send an email to Samia, JerusalemLuxury.com" src="{{MEDIA_URL}}/img/elements/subscribe-up.jpg" /></a></div>
+        <div id="subscribe">
+            <a title="Send an email to Samia, JerusalemLuxury.com" href="mailto:samia@jerusalemluxury.com">
+                <img bc="2" alt="Send an email to Samia, JerusalemLuxury.com" src="{{MEDIA_URL}}/img/elements/subscribe-up.jpg" />
+            </a>
+        </div>
 
         <div id="footer">
             <div>
