@@ -56,7 +56,7 @@ hr { margin:0 0 17px 0; border:1px solid #FFF; border-bottom:1px dotted #DDD; }
 .box .left { width:150px; font:22px georgia; color:#5CB4B4; float:left; }
 .box .left p { margin:10px 0 0 5px; }
 .box .left span { font:11px verdana; }
-.box .right { width:435px; float:right; }
+.box .right { width:535px; float:right; }
 
 .literature { padding:0 !important; }
 .literature li { margin:0 0 6px 0 !important; background:none !important; }

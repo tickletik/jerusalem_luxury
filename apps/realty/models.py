@@ -54,6 +54,7 @@ class Location(models.Model):
 
 
 class Amenities(models.Model):
+
     HEATING_CHOICES = (
             ('N', 'None'),
             ('P', 'Partial'),
@@ -125,6 +126,38 @@ class Property(models.Model):
     def __unicode__(self):
         return "%s" % self.name
 
+    def set_language(self, language_curr):
+
+        titledesc = self.titledesc_property_set.filter(language_choice=language_curr)
+        if len(titledesc) > 0: self.titledesc = titledesc[0]
+
+        display = self.images_set.order_by('position')
+        if len(display) > 0: self.display = display[0]
+
+        images = self.images_set.order_by('position')
+        if len(images) > 0: 
+            for im in images:
+                im.set_language(language_curr)
+
+            self.images = images
+
+        locations = self.location_set.all()
+        if len(locations) > 0: locations = locations[0]
+
+        neighborhood = locations.neighborhood.title_n_set.filter(language_choice=language_curr)
+        if len(neighborhood) > 0: neighborhood = neighborhood[0].text
+
+
+        rent = self.rent_set.all()
+        if len(rent) > 0: self.rent = self.rent_set.all()[0]
+
+        sale = self.sale_set.all()
+        if len(sale) > 0: self.sale = self.sale_set.all()[0]
+
+        amenities = self.amenities_set.all()
+        if len(amenities) > 0: self.amenities = amenities[0]
+        
+
     class Meta:
         verbose_name_plural="Properties"
 
@@ -170,6 +203,10 @@ def image_resize(filename, key):
 class Images(models.Model):
     def __unicode__(self):
         return "%s - %s" % (self.name, self.property.name)
+
+    def set_language(self, language_curr):
+        titledesc = self.titledesc_images_set.filter(language_choice=language_curr)
+        if len(titledesc) > 0: self.titledesc = titledesc[0]
 
 
     def save(self):
