@@ -144,6 +144,7 @@ class Property(models.Model):
         locations = self.location_set.all()
         if len(locations) > 0: locations = locations[0]
 
+        
         neighborhood = locations.neighborhood.title_n_set.filter(language_choice=language_curr)
         if len(neighborhood) > 0: neighborhood = neighborhood[0].text
 
@@ -185,24 +186,24 @@ class Property(models.Model):
     is_sale = models.BooleanField(verbose_name="Is for Sale", 
             help_text="Check this box off if you want this property to be displayed as &ldquo;For Sale&rdquo;")
 
-def image_resize(filename, key):
-    im = Image.open(filename)
-    ratio = settings.IMAGE_SIZE[key][0] / float(im.size[0])
-    size = settings.IMAGE_SIZE[key][0], int(im.size[1] * ratio)
-    
-    im = im.resize(size, Image.ANTIALIAS)
-
-    # if the height is greater than specified, crop it
-    if im.size[1] > settings.IMAGE_SIZE[key][1]:
-        im = im.crop(box=(0,0,settings.IMAGE_SIZE[key][0], settings.IMAGE_SIZE[key][1])) 
-
-    
-    im.save(filename)
-
 
 class Images(models.Model):
     def __unicode__(self):
         return "%s - %s" % (self.name, self.property.name)
+
+    def __image_resize__(self, filename, key):
+        im = Image.open(filename)
+        ratio = settings.IMAGE_SIZE[key][0] / float(im.size[0])
+        size = settings.IMAGE_SIZE[key][0], int(im.size[1] * ratio)
+        
+        im = im.resize(size, Image.ANTIALIAS)
+    
+        # if the height is greater than specified, crop it
+        if im.size[1] > settings.IMAGE_SIZE[key][1]:
+            im = im.crop(box=(0,0,settings.IMAGE_SIZE[key][0], settings.IMAGE_SIZE[key][1])) 
+    
+        
+        im.save(filename)
 
     def set_language(self, language_curr):
         titledesc = self.titledesc_images_set.filter(language_choice=language_curr)
@@ -220,22 +221,22 @@ class Images(models.Model):
         super(Images, self).save()
 
         if self.image_thumb:
-            image_resize(self.image_thumb.file.name, 'thumb')
+            self.__image_resize__(self.image_thumb.file.name, 'thumb')
         elif not self.image_thumb and self.image_large:
             # Note: find a better way to extract the name b/c it's always possible that I'll be doing freaky stuff with '/'
             self.image_thumb.save(self.image_large.name.rsplit('/')[-1], self.image_large, save=True)
-            image_resize(self.image_thumb.file.name, 'thumb')
+            self.__image_resize__(self.image_thumb.file.name, 'thumb')
 
         if self.slideshow:
-            image_resize(self.slideshow.file.name, 'slideshow')
+            self.__image_resize__(self.slideshow.file.name, 'slideshow')
         elif not self.slideshow and self.image_large:
             # Note: find a better way to extract the name b/c it's always possible that I'll be doing freaky stuff with '/'
             self.slideshow.save(self.image_large.name.rsplit('/')[-1], self.image_large, save=True)
-            image_resize(self.slideshow.file.name, 'slideshow')
+            self.__image_resize__(self.slideshow.file.name, 'slideshow')
 
 
         if self.image_large:
-            image_resize(self.image_large.file.name, 'large')
+            self.__image_resize__(self.image_large.file.name, 'large')
 
     class Meta:
         verbose_name_plural = "Images"
@@ -254,8 +255,8 @@ class Images(models.Model):
 
     in_display = models.BooleanField(verbose_name="To be used as front page display?")
 
-    image_large = models.ImageField(upload_to="img/rentals/large") 
-    image_thumb = models.ImageField(upload_to="img/rentals/thumb", blank=True, null=True)
+    image_large = models.ImageField(upload_to="img/realty/large") 
+    image_thumb = models.ImageField(upload_to="img/realty/thumb", blank=True, null=True)
 
     slideshow = models.ImageField(upload_to="img/slideshow", blank=True, null=True)
 

@@ -149,6 +149,9 @@
     
                             {% form_field form_images.position "form-row"  %}
 
+                            {% form_field form_images.in_display "form-row"  %}
+
+
                             {% form_field form_images.image_large "form-row image_large"  MEDIA_URL form_images.instance.image_large.name %}
                             {% form_field form_images.image_thumb "form-row image_thumb"  MEDIA_URL form_images.instance.image_thumb.name %}
                             {% form_field form_images.slideshow "form-row slideshow"  MEDIA_URL form_images.instance.slideshow.name %}

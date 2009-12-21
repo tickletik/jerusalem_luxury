@@ -13,7 +13,7 @@ current_site = Site.objects.get_current()
 language_curr = l_models.LanguageChoice.objects.filter(is_activated=True)[0]
 
 def index(request):
-    return render_to_response('realty/landing.dtpl', {'MEDIA_URL':settings.MEDIA_URL, 'current_site':current_site, 
+    return render_to_response('realty/landing.dtpl', {'slideshow_type':'landing', 'MEDIA_URL':settings.MEDIA_URL, 'current_site':current_site, 
         }) 
 
 def sales(request):
@@ -23,6 +23,7 @@ def sales(request):
         prop.set_language(language_curr)
 
     return render_to_response('realty/sales.dtpl', {
+        'slideshow_type':'sales',
         'properties':properties,
         'MEDIA_URL':settings.MEDIA_URL, 
         'current_site':current_site, 
@@ -35,6 +36,7 @@ def rentals(request):
         prop.set_language(language_curr)
 
     return render_to_response('realty/rentals.dtpl', {
+        'slideshow_type':'rentals',
         'properties':properties,
         'MEDIA_URL':settings.MEDIA_URL, 
         'current_site':current_site, 
@@ -46,6 +48,7 @@ def rentals_property(request, property_id):
     m_property.set_language(language_curr)
 
     return render_to_response('realty/rentals_property.dtpl', {
+        'slideshow_type':'rentals/%s' % property_id,
         'property':m_property,
         'MEDIA_URL':settings.MEDIA_URL, 
         'current_site':current_site, 

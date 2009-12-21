@@ -15,7 +15,8 @@ urlpatterns += patterns('main.views',
 )
 
 urlpatterns += patterns('slideshow.views',
-    (r'^slideshow/image_list/(?P<section>\w+)/$', 'image_list'),
+    (r'^slideshow/xml/(?P<section>\w+)/$', 'image_list'),
+    (r'^slideshow/xml/(?P<section>\w+)/(?P<model_id>\d+)/$', 'xml_model'),
 )
 
 urlpatterns += patterns('realty.admin_views',

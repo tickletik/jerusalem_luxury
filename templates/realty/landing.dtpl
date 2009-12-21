@@ -16,7 +16,7 @@
     
     <script type="text/javascript">
         var flashvars = {};
-        flashvars.url_imagelist = "http://{{current_site}}/slideshow/image_list/home/";
+            flashvars.url_imagelist = "http://{{current_site}}/slideshow/xml/{{slideshow_type}}/";
 			flashvars.has_border = "true";
 			flashvars.border_width = "768";
 			flashvars.border_height = "400";
