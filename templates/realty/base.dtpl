@@ -63,10 +63,10 @@
                 <ul>
                     <li class="sales"><a href="/listings/sales" {% ifequal section "sales" %}class="current"{% endifequal %}><span>sales</span></a</li>
                     <li class="rentals"><a href="/listings/rentals" {% ifequal section "rentals" %}class="current"{% endifequal %}<span>Rentals</span></a</li>
-                    <li class="clients"><a href="/clients"><span>Clients</span></a</li>
-                    <li class="services"><a href="/services"><span>Services</span></a</li>
-                    <li class="imp"><a href="/important"><span>Important</span></a</li>
-                    <li class="lin"><a href="/links"><span>Links</span></a</li>
+                    <li class="clients"><a href="/clients" {% ifequal section "clients" %}class="current"{% endifequal %}><span>Clients</span></a</li>
+                    <li class="services"><a href="/services" {% ifequal section "services" %}class="current"{% endifequal %}><span>Services</span></a</li>
+                    <li class="imp"><a href="/important" {% ifequal section "important" %}class="current"{% endifequal %}><span>Important</span></a</li>
+                    <li class="lin"><a href="/links" {% ifequal section "links" %}class="current"{% endifequal %}><span>Links</span></a</li>
                 </ul>
             </div>
 

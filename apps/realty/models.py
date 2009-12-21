@@ -155,6 +155,7 @@ class Property(models.Model):
         sale = self.sale_set.all()
         if len(sale) > 0: self.sale = self.sale_set.all()[0]
 
+
         amenities = self.amenities_set.all()
         if len(amenities) > 0: self.amenities = amenities[0]
         

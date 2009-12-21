@@ -27,66 +27,13 @@ language_curr = l_models.LanguageChoice.objects.filter(is_activated=True)[0]
 
 def image_list(request, section):
 
-    if section == 'home':
-        # create test data
-        imagelist = list()
-        
-        image = dict()
-        image['dir'] = 'home'
-        image['name'] = '01'
-        image['ext'] = 'jpg'
-        image['caption'] = 'Aliquam lectus orci, adipiscing et'
-        imagelist.append(image)
-    
-        image = dict()
-        image['dir'] = 'home'
-        image['name'] = '02'
-        image['ext'] = 'jpg'
-        image['caption'] = 'sodales ac, feugiat non, lacus.'
-        imagelist.append(image)
-    
-        image = dict()
-        image['dir'] = 'home'
-        image['name'] = '03'
-        image['ext'] = 'jpg'
-        image['caption'] = 'Ut dictum velit nec est. Quisque posuere, purus sit amet malesuada blandit,'
-        imagelist.append(image)
-    
-        image = dict()
-        image['dir'] = 'home'
-        image['name'] = '04'
-        image['ext'] = 'jpg'
-        image['caption'] = 'pharetra, urna lectus ultrices est, vel pretium pede '
-        imagelist.append(image)
-    
-        image = dict()
-        image['dir'] = 'home'
-        image['name'] = '05'
-        image['ext'] = 'jpg'
-        image['caption'] = 'sollicitudin tortor. Maecenas volutpat, nisl et dignissim '
-        imagelist.append(image)
-    
-        image = dict()
-        image['dir'] = 'home'
-        image['name'] = '06'
-        image['ext'] = 'jpg'
-        image['caption'] = 'sapien sapien auctor arcu, sed pulvinar felis mi '
-        imagelist.append(image)
-    
-        #end test data
-    
-        gallery_dir = "img/gallery"
-    
-        return render_to_response('slideshow/image_list.xml', 
-            {'MEDIA_URL':MEDIA_URL, 'gallery_dir':gallery_dir, 'imagelist':imagelist,})
-
     m_properties = list()
-    if section == 'landing':
-        m_properties = r_models.Property.objects.filter(is_active=True).filter(is_available=True)
-    elif section == 'rentals':
+    if section == 'rentals':
         m_properties = r_models.Property.objects.filter(is_active=True).filter(is_available=True).filter(is_rent=True)
     elif section == 'sales':
         m_properties = r_models.Property.objects.filter(is_active=True).filter(is_available=True).filter(is_sale=True)
+    else:
+        m_properties = r_models.Property.objects.filter(is_active=True).filter(is_available=True)
 
     imagelist = list()
     for prop in m_properties:

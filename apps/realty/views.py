@@ -54,3 +54,11 @@ def listings_property(request, section, property_id):
         'current_site':current_site, 
         }) 
 
+def static_pages(request, section):
+
+    return render_to_response('realty/%s.dtpl' % section, {
+        'section':section,
+        'MEDIA_URL':settings.MEDIA_URL, 
+        'current_site':current_site, 
+        }) 
+

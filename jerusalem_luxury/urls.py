@@ -8,6 +8,7 @@ urlpatterns = patterns('realty.views',
     (r'^$', 'index'),
     (r'^listings/(?P<section>\w+)/$', 'listings'),
     (r'^listings/(?P<section>\w+)/(?P<property_id>\d+)/$', 'listings_property'),
+    (r'^(?P<section>(services|important|links|clients))/$', 'static_pages'),
 )
 urlpatterns += patterns('main.views',
     # Example:

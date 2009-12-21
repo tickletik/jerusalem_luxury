@@ -1,0 +1,9 @@
+{% extends "realty/base.dtpl" %}
+
+        {% block content %}
+            <h1>Satified Client Comments</h1>
+            <h2>Coming Soon</h2>
+
+            <p><img src="{{MEDIA_URL}}/img/elements//break.png" alt=""/></p>
+        {% endblock content %}
+

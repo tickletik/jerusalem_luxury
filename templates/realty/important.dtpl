@@ -1,0 +1,25 @@
+{% extends "realty/base.dtpl" %}
+
+    {% block content %}
+    
+        <h1>Important Information</h1>
+
+        <p>Jerusalem Luxury real estate is owned by Samia Manneh, a licensed Real estate agent approved by the Israeli ministry of justice. Samia is a member of the Israeli Brokerage chamber of commerce and of the Jerusalem multiple listing service.</p>
+        
+        <h2>Commissions:</h2>
+        
+        <p>* For the sale of property, the commission is 2% of the price of the sale</p>
+        <p>* For rentals that exceed a 5-month period, a one-month rental fee is charged</p>
+        <p>* For rentals less than 5 months, 10% of the total rent during the term of the lease is charged</p>
+        <p>* Value added tax 16.5% to be added</p>
+         
+        <p><strong>Commission is to be paid on the signing of a contract or any binding agreement</strong></p>
+         
+        <p>When you decide to engage the services of our agents you are required to sign a brokerage agreement with the agent which specifies your agreement to pay agent fees</p>
+        
+        <p>Any relevant information regarding real-estate law, rules and regulations in Israel can be found here:
+        <a href="http://www.justice.gov.il/MOJHeb/RashamHametavchim/YeziratKesher.htm">www.justice.gov.il/MOJHeb/RashamHametavchim/YeziratKesher.htm</a></p>
+         
+        
+        <p><img src="{{MEDIA_URL}}/img/elements//break.png" alt=""/></p>
+    {% endblock content %}

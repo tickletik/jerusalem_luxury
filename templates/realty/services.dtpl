@@ -1,0 +1,13 @@
+{% extends "realty/base.dtpl" %}
+
+        {% block content %}
+            <h1>Quality Personal Services</h1>
+
+            <p>We provide quality personal services.</p> 
+            <p>We speak four languages; English, French, Arabic and Hebrew.</p> 
+            <p>We help you with the connection of Internet telephone and T.V as well as any other necessaries to move to your new home.</p> 
+            <p>We are committed to provide our clients with the highest quality level personal service and support. </p>
+            <p>We work on the principle of building a trust relation with our customers which is highlighted though the services provided to our customers.</p>
+            <p><img src="{{MEDIA_URL}}/img/elements//break.png" alt=""/></p>
+        {% endblock content %}
+

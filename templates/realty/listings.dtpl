@@ -39,8 +39,13 @@
                         Furnished.
                     {% endifnotequal %}
 
+                    {% if property.is_rent %}
                     Price {{ property.rent.asking_price|floatformat:0 }} USD.
                     {% ifequal property.rent.negotiable 1%} Negotiable{% endifequal %}
+                    {% else %}
+                    Price {{ property.sale.asking_price|floatformat:0 }} USD.
+                    {% ifequal property.sale.negotiable 1%} Negotiable{% endifequal %}
+                    {% endif %}
                 </p>
                 <p><a href="/listings/{{ section }}/{{property.id}}">View This Property</a></p>
             </div>
