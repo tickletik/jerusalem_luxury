@@ -1,0 +1,51 @@
+{% extends "realty/base.dtpl" %}
+
+        {% block content %}
+            <h1>Properties<br/>For {{ section_header }}</h1>
+
+            <p>We cater for people who are seeking to buy real estate property as an investment, a holiday home or for permanent residence. Our customers are mostly investors that buy for investment purposes or that are moving to Jerusalem permanently or as a holiday apartment. We are here to assist, advise, find and plan every step on the way to your dream house.</p>
+
+            <p>We are proud to cover the most charming areas in Jerusalem, both East and West. Lovely neighborhoods include Abu Tor, German Colony, Bakaa, Talbieh, Rehavia, Arnona, Malcha, French Hill, Musrara, Sheikh-Jarah, Shufat and Beit Hanina.</p> 
+
+            <h2>Things you should know before {% ifequal section "rentals"%}renting{% else %}buying{% endifequal %}</h2>
+
+            <p>Since 1996, the Ministry of Justice licenses Israeli real estate brokers. The broker is obliged by law to provide all relevant property information. The broker may represent either buyer or seller or may represent both sides.</p>
+
+            <p>Every agent must have a license approved by ministry of justice; a license cannot be transferred between family members or friends.</p>
+
+            {% for property in properties %}
+            <div class="box">
+                <a href="/listings/{{ section }}/{{property.id}}"><img src="{{MEDIA_URL}}/{{property.display.image_thumb}}" alt="Luxury Property for Sale in {{property.neighborhood}}"/></a>
+                    
+                <h2><a href="/listings/{{ section }}/{{property.id}}">{{property.titledesc.title}}</a></h2> 
+                <p>{{property.amenities.bedrooms}} Bedrooms. 
+
+                    {% ifnotequal property.amenities.parking "N" %}Parking.{% endifnotequal %}
+
+                    {% ifnotequal property.amenities.balcony "N" %}
+                        {% ifequal property.amenities.number_of_balconies 1 %}
+                        Terrace.
+                        {% else %}
+                        {{ property.amenities.number_of_balconies }} Balconies.
+                        {% endifequal %}
+                    {% endifnotequal %}
+
+                    {% ifnotequal property.amenities.furnishing "N" %}
+                        {% ifequal property.amenities.furnishing "P" %}
+                        Partly
+                        {% else %}
+                        Fully
+                        {% endifequal %}
+                        Furnished.
+                    {% endifnotequal %}
+
+                    Price {{ property.rent.asking_price|floatformat:0 }} USD.
+                    {% ifequal property.rent.negotiable 1%} Negotiable{% endifequal %}
+                </p>
+                <p><a href="/listings/{{ section }}/{{property.id}}">View This Property</a></p>
+            </div>
+            {% endfor %}
+		
+        {% endblock content %}
+
+		

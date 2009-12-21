@@ -14,18 +14,20 @@
     <script type="text/javascript" src="{{MEDIA_URL}}/js/swfobject.js"></script>
     
     <script type="text/javascript">
-			var flashvars = {};
-            flashvars.url_imagelist = "http://{{current_site}}/slideshow/xml/{{slideshow_type}}/";
-			flashvars.has_border = "true";
-			flashvars.border_width = "668";
-			flashvars.border_height = "400";
-            flashvars.border_thickness = "15";
-            flashvars.border_opacity = "0.4";
-            flashvars.border_color = "0xFFFFFF";
-			var params = {};
-			params.scale = "noscale";
-			var attributes = {};
-			swfobject.embedSWF("{{MEDIA_URL}}/swf/slideshow.swf", "alternate_flash", "668", "400", "9.0.0", false, flashvars, params, attributes);
+        var flashvars = {};
+        flashvars.url_imagelist = {% block slideshow_url %}"http://{{current_site}}/slideshow/xml/{{section}}/"{% endblock slideshow_url %};
+        flashvars.has_border = "true";
+        flashvars.border_width = "668";
+        flashvars.border_height = "400";
+        flashvars.border_thickness = "15";
+        flashvars.border_opacity = "0.4";
+        flashvars.border_color = "0xFFFFFF";
+
+        var params = {};
+        params.scale = "noscale";
+
+        var attributes = {};
+        swfobject.embedSWF("{{MEDIA_URL}}/swf/slideshow.swf", "alternate_flash", "668", "400", "9.0.0", false, flashvars, params, attributes);
     </script>
     
     {# set up the jquery lightbox plugin #}
@@ -55,12 +57,12 @@
         </div>
 
 
-	    <div id="container2">
+        <div id="container2">
 
             <div id="navmenu">
                 <ul>
-                    <li class="sales"><a href="/sales"><span>sales</span></a</li>
-                    <li class="rentals"><a href="/rentals" class="current"><span>Rentals</span></a</li>
+                    <li class="sales"><a href="/listings/sales" {% ifequal section "sales" %}class="current"{% endifequal %}><span>sales</span></a</li>
+                    <li class="rentals"><a href="/listings/rentals" {% ifequal section "rentals" %}class="current"{% endifequal %}<span>Rentals</span></a</li>
                     <li class="clients"><a href="/clients"><span>Clients</span></a</li>
                     <li class="services"><a href="/services"><span>Services</span></a</li>
                     <li class="imp"><a href="/important"><span>Important</span></a</li>
@@ -70,7 +72,7 @@
 
 
             {# side address and contact for header div #}
-	    	<div id="header">
+            <div id="header">
                 <div id="logo">
                     <a href="/">
                         <img alt="Luxury properties for rent and rent in Jerusalem, Israel" src="{{MEDIA_URL}}/img/elements/logo2.gif" />
@@ -103,7 +105,7 @@
         </div> {# end div container2 #}
 
 	
-		<div id="content">
+        <div id="content">
             {% block content %}
 
             {% endblock %}
@@ -125,8 +127,8 @@
 
             <span class="footer1">
                 <a href="/">HOME</a>
-                <a href="/sales">SALES</a>
-                <a href="/rentals">RENTALS</a>
+                <a href="/listings/sales">SALES</a>
+                <a href="/listings/rentals">RENTALS</a>
                 <a href="/clients">CLIENTS</a>
                 <a href="/services">SERVICES</a>
                 <a href="/important">IMPORTANT!</a>
@@ -141,8 +143,8 @@
         </div>
     </div>
 
-	<div id="trees"></div>
-	<div id="treecover"></div>
+    <div id="trees"></div>
+    <div id="treecover"></div>
 
 
 

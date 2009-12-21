@@ -13,42 +13,42 @@ current_site = Site.objects.get_current()
 language_curr = l_models.LanguageChoice.objects.filter(is_activated=True)[0]
 
 def index(request):
-    return render_to_response('realty/landing.dtpl', {'slideshow_type':'landing', 'MEDIA_URL':settings.MEDIA_URL, 'current_site':current_site, 
-        }) 
+    return render_to_response('realty/landing.dtpl', {'slideshow_type':'landing', 'MEDIA_URL':settings.MEDIA_URL, 'current_site':current_site,}) 
 
-def sales(request):
-    properties = r_models.Property.objects.filter(is_sale=True).filter(is_active=True) 
 
-    for prop in properties:
-        prop.set_language(language_curr)
+def listings(request, section):
 
-    return render_to_response('realty/sales.dtpl', {
-        'slideshow_type':'sales',
-        'properties':properties,
-        'MEDIA_URL':settings.MEDIA_URL, 
-        'current_site':current_site, 
-        }) 
+    if section == 'sales':
+        properties = r_models.Property.objects.filter(is_sale=True).filter(is_active=True) 
+        section_header = 'Sale'
 
-def rentals(request):
-    properties = r_models.Property.objects.filter(is_rent=True).filter(is_active=True) 
+    elif section == 'rentals':
+        properties = r_models.Property.objects.filter(is_rent=True).filter(is_active=True) 
+        section_header = 'Rent'
 
     for prop in properties:
         prop.set_language(language_curr)
 
-    return render_to_response('realty/rentals.dtpl', {
-        'slideshow_type':'rentals',
+    return render_to_response('realty/listings.dtpl', {
+        'section': section,
+        'section_header': section_header,
         'properties':properties,
         'MEDIA_URL':settings.MEDIA_URL, 
-        'current_site':current_site, 
-        }) 
+        'current_site':current_site, }) 
 
-def rentals_property(request, property_id):
-    
+def listings_property(request, section, property_id): 
+
     m_property = get_object_or_404(r_models.Property, id=property_id)
     m_property.set_language(language_curr)
 
-    return render_to_response('realty/rentals_property.dtpl', {
-        'slideshow_type':'rentals/%s' % property_id,
+    if section == 'rentals':
+        section_header = 'Rent'
+    elif section == 'sales':
+        section_header = 'Sale'
+
+    return render_to_response('realty/property.dtpl', {
+        'section':section,
+        'section_header':section_header,
         'property':m_property,
         'MEDIA_URL':settings.MEDIA_URL, 
         'current_site':current_site, 

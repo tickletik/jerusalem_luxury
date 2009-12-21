@@ -1,0 +1,24 @@
+{% extends "realty/base.dtpl" %}
+    {% block slideshow_url %}"http://{{current_site}}/slideshow/xml/{{section}}/{{property.id}}"{% endblock slideshow_url %}
+    
+    {% block content %}
+            <h1>{{ property.titledesc.title }}</h1>
+
+            <p>{{ property.titledesc.desc }}</p>
+
+            <div class="box">
+
+	
+                <div id="gallery"> 
+                    {% for image in property.images %}
+                    <div>
+                        <a href="{{MEDIA_URL}}/{{image.image_large}}" title="{{image.titledesc.title}}">
+                            <img src="{{MEDIA_URL}}/{{image.image_thumb}}" width="126px" height="96px"/> 
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div> <!-- / gallery --> 
+	
+            </div>
+    {% endblock content %}
+
