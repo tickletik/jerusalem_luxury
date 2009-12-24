@@ -212,7 +212,10 @@ class Images(models.Model):
 
     def set_language(self, language_curr):
         titledesc = self.titledesc_images_set.filter(language_choice=language_curr)
-        if len(titledesc) > 0: self.titledesc = titledesc[0]
+        if len(titledesc) > 0:
+            self.titledesc = titledesc[0]
+        else:
+            self.titledesc = {'title':'', 'desc':''}
 
 
     def save(self):
