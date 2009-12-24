@@ -194,8 +194,12 @@ class Images(models.Model):
 
     def __image_resize__(self, filename, key):
         im = Image.open(filename)
-        ratio = settings.IMAGE_SIZE[key][0] / float(im.size[0])
-        size = settings.IMAGE_SIZE[key][0], int(im.size[1] * ratio)
+
+        if settings.RESIZE_TYPE == 'aspect':
+            ratio = settings.IMAGE_SIZE[key][0] / float(im.size[0])
+            size = settings.IMAGE_SIZE[key][0], int(im.size[1] * ratio)
+        elif settings.RESIZE_TYPE == 'plain':
+            size = settings.IMAGE_SIZE[key][0], settings.IMAGE_SIZE[key][1]
         
         im = im.resize(size, Image.ANTIALIAS)
     
