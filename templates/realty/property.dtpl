@@ -1,6 +1,22 @@
 {% extends "realty/base.dtpl" %}
     {% block slideshow_url %}"http://{{current_site}}/slideshow/xml/{{section}}/{{property.id}}"{% endblock slideshow_url %}
     
+    {% block extend_contact %}
+        <a href="mailto:sales@jerusalemluxury.com 
+                            ?subject={{section}} property id: {{property.id}} 
+                            &body=I am interested in {{property.titledesc.title}} 
+                            %0D
+                            %0DMy name is: 
+                            %0D
+                            %0DMy telephone number is: 
+                            %0D
+                            %0DJerusalem Luxury thanks you for your interest. We will contact you shortly,
+                            %0D%0D
+                            %0DSamia Manneh
+                            "><img alt="Book Online" src="{{MEDIA_URL}}/img/elements/book-up.png" /></a>
+    {% endblock %}
+
+
     {% block content %}
             <h1>{{ property.titledesc.title }}</h1>
 

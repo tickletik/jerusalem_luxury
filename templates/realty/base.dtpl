@@ -87,7 +87,9 @@
                     <strong>Phone</strong> +972-54-494-7730<br />
                     <strong>Skype</strong> jerusalemluxury<br />
                     <strong>Fax</strong> +972-2-645-1102<br />
+                    {% block extend_contact %}
                     <a href="mailto:samia@jerusalemluxury.com">Send an Email</a>
+                    {% endblock extend_contact %}
                 </p>
             </div>
             {# end header div #}
@@ -165,11 +167,5 @@ Israel --></p>
 <strong>Fax</strong> +972-2-645-1102<br />
 <a href="mailto:samia@jerusalemluxury.com">Send an Email</a></p>
 </div>
-<!-- <div id="book"><a onclick="javascript:pageTracker._trackPageview('/custom/reservations/book_online');" title="Check Rates &amp; Availability" href="/book.htm"><img alt="Book Online" src="images/book-up.png" /></a></div>
-
-
--->
-
-
 
 
