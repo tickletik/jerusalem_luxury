@@ -10,6 +10,11 @@ from jinja_utils.shortcuts import render_to_response
 from django.contrib.sites.models import Site
 current_site = Site.objects.get_current()
 
+
+def crossdomain(request):
+
+    return render_to_response('main/crossdomain.xml', {'MEDIA_URL':MEDIA_URL, 'current_site':current_site, }) 
+
 def index(request):
     apartment_list = list()
 

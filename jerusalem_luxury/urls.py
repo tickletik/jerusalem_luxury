@@ -10,8 +10,10 @@ urlpatterns = patterns('realty.views',
     (r'^listings/(?P<section>\w+)/(?P<property_id>\d+)/$', 'listings_property'),
     (r'^(?P<section>(services|important|links|clients))/$', 'static_pages'),
 )
+
 urlpatterns += patterns('main.views',
     # Example:
+    (r'^crossdomain.xml', 'crossdomain'),
     (r'^testimage/(?P<image_name>\w+)/$', 'testimage'),
 )
 
