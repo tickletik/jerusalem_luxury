@@ -48,8 +48,8 @@ class Location(models.Model):
     apartment_number = models.CharField(max_length=6, blank=True, help_text="If we're dealing with a house or a building without apartment numbers, just leave this blank.")
 
     neighborhood = models.ForeignKey(rd_models.Neighborhood)
-    city = models.ForeignKey(rd_models.City)
-    region = models.ForeignKey(rd_models.Region)
+    city = models.ForeignKey(rd_models.City, default=rd_models.default_City())
+    region = models.ForeignKey(rd_models.Region, default=rd_models.default_Region())
 
 
 
@@ -99,8 +99,8 @@ class Amenities(models.Model):
 
     number_of_floors = models.IntegerField(default=1, verbose_name="# Floors", help_text="Number of floors in building. Unless the property in question is a cardboard shack on the sidewalk, please at least enter a value of &ldquo;1&rdquo;  :D")
 
-    floor_width = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="width")
-    floor_length = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="length")
+    floor_width = models.DecimalField(max_digits=10, default=0, decimal_places=2, verbose_name="width", help_text="leave this with a variable of &ldquo;0&rdquo; to ignore it")
+    floor_length = models.DecimalField(max_digits=10, default=0, decimal_places=2, verbose_name="length", help_text="leave this with a variable of &ldquo;0&rdquo; to ignore it")
 
 
     #parking_garage = models.BooleanField(verbose_name="Has Parking Garage?")

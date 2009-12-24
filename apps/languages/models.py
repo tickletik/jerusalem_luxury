@@ -10,6 +10,13 @@ class LanguageChoice(models.Model):
     def __unicode__(self):
         return "[%s] %s" % (self.code, self.name)
 
+def get_default_LanguageChoice():
+    langs = LanguageChoice.objects.filter(is_activated=True)
+    if len(langs) > 0:
+        return langs[0].id
+    
+    return None
+
 class ATextField(models.Model):
     language_choice = models.ForeignKey(LanguageChoice)
     text = models.TextField()
@@ -32,7 +39,7 @@ class ACharField(models.Model):
         return "%s" % self.text
 
 class ATitleDesc(models.Model):
-    language_choice = models.ForeignKey(LanguageChoice)
+    language_choice = models.ForeignKey(LanguageChoice, default=get_default_LanguageChoice(), limit_choices_to=models.Q(is_activated=True))
     title = models.CharField(max_length=200)
     desc = models.TextField()
 

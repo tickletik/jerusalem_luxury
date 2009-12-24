@@ -5,9 +5,9 @@ from django.forms import ModelForm
 from django.forms.models import BaseInlineFormSet, inlineformset_factory
 from django.forms.formsets import DELETION_FIELD_NAME
 
-num_langs = l_models.LanguageChoice.objects.filter(is_activated=True) 
+num_langs = len(l_models.LanguageChoice.objects.filter(is_activated=True))
 
-ImagesTitleDescFormset = inlineformset_factory(models.Images, models.Images.TitleDesc, fk_name="primary", max_num=3)
+ImagesTitleDescFormset = inlineformset_factory(models.Images, models.Images.TitleDesc, fk_name="primary", max_num=num_langs)
 
 NestedFormset = ImagesTitleDescFormset 
 prefix_nested = 'IMAGES_TITLE_DESC'
@@ -104,7 +104,7 @@ class PropertyForm(ModelForm):
     class Meta:
         model = models.Property
 
-PropertyTitleDescFormset = inlineformset_factory(models.Property, models.Property.TitleDesc, fk_name="primary", max_num=3)
+PropertyTitleDescFormset = inlineformset_factory(models.Property, models.Property.TitleDesc, fk_name="primary", max_num=num_langs)
 ImagesFormset  = inlineformset_factory(models.Property, models.Images, formset=BaseImagesFormset, extra=1)
 LocationFormset = inlineformset_factory(models.Property, models.Location, fk_name="property", max_num=1)
 AmenitiesFormset = inlineformset_factory(models.Property, models.Amenities, fk_name="property", max_num=1)

@@ -50,6 +50,12 @@ class City(models.Model):
     def __unicode__(self):
         return "%s" % self.name
 
+def default_City():
+    cities = City.objects.all()
+    if len(cities) > 0:
+        return cities[0].id
+
+    return None
 
 class Region(models.Model):
     class Title_R(ACharField):
@@ -63,6 +69,14 @@ class Region(models.Model):
 
     def __unicode__(self):
         return "%s" % self.name
+
+def default_Region():
+    regions = Region.objects.all()
+    if len(regions) > 0:
+        return regions[0].id
+
+    return None
+
 
 class RentalType(models.Model):
     class Meta:
