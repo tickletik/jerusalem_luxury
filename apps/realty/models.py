@@ -39,7 +39,11 @@ class Property(models.Model):
 
 class Images(models.Model):
     def __unicode__(self):
-        return "%s - %s" % (self.title, self.property.title)
+        if self.property.rental_or_sale == 'R':
+            display_title = 'Rental'
+        else:
+            display_title = 'Sale'
+        return "%s - %s" % (display_title, self.property.title)
 
     def __image_resize__(self, filename, key):
         im = Image.open(filename)
