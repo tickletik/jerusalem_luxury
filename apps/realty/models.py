@@ -94,9 +94,6 @@ class Images(models.Model):
 
     property = models.ForeignKey("Property")
 
-    title = models.CharField(max_length=200)
-    description = models.TextField()
-
     in_display = models.BooleanField(verbose_name="To be used as front page display?")
     slideshow = models.ImageField(upload_to="img/slideshow", blank=True, null=True)
 

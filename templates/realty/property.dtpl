@@ -40,7 +40,7 @@
                 <div id="gallery"> 
                     {% for image in property.images_set.all %}
                     <div>
-                        <a href="{{MEDIA_URL}}/{{image.image_large}}" title="{{image.title}}">
+                        <a href="{{MEDIA_URL}}/{{image.image_large}}" title="{% ifequal property.sale_or_rental "R" %}Rental{%else%}Sale{% endifequal %}">
                             <img src="{{MEDIA_URL}}/{{image.image_thumb}}" width="126px" height="96px"/> 
                         </a>
                     </div>
