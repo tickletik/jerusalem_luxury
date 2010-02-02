@@ -1,4 +1,7 @@
 {% extends "realty/base.dtpl" %}
+
+{% load humanize %}
+
     {% block slideshow_url %}"http://{{current_site}}/slideshow/xml/{{section}}/{{property.id}}"{% endblock slideshow_url %}
     
     {% block extend_contact %}
@@ -21,6 +24,15 @@
             <h1>{{ property.title }}</h1>
 
             <p>{{ property.description }}</p>
+            {% if property.rented_or_sold %}
+                {% ifequal property.rental_or_sale 'R' %}
+                <h4>RENTED</h4>
+                {% else %}
+                <h4>SOLD</h4>
+                {% endifequal %}
+            {% else %}
+            <p>Price {{ property.price|intcomma }} USD.</p>
+            {% endif %}
 
             <div class="box">
 

@@ -1,7 +1,5 @@
 {% extends "realty/base.dtpl" %}
 
-{% load humanize %}
-
         {% block content %}
             <h1>Properties<br/>For {{ section_header }}</h1>
 
@@ -22,8 +20,8 @@
 
                 <h2><a href="/listings/{{ section }}/{{property.id}}">{{property.title}}</a></h2> 
                 <p>{{ property.short_desc }}.</p>
-                <p>Price {{ property.price|intcomma }} USD.</p>
                 <p><a href="/listings/{{ section }}/{{property.id}}">View This Property</a></p>
+
             </div>
             {% endfor %}
 		
