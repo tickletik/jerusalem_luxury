@@ -4,7 +4,7 @@ from django.http import HttpResponse
 
 from PIL import Image
 
-from jinja_utils.shortcuts import render_to_response 
+from utils.jinja import render_to_response 
 
 # get the base URL from the Site model
 from django.contrib.sites.models import Site

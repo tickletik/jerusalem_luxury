@@ -1,8 +1,0 @@
-<image_list>
-    {% for image in imagelist %}
-    <image name='{{image.name}}'>
-        <url>{{MEDIA_URL}}/{{gallery_dir}}/{{image.dir}}/{{image.name}}.{{image.ext}}</url>
-        <caption>{{image.caption}}</caption>
-    </image>
-    {% endfor %}
-</image_list>

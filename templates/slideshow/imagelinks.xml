@@ -1,8 +1,8 @@
 <image_list>
     {% for image in imagelist %}
-    <image name='{{image.titledesc.title}}'>
+    <image name='{{image.title}}'>
         <url>{{MEDIA_URL}}/{{image.slideshow}}</url>
-        <caption>{{image.titledesc.desc}}</caption>
+        <caption>{{image.description}}</caption>
     </image>
     {% endfor %}
 </image_list>

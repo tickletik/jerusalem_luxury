@@ -4,7 +4,7 @@
     {% block extend_contact %}
         <a href="mailto:sales@jerusalemluxury.com 
                             ?subject={{section}} property id: {{property.id}} 
-                            &body=I am interested in {{property.titledesc.title}} 
+                            &body=I am interested in {{property.title}} 
                             %0D
                             %0DMy name is: 
                             %0D
@@ -18,17 +18,17 @@
 
 
     {% block content %}
-            <h1>{{ property.titledesc.title }}</h1>
+            <h1>{{ property.title }}</h1>
 
-            <p>{{ property.titledesc.desc }}</p>
+            <p>{{ property.description }}</p>
 
             <div class="box">
 
 	
                 <div id="gallery"> 
-                    {% for image in property.images %}
+                    {% for image in property.images_set.all %}
                     <div>
-                        <a href="{{MEDIA_URL}}/{{image.image_large}}" title="{{image.titledesc.title}}">
+                        <a href="{{MEDIA_URL}}/{{image.image_large}}" title="{{image.title}}">
                             <img src="{{MEDIA_URL}}/{{image.image_thumb}}" width="126px" height="96px"/> 
                         </a>
                     </div>

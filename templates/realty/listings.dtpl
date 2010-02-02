@@ -1,5 +1,7 @@
 {% extends "realty/base.dtpl" %}
 
+{% load humanize %}
+
         {% block content %}
             <h1>Properties<br/>For {{ section_header }}</h1>
 
@@ -16,37 +18,11 @@
             {% for property in properties %}
             <div class="box">
                 <a href="/listings/{{ section }}/{{property.id}}"><img src="{{MEDIA_URL}}/{{property.display.image_thumb}}" alt="Luxury Property for Sale in {{property.neighborhood}}"/></a>
-                    
-                <h2><a href="/listings/{{ section }}/{{property.id}}">{{property.titledesc.title}}</a></h2> 
-                <p>{{property.amenities.bedrooms}} Bedrooms. 
 
-                    {% ifnotequal property.amenities.parking "N" %}Parking.{% endifnotequal %}
 
-                    {% ifnotequal property.amenities.balcony "N" %}
-                        {% ifequal property.amenities.number_of_balconies 1 %}
-                        Terrace.
-                        {% else %}
-                        {{ property.amenities.number_of_balconies }} Balconies.
-                        {% endifequal %}
-                    {% endifnotequal %}
-
-                    {% ifnotequal property.amenities.furnishing "N" %}
-                        {% ifequal property.amenities.furnishing "P" %}
-                        Partly
-                        {% else %}
-                        Fully
-                        {% endifequal %}
-                        Furnished.
-                    {% endifnotequal %}
-
-                    {% if property.is_rent %}
-                    Price {{ property.rent.asking_price|floatformat:0 }} USD.
-                    {% ifequal property.rent.negotiable 1%} Negotiable{% endifequal %}
-                    {% else %}
-                    Price {{ property.sale.asking_price|floatformat:0 }} USD.
-                    {% ifequal property.sale.negotiable 1%} Negotiable{% endifequal %}
-                    {% endif %}
-                </p>
+                <h2><a href="/listings/{{ section }}/{{property.id}}">{{property.title}}</a></h2> 
+                <p>{{ property.short_desc }}.</p>
+                <p>Price {{ property.price|intcomma }} USD.</p>
                 <p><a href="/listings/{{ section }}/{{property.id}}">View This Property</a></p>
             </div>
             {% endfor %}
