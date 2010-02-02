@@ -87,8 +87,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'django.contrib.webdesign',
+    'django.contrib.humanize',
     'realty',
-    'realty_data',
-    'languages',
-    'jlinx_utils',
+    'utils',
 )
