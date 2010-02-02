@@ -20,3 +20,6 @@ settings.py
 \#*.*#
 \.#*.*
 
+old/
+media/img/realty/
+media/img/slideshow/
