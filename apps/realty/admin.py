@@ -8,5 +8,15 @@ class PropertyAdmin(admin.ModelAdmin):
 
     inlines=[ImageInline]
     list_display = ['title', 'rental_or_sale', 'rented_or_sold', 'price_in_dollars']
+    fieldsets = (
+            (None, 
+                
+                { 
+                    'fields': ('title', 'rental_or_sale', 'rented_or_sold', 'short_desc', 'description', 'location', 'price'), 
+                    'classes': ['testit'], 
+                }
+                
+            ),
+        )
 
 admin.site.register(Property, PropertyAdmin)

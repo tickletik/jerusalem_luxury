@@ -43,7 +43,8 @@ class Images(models.Model):
             display_title = 'Rental'
         else:
             display_title = 'Sale'
-        return "%s - %s" % (display_title, self.property.title)
+        #return "%s - %s" % (display_title, self.property.title)
+        return "somethign"
 
     def __image_resize__(self, filename, key):
         im = Image.open(filename)
