@@ -5,5 +5,5 @@ sys.path = ['/home/samiah/webapps/django_production', '/home/samiah/webapps/djan
 from django.core.handlers.wsgi import WSGIHandler
 
 
-os.environ['DJANGO_SETTINGS_MODULE'] = 'jerusalem.settings'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'jerusalem_luxury.settings'
 application = WSGIHandler()
