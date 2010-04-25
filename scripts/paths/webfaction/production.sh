@@ -1,7 +1,7 @@
 PATH=$PATH:"/home/samia/webapps/django_production"
 export PATH
 
-DJANGO_SETTINGS_MODULE="jerusalem.settings"
+DJANGO_SETTINGS_MODULE="jerusalem_luxury.settings"
 export DJANGO_SETTINGS_MODULE
 
 PYTHONPATH=$PYTHONPATH:"/home/samiah/webapps/django_production/lib/apps":"/home/samiah/webapps/django_production/lib/python2.5"
