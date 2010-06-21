@@ -37,6 +37,13 @@ def listings(request, section):
             prop.display = prop.images_set.all()[0]
        
 
+    rev = list()
+    for p in properties:
+        rev.append(p)
+
+    rev.reverse()
+    properties = rev
+
     return render_to_response('realty/listings.dtpl', {
         'section': section,
         'section_header': section_header,
