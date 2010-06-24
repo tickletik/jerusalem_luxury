@@ -15,7 +15,7 @@ MANAGERS = ADMINS
 DATABASE_ENGINE = 'mysql'           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
 DATABASE_NAME = 'samia_dev'             # Or path to database file if using sqlite3.
 DATABASE_USER = 'samia_dev'             # Not used with sqlite3.
-DATABASE_PASSWORD = '6b8c6fb5'         # Not used with sqlite3.
+DATABASE_PASSWORD = '7a50f770'         # Not used with sqlite3.
 DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
 DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
 

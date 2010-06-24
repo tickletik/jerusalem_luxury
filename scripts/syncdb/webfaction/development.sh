@@ -1,1 +1,1 @@
-python manage.py syncdb --noinput; python manage.py loaddata $DJANGO/fixtures/sites.json loaddata $DJANGO/fixtures/realty.json
+python2.5 manage.py loaddata $DJANGO/fixtures/realty.json
