@@ -23,11 +23,11 @@ def index(request):
 def listings(request, section):
 
     if section == 'sales':
-        properties = r_models.Property.objects.filter(rental_or_sale='S')
+        properties = r_models.Property.objects.filter(rental_or_sale='S').order_by('-id')
         section_header = 'Sale'
 
     elif section == 'rentals':
-        properties = r_models.Property.objects.filter(rental_or_sale='R')
+        properties = r_models.Property.objects.filter(rental_or_sale='R').order_by('-id')
         section_header = 'Rent'
 
     for prop in properties:
@@ -36,13 +36,6 @@ def listings(request, section):
         elif len(prop.images_set.all()) > 0:
             prop.display = prop.images_set.all()[0]
        
-
-    rev = list()
-    for p in properties:
-        rev.append(p)
-
-    rev.reverse()
-    properties = rev
 
     return render_to_response('realty/listings.dtpl', {
         'section': section,
