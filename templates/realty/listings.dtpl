@@ -19,7 +19,7 @@
 
 
                 <h2><a href="/listings/{{ section }}/{{property.id}}">{{property.title}}</a></h2> 
-                <p>{{ property.short_desc }}.</p>
+                <p>{{ property.short_desc|truncatewords:40 }}.</p>
                 <p><a href="/listings/{{ section }}/{{property.id}}">View This Property</a></p>
 
             </div>
