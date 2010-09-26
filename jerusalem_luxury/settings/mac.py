@@ -43,7 +43,7 @@ MEDIA_ROOT = '/Users/ronny/Sites/media/jerusalem_luxury'
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = 'http://jerusalem-luxury.dev/media'
+MEDIA_URL = '/media'
 
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
@@ -65,6 +65,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    '85.SSLRedirect'
 )
 
 ROOT_URLCONF = 'jerusalem_luxury.urls'
