@@ -2,9 +2,13 @@ To reinstall everything (like in syncdb) use scripts/reset.sh
 
 That's also a good place to find out how things get done
 
-admin/KYFQRa4B
-samia_dev/KYFQRa4B
 
+dev users:
+    admin/KYFQRa4B
+    samia_dev/KYFQRa4B
+
+prod users:
+    admin/e4af0df2
 
 python libraries to install:
 
