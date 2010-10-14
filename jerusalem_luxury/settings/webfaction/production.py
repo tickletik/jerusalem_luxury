@@ -69,6 +69,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    '85.SSLRedirect'
 )
 
 ROOT_URLCONF = 'jerusalem_luxury.urls'
